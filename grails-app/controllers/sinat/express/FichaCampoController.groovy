@@ -289,7 +289,6 @@ class FichaCampoController {
 
   @Transactional
   def saveCobertura() {
-    println params
     Cobertura coberturaInstance = new Cobertura()
     coberturaInstance.properties = params
     if(coberturaInstance.tipoUso == null) {
@@ -451,8 +450,6 @@ class FichaCampoController {
     def generated = ''
     habilitacion["${TipoUso.get(params.tipoUso)}"].each { campo, hab ->
       def tipo = (selects.indexOf(campo) == -1)?'input':'select'
-      if(campo == 'tecnologiaPredominante')
-        println "$tipo#$campo"
       def jsline = "('${element} $tipo#$campo')${(hab=='disabled')?'.attr(\'disabled\',\'disabled\').addClass(\'desabilitado\')':'.removeAttr(\'disabled\').removeClass(\'desabilitado\')'};\n"
       generated += '$' + jsline
     }
