@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.postgis:postgis-jdbc:1.3.3" type="repository">
+    <properties maven-id="org.postgis:postgis-jdbc:1.3.3" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/postgis-jdbc-1.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/postgis-stubs-1.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/postgresql-8.3-603.jdbc4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

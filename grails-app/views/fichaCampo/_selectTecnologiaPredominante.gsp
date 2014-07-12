@@ -1,0 +1,9 @@
+<g:select disabled="${showing}"
+          style="width:130px;height:23px;"
+          id="tecnologiaPredominante"
+          name="tecnologiaPredominante.id"
+          from="${lista}"
+          optionKey="id"
+          required=""
+          class="many-to-one"
+          noSelection="['':'']" />

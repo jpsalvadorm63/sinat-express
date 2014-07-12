@@ -1,0 +1,81 @@
+delete from lp ;
+insert into lp (
+        id,
+        source,
+        codigocatastral,
+        codigoprovincia,
+        codigocanton,
+        pec,
+        minx,
+        miny,
+        maxx,
+        maxy,
+        superficie,
+        version,
+        creacion,
+        actualizacion
+)
+SELECT
+        nextval('hibernate_sequence'),
+        'chunchiforweb' source,
+        codigocata "codigoCatastral",
+        SUBSTRING(codigocata FROM 1 FOR 2) "codigoProvincia",
+        SUBSTRING(codigocata FROM 3 FOR 2) "codigoCanton",
+        'false' pec,
+        round(cast(st_xmin(geom) as numeric),1) minx,
+        round(cast(st_ymin(geom) as numeric),1) miny,
+        round(cast(st_xmax(geom) as numeric),1) maxx,
+        round(cast(st_ymax(geom) as numeric),1) maxy,
+        round(cast(st_area(geom)/10000.0 as numeric),3) superficie,
+        1,
+        now(),
+        now()
+      FROM
+        chunchiforweb
+      WHERE
+            CHAR_LENGTH(codigocata) = 13
+        AND geom IS NOT NULL;
+
+insert into lp (
+        id,
+        source,
+        codigocatastral,
+        codigoprovincia,
+        codigocanton,
+        pec,
+        minx,
+        miny,
+        maxx,
+        maxy,
+        superficie,
+        version,
+        creacion,
+        actualizacion
+)
+select
+        nextval('hibernate_sequence'),
+        'chunchiforweb' source,
+        codigocata "codigoCatastral",
+        SUBSTRING(codigocata FROM 1 FOR 2) "codigoProvincia",
+        SUBSTRING(codigocata FROM 3 FOR 2) "codigoCanton",
+        'true' pec,
+        round(cast(st_xmin(geom) as numeric),1) minx,
+        round(cast(st_ymin(geom) as numeric),1) miny,
+        round(cast(st_xmax(geom) as numeric),1) maxx,
+        round(cast(st_ymax(geom) as numeric),1) maxy,
+        round(cast(st_area(geom)/10000.0 as numeric),3) superficie,
+        1,
+        creacion,
+        actualizacion,
+        now(),
+        now()
+      from
+        ( select
+            codigocata,
+            st_union(geom) geom
+          from
+            chunchiforweb
+          where
+            char_length(codigocata) = 8
+          group by
+            codigocata ) p ;

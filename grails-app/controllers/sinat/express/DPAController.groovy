@@ -1,0 +1,155 @@
+package sinat.express
+
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+
+@Transactional(readOnly = true)
+class DPAController {
+
+  static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+  def index(Integer max) {
+    params.max = Math.min(max ?: 24, 100)
+    params.sort = (params.sort)?:'nombre'
+    params.order = (params.order)?:'ASC'
+    //respond DPA.list(params), model:[DPAInstanceCount: DPA.count()]
+    respond DPA.findAllByNivel('PROVINCIA',params), model:[DPAInstanceCount: DPA.findAllByNivel('PROVINCIA').size()]
+  }
+
+  def updateProvincia() {
+    def provincia = DPA.get(params.provinciaId)
+    def canton = DPA.findBySuperior(provincia)
+    session.provincia = provincia?.codigo
+    session.canton = canton?.codigo
+
+    render g.select(style:'width:260px;',
+           id:'canton',
+           name:'canton.id',
+           from:DPA.cantones(provincia),
+           optionKey:'id',
+           value:canton?.id,
+           class:'many-to-one',
+           onchange: 'cambiaCanton(this.value)' )
+  }
+
+  def updateCanton() {
+    def canton = DPA.get(params.cantonId)
+    session.canton = canton?.codigo
+    render ""
+  }
+
+  def cambiarCanton() {
+    if(session.provincia == null && session.canton == null ) {
+      session.provincia = '01'
+      session.canton = '0101'
+    }
+    render(view:"cambiarCanton", model:[provincia:DPA.findByCodigo(session.provincia), canton:DPA.findByCodigo(session.canton)])
+  }
+
+  def cantones() {
+    params.sort = (params.sort)?:'nombre'
+    params.order = (params.order)?:'ASC'
+    def provincia = DPA.findByCodigo(params.id)
+    def cantones = DPA.findAllByNivelAndSuperior('CANTON',provincia,params)
+    render template:"cantones", model:[DPAInstanceList:cantones]
+  }
+
+  def parroquias() {
+    params.sort = (params.sort)?:'nombre'
+    params.order = (params.order)?:'ASC'
+    def canton = DPA.findByCodigo(params.id)
+    def parroquias = DPA.findAllByNivelAndSuperior('PARROQUIA',canton,params)
+    render template:"parroquias", model:[DPAInstanceList:parroquias]
+  }
+
+  def reportes(Integer max) {
+    params.max = Math.min(max ?: 16, 100)
+    params.sort = (params.sort)?:'nombre'
+    params.order = (params.order)?:'ASC'
+    //respond DPA.list(params), model:[DPAInstanceCount: DPA.count()]
+    respond DPA.findAllByNivel('PROVINCIA',params), model:[DPAInstanceCount: DPA.findAllByNivel('PROVINCIA').size()]
+  }
+
+  def cantonesRep() {
+    params.sort = (params.sort)?:'nombre'
+    params.order = (params.order)?:'ASC'
+    def provincia = DPA.findByCodigo(params.id)
+    def cantones = DPA.findAllByNivelAndSuperior('CANTON',provincia,params)
+    render template:"cantonesRep", model:[DPAInstanceList:cantones]
+  }
+
+  def informacionGeneralACsv() {
+    response.setHeader "Content-disposition", "attachment; filename=InformacionGeneral.csv"
+    response.contentType = 'text/csv'
+    def textcsv = ''
+    def textcabecera='CODIGO_FICHA,FECHA,UTMX,UTMY,ALTITUD,ZONA_HOMOGENEA,SECTOR,PARROQUIA,CANTON,PROVINCIA,PROPIETARIO,ARRENDATARIO,ADMINISTRADOR,ENCUESTADO,SUPERFICIE(ha),CODIGO_CATASTRAL,CONSTRUCCION,LEGALIZACION\n'
+    def cantonInstance=DPA.findByCodigo(params.id)
+    def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
+    fichaCampoInstanceList.each { ficha ->
+      textcsv += "${ficha.numeroFicha},${ficha.fecha},${ficha.coordenadaX?:''},${ficha.coordenadaY?:''},${ficha.altitud?:''},${ficha.zonaHomogenea?:''},${ficha.sector?:''},${ficha.parroquia?:''},${ficha.canton},${ficha.provincia},${ficha.nombrePropietario?:''},${ficha.nombreArrendatario?:''},${ficha.nombreAdministrador?:''},${ficha.encuestado?:''},${ficha.superficieTotal?:''},=\"${ficha.codigoCatastral?:''}\",${ficha.construccion?:''},${ficha.legalizacion?:''}\n"
+    }
+    response.outputStream << textcabecera
+    response.outputStream << textcsv
+    response.outputStream.flush()
+  }
+
+  def serviciosBasicosACsv() {
+    response.setContentType("application/vnd.ms-excel:UTF-8");
+    response.setHeader("Content-Disposition", "attachment; filename=ServiciosBasicos.csv");
+    //response.setHeader "Content-disposition", "attachment; filename=ServiciosBasicos.csv"
+    //response.setContentType("application/vnd.ms-excel:UTF-8");
+    OutputStream outputStream = response.getOutputStream();
+    def textcsb = ''
+    def textcabecerasb='CODIGO_FICHA,ENERGIA,AGUA,ALCANTARILLADO,COMUNICACIONES,ACCESIBILIDAD\n'
+    def cantonInstance=DPA.findByCodigo(params.id)
+    def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
+    fichaCampoInstanceList.each { fichasb ->
+      // textcsb += "${fichasb.numeroFicha},${fichasb.sbEnergiaElectrica},${fichasb.sbAguaPotable},${fichasb.sbAlcantarillado},${fichasb.sbComunicaciones},${fichasb.accesibilidad}\n"
+      textcsb += "${fichasb.numeroFicha},${fichasb.sbEnergiaElectrica?'Si':'No'},${fichasb.sbAguaPotable?'Si':'No'},${fichasb.sbAlcantarillado?'Si':'No'},${fichasb.sbComunicaciones?'Si':'No'},${fichasb.accesibilidad?:""}\n"
+    }
+    outputStream << textcabecerasb
+    outputStream << textcsb
+    outputStream.flush()
+  }
+
+  def coberturaACsv() {
+    response.setHeader "Content-disposition", "attachment; filename=Cobertura.csv"
+    response.contentType = 'text/csv'
+    def textccb = ''
+    def textcabeceracb='CODIGO_FICHA,USO,COBERTURA,ESPECIFICAR,SUPERFICIE,ROTACION,COSECHA,CARGA_ANIMAL,RENDIMIENTO,PRECIO PRODUCTO,TECNOLOGIA,RIEGO,MECANIZACION,VALOR_OFERTA,VALOR_VENTA,VALOR_ARRIENDO\n'
+    def cantonInstance = DPA.findByCodigo(params.id)
+    def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
+    fichaCampoInstanceList.each {fc ->
+      def numficha=fc.numeroFicha
+      def coberturaInstanceList = Cobertura.findAllByFichaCampo(fc)
+      coberturaInstanceList.each {c ->
+        //textccb += "$numficha,${c.tipoUso?.nombre},${c.tipoCobertura?.nombre},${c.superficie},${c.rotacion},${c.cosechasPorAnio},${c.cargaAnimal},${c.rendimiento},${c.tecnologiaPredominante?.nombre},${c.sistemaDeRiego},${c.mecanizacion},${c.oferta},${c.venta},${c.arriendo}\n"
+        textccb += "$numficha,${c.tipoUso?:''},${c.tipoCobertura?:''},${c.otrosCultivo?:''},${c.superficie?:''},${c.rotacion?:''},${c.cosechasPorAnio?:''},${c.cargaAnimal?:''},${c.rendimiento?:''},${c.precioProducto?:''},${c.tecnologiaPredominante?:''},${c.sistemaDeRiego?:''},${c.mecanizacion?:''},${c.oferta?:''},${c.venta?:''},${c.arriendo?:''}\n"
+      }
+    }
+    response.outputStream << textcabeceracb
+    response.outputStream << textccb
+    response.outputStream.flush()
+  }
+
+  def habitacionalACsv() {
+    response.setHeader "Content-disposition", "attachment; filename=Habitacional.csv"
+    response.contentType = 'text/csv'
+    def textchb = ''
+    def textcabecerahb='CODIGO_FICHA,SUPERFICIE,LEGALIZACION,AGUA,ENERGIA,ALCANTARILLADO,COMUNICACIONES,VALOR_OFERTA,VALOR_VENTA,VALOR_ARRIENDO\n'
+    def cantonInstance = DPA.findByCodigo(params.id)
+    def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
+    fichaCampoInstanceList.each { fh ->
+      def numficha=fh.numeroFicha
+      def habitacionalInstanceList=Habitacional.findAllByFichaCampo(fh)
+      habitacionalInstanceList.each {habit ->
+        // textchb += "$numficha,${habit.superficie},${habit.legalizacion},${habit.sbAguaPotable},${habit.sbEnergiaElectrica},${habit.sbAlcantarillado},${habit.sbComunicaciones},${habit.oferta},${habit.venta},${habit.arriendo}\n"
+        textchb += "$numficha,${habit.superficie?:''},${habit.legalizacion?:''},${habit.sbAguaPotable?'Si':'No'},${habit.sbEnergiaElectrica?'Si':'No'},${habit.sbAlcantarillado?'Si':'No'},${habit.sbComunicaciones?'Si':'No'},${habit.oferta?:''},${habit.venta?:''},${habit.arriendo?:''}\n"
+      }
+    }
+    response.outputStream << textcabecerahb
+    response.outputStream << textchb
+    response.outputStream.flush()
+  }
+
+}
