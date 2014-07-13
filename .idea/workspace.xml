@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a99eedb4-0bc1-4a23-a87f-1f63a4f99bd0" name="Default" comment="ppgraded to grails 2.4.2">
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\Controller.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\DomainClass.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\Filters.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\ScaffoldingController.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\Script.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\Service.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\TagLib.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\Tests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\artifacts\WebTest.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\AsyncController.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\AsyncSpec.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\Controller.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\RestfulController.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\RestfulSpec.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\Spec.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\_form.gsp" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\create.gsp" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\edit.gsp" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\index.gsp" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\renderEditor.template" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\scaffolding\show.gsp" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\CliTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\Controller.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\DomainClass.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\Filters.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\Generic.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\Integration.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\Service.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\TagLib.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\testing\UnitTest.groovy" afterPath="" />
-      <change type="DELETED" beforePath="C:\java-apps\grails-projects\sinat-express\src\templates\war\web.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml" afterPath="$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sinat-express-grailsPlugins.iml" afterPath="$PROJECT_DIR$/sinat-express-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sinat-express.iml" afterPath="$PROJECT_DIR$/sinat-express.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/WEB-INF/sitemesh.xml" afterPath="$PROJECT_DIR$/web-app/WEB-INF/sitemesh.xml" />
+    <list default="true" id="a99eedb4-0bc1-4a23-a87f-1f63a4f99bd0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sinat-express.iws" />
@@ -305,20 +267,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sinat-express" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sinat-express" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sinat-express" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -901,7 +849,7 @@
       <workItem from="1405175083354" duration="1059000" />
       <workItem from="1405176235042" duration="1784000" />
       <workItem from="1405260128768" duration="4450000" />
-      <workItem from="1405265020343" duration="798000" />
+      <workItem from="1405265020343" duration="939000" />
     </task>
     <task id="LOCAL-00001" summary="Testing some changes">
       <created>1405170648308</created>
@@ -911,11 +859,15 @@
       <created>1405170791448</created>
       <updated>1405170791448</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="upgraded to grails 2.4.2 - working OK now">
+      <created>1405265884009</created>
+      <updated>1405265884009</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1041352000" />
+    <option name="totallyTimeSpent" value="1041493000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -943,36 +895,36 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21978852" sideWeight="0.5008157" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2036824" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13003452" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2579583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21978852" sideWeight="0.5010661" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15765247" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21978852" sideWeight="0.5008157" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32796317" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16397415" sideWeight="0.4989339" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21403913" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="4" y="724" width="1238" height="226" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2036824" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2579583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21978852" sideWeight="0.5010661" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21978852" sideWeight="0.5008157" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35788262" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24856156" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1028,7 +980,8 @@
     </option>
     <MESSAGE value="Testing some changes" />
     <MESSAGE value="Testing some changes 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing some changes 2" />
+    <MESSAGE value="upgraded to grails 2.4.2 - working OK now" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgraded to grails 2.4.2 - working OK now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
