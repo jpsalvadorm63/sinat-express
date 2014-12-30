@@ -65,7 +65,7 @@
     <g:select style="width:260px;"
               id="provincia"
               name="provincia.id"
-              from="${sinat.express.DPA.provincias()}"
+              from="${externos.DPALP.provincias()}"
               optionKey="id"
               value="${provincia?.id}"
               onchange="cambiaProvincia(this.value)" />
@@ -76,7 +76,7 @@
       <g:select style="width:260px;"
                 id="canton"
                 name="canton.id"
-                from="${sinat.express.DPA.cantones(provincia)}"
+                from="${externos.DPALP.cantones(provincia)}"
                 optionKey="id"
                 value="${canton?.id}"
                 onchange="cambiaCanton(this.value)" />

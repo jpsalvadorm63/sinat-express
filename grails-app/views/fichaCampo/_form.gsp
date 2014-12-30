@@ -38,7 +38,7 @@
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'coordenadaY', 'error')} ">
       <div class="label">Coordenada UTM Y</div>
-      <g:textField disabled="${showing}" name="coordenadaY" maxlength="7" value="${fichaCampoInstance?.coordenadaY}" onkeypress="return isNumberKey(event)"/>
+      <g:textField disabled="${showing}" name="coordenadaY" maxlength="9" value="${fichaCampoInstance?.coordenadaY}" onkeypress="return isNumberKey(event)"/>
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'altitud', 'error')} required">
       <div class="label">Altitud</div>

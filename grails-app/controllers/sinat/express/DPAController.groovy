@@ -2,6 +2,8 @@ package sinat.express
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import util.AppSession
+import externos.DPALP
 
 @Transactional(readOnly = true)
 class DPAController {
@@ -12,53 +14,56 @@ class DPAController {
     params.max = Math.min(max ?: 24, 100)
     params.sort = (params.sort)?:'nombre'
     params.order = (params.order)?:'ASC'
-    //respond DPA.list(params), model:[DPAInstanceCount: DPA.count()]
-    respond DPA.findAllByNivel('PROVINCIA',params), model:[DPAInstanceCount: DPA.findAllByNivel('PROVINCIA').size()]
+    render view:'index', model:[DPAInstanceList: DPALP.findAllByNivel('PROVINCIA',params), DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size()]
   }
 
+  @Transactional
   def updateProvincia() {
-    def provincia = DPA.get(params.provinciaId)
-    def canton = DPA.findBySuperior(provincia)
-    session.provincia = provincia?.codigo
-    session.canton = canton?.codigo
+    def provincia = DPALP.get(params.provinciaId)
+    def canton = DPALP.findBySuperior(provincia)
+    AppSession.setSessionVar(session.id,'provincia',provincia?.codigo)
+    AppSession.setSessionVar(session.id,'canton',canton?.codigo)
 
     render g.select(style:'width:260px;',
            id:'canton',
            name:'canton.id',
-           from:DPA.cantones(provincia),
+           from:DPALP.cantones(provincia),
            optionKey:'id',
            value:canton?.id,
            class:'many-to-one',
            onchange: 'cambiaCanton(this.value)' )
   }
 
+  @Transactional
   def updateCanton() {
-    def canton = DPA.get(params.cantonId)
-    session.canton = canton?.codigo
+    def canton = DPALP.get(params.cantonId)
+    AppSession.setSessionVar(session.id,'canton',canton?.codigo)
     render ""
   }
 
+  @Transactional
   def cambiarCanton() {
-    if(session.provincia == null && session.canton == null ) {
-      session.provincia = '01'
-      session.canton = '0101'
+    if(AppSession.getSessionVar(session.id,'provincia') == null && AppSession.getSessionVar(session.id,'canton') == null ) {
+      AppSession.setSessionVar(session.id,'provincia','01')
+      AppSession.setSessionVar(session.id,'canton','0101')
     }
-    render(view:"cambiarCanton", model:[provincia:DPA.findByCodigo(session.provincia), canton:DPA.findByCodigo(session.canton)])
+    render(view:"cambiarCanton", model:[ provincia:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia')),
+                                         canton:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton')) ])
   }
 
   def cantones() {
     params.sort = (params.sort)?:'nombre'
     params.order = (params.order)?:'ASC'
-    def provincia = DPA.findByCodigo(params.id)
-    def cantones = DPA.findAllByNivelAndSuperior('CANTON',provincia,params)
+    def provincia = DPALP.findByCodigo(params.id)
+    def cantones = DPALP.findAllByNivelAndSuperior('CANTON',provincia,params)
     render template:"cantones", model:[DPAInstanceList:cantones]
   }
 
   def parroquias() {
     params.sort = (params.sort)?:'nombre'
     params.order = (params.order)?:'ASC'
-    def canton = DPA.findByCodigo(params.id)
-    def parroquias = DPA.findAllByNivelAndSuperior('PARROQUIA',canton,params)
+    def canton = DPALP.findByCodigo(params.id)
+    def parroquias = DPALP.findAllByNivelAndSuperior('PARROQUIA',canton,params)
     render template:"parroquias", model:[DPAInstanceList:parroquias]
   }
 
@@ -66,15 +71,14 @@ class DPAController {
     params.max = Math.min(max ?: 16, 100)
     params.sort = (params.sort)?:'nombre'
     params.order = (params.order)?:'ASC'
-    //respond DPA.list(params), model:[DPAInstanceCount: DPA.count()]
-    respond DPA.findAllByNivel('PROVINCIA',params), model:[DPAInstanceCount: DPA.findAllByNivel('PROVINCIA').size()]
+    respond DPALP.findAllByNivel('PROVINCIA',params), model:[DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size()]
   }
 
   def cantonesRep() {
     params.sort = (params.sort)?:'nombre'
     params.order = (params.order)?:'ASC'
-    def provincia = DPA.findByCodigo(params.id)
-    def cantones = DPA.findAllByNivelAndSuperior('CANTON',provincia,params)
+    def provincia = DPALP.findByCodigo(params.id)
+    def cantones = DPALP.findAllByNivelAndSuperior('CANTON',provincia,params)
     render template:"cantonesRep", model:[DPAInstanceList:cantones]
   }
 
@@ -83,7 +87,7 @@ class DPAController {
     response.contentType = 'text/csv'
     def textcsv = ''
     def textcabecera='CODIGO_FICHA,FECHA,UTMX,UTMY,ALTITUD,ZONA_HOMOGENEA,SECTOR,PARROQUIA,CANTON,PROVINCIA,PROPIETARIO,ARRENDATARIO,ADMINISTRADOR,ENCUESTADO,SUPERFICIE(ha),CODIGO_CATASTRAL,CONSTRUCCION,LEGALIZACION\n'
-    def cantonInstance=DPA.findByCodigo(params.id)
+    def cantonInstance=DPALP.findByCodigo(params.id)
     def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
     fichaCampoInstanceList.each { ficha ->
       textcsv += "${ficha.numeroFicha},${ficha.fecha},${ficha.coordenadaX?:''},${ficha.coordenadaY?:''},${ficha.altitud?:''},${ficha.zonaHomogenea?:''},${ficha.sector?:''},${ficha.parroquia?:''},${ficha.canton},${ficha.provincia},${ficha.nombrePropietario?:''},${ficha.nombreArrendatario?:''},${ficha.nombreAdministrador?:''},${ficha.encuestado?:''},${ficha.superficieTotal?:''},=\"${ficha.codigoCatastral?:''}\",${ficha.construccion?:''},${ficha.legalizacion?:''}\n"
@@ -101,7 +105,7 @@ class DPAController {
     OutputStream outputStream = response.getOutputStream();
     def textcsb = ''
     def textcabecerasb='CODIGO_FICHA,ENERGIA,AGUA,ALCANTARILLADO,COMUNICACIONES,ACCESIBILIDAD\n'
-    def cantonInstance=DPA.findByCodigo(params.id)
+    def cantonInstance=DPALP.findByCodigo(params.id)
     def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
     fichaCampoInstanceList.each { fichasb ->
       // textcsb += "${fichasb.numeroFicha},${fichasb.sbEnergiaElectrica},${fichasb.sbAguaPotable},${fichasb.sbAlcantarillado},${fichasb.sbComunicaciones},${fichasb.accesibilidad}\n"
@@ -117,7 +121,7 @@ class DPAController {
     response.contentType = 'text/csv'
     def textccb = ''
     def textcabeceracb='CODIGO_FICHA,USO,COBERTURA,ESPECIFICAR,SUPERFICIE,ROTACION,COSECHA,CARGA_ANIMAL,RENDIMIENTO,PRECIO PRODUCTO,TECNOLOGIA,RIEGO,MECANIZACION,VALOR_OFERTA,VALOR_VENTA,VALOR_ARRIENDO\n'
-    def cantonInstance = DPA.findByCodigo(params.id)
+    def cantonInstance = DPALP.findByCodigo(params.id)
     def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
     fichaCampoInstanceList.each {fc ->
       def numficha=fc.numeroFicha
@@ -137,7 +141,7 @@ class DPAController {
     response.contentType = 'text/csv'
     def textchb = ''
     def textcabecerahb='CODIGO_FICHA,SUPERFICIE,LEGALIZACION,AGUA,ENERGIA,ALCANTARILLADO,COMUNICACIONES,VALOR_OFERTA,VALOR_VENTA,VALOR_ARRIENDO\n'
-    def cantonInstance = DPA.findByCodigo(params.id)
+    def cantonInstance = DPALP.findByCodigo(params.id)
     def fichaCampoInstanceList=FichaCampo.findAllByCanton(cantonInstance)
     fichaCampoInstanceList.each { fh ->
       def numficha=fh.numeroFicha

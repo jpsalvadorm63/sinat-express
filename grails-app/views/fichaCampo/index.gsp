@@ -1,4 +1,5 @@
 <%@ page import="sinat.express.FichaCampo" %>
+<%@ page import="util.AppSession" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +49,8 @@
 <div id="list-fichaCampo" class="content scaffold-list" role="main" style="margin-top: 0;">
   <h1>Fichas de Investigación de Campo - FIC</h1>
   <p style="text-align: center;font-weight: bold;margin:2px 0 4px 0;">
-    ${sinat.express.DPA.findByCodigo(session.provincia)} -
-    ${sinat.express.DPA.findByCodigo(session.canton)}
+    ${externos.DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia'))} -
+    ${externos.DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton'))}
   </p>
   <g:if test="${flash.message}">
     <div class="message" role="status">${flash.message}</div>

@@ -45,11 +45,15 @@ class Usuario {
   }
 
   static def fillData() {
+		def usuarios = [
+			'admin' :   [password:'sigTierras',rol:'ROLE_ADMIN'],
+			'publico' : [password:'publico',rol:'ROLE_OBSERVER'],
+			'público' : [password:'público',rol:'ROLE_OBSERVER'],
+			'fic' :     [password:'fic2015',rol:'ROLE_FIC']
+		]
 
     // set initial users
-    [  'admin' : [password:'sigTierras',rol:'ROLE_ADMIN'],
-       'publico' : [password:'publico',rol:'ROLE_OBSERVER'],
-       'público' : [password:'público',rol:'ROLE_OBSERVER']  ].each { username, conf ->
+		usuarios.each { username, conf ->
       if(!Usuario.findByUsername(username)) {
         def usuarioInstance = new Usuario()
         usuarioInstance.username = username
@@ -59,9 +63,7 @@ class Usuario {
     }
 
     // set user -> rol
-    [  'admin' : [password:'sigTierras',rol:'ROLE_ADMIN'],
-       'publico' : [password:'publico',rol:'ROLE_OBSERVER'],
-       'público' : [password:'público',rol:'ROLE_OBSERVER']  ].each { username, conf ->
+    usuarios.each { username, conf ->
       def usuarioInstance = Usuario.findByUsername(username)
       def rolInstance = Rol.findByAuthority(conf.rol)
       if(rolInstance) {

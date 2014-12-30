@@ -1,3 +1,4 @@
+<%@ page import="util.AppSession" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +10,17 @@
 </head>
 <body>
   <div id="menu">
-    <g:if test="${session.canton != null}">
+    <g:if test="${AppSession.getSessionVar(session.id,'canton') != null}">
       <ul class="menu">
         <li><a class="parent" href="#"><span>Ficha de Campo</span></a>
           <div><ul>
             <li><a href="${createLink(uri: '/FichaCampo/index')}"><span>Lista de fichas</span></a></li>
             <li><a class="parent" href="#"><span>Reportes</span></a>
               <div><ul>
-                <li><a href="${createLink(uri:'/DPA/informacionGeneralACsv/')}${session.canton}"><span>Información General</span></a></li>
-                <li><a href="${createLink(uri:'/DPA/serviciosBasicosACsv/')}${session.canton}"><span>Servicios básicos</span></a></li>
-                <li><a href="${createLink(uri:'/DPA/coberturaACsv/')}${session.canton}"><span>Cobertura</span></a></li>
-                <li><a href="${createLink(uri:'/DPA/habitacionalACsv/')}${session.canton}"><span>Habitacional</span></a></li>
+                <li><a href="${createLink(uri:'/DPA/informacionGeneralACsv/')}${AppSession.getSessionVar(session.id,'canton')}"><span>Información General</span></a></li>
+                <li><a href="${createLink(uri:'/DPA/serviciosBasicosACsv/')}${AppSession.getSessionVar(session.id,'canton')}"><span>Servicios básicos</span></a></li>
+                <li><a href="${createLink(uri:'/DPA/coberturaACsv/')}${AppSession.getSessionVar(session.id,'canton')}"><span>Cobertura</span></a></li>
+                <li><a href="${createLink(uri:'/DPA/habitacionalACsv/')}${AppSession.getSessionVar(session.id,'canton')}"><span>Habitacional</span></a></li>
               </ul></div>
             </li>
             <li><a class="parent" href="#"><span>Administración</span></a>
@@ -40,7 +41,7 @@
         <li class="last"><a href="#"><span>Ayuda</span></a></li>
       </ul>
     </g:if>
-    <g:if test="${session.canton == null}">
+    <g:if test="${AppSession.getSessionVar(session.id,'canton') == null}">
       <ul class="menu">
         <li class="last"><a href="${createLink(uri: '/DPA/cambiarCanton')}"><span>Seleccionar Provincia/Cantón</span></a></li>
       </ul>

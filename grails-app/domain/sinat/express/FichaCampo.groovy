@@ -1,5 +1,6 @@
 package sinat.express
 
+import externos.DPALP
 import groovy.sql.Sql
 
 class FichaCampo {
@@ -13,9 +14,9 @@ class FichaCampo {
   // I. Información General
   // I.a Ubicación Geográfica
   String zonaHomogenea
-  DPA provincia
-  DPA canton
-  DPA parroquia
+  DPALP provincia
+  DPALP canton
+  DPALP parroquia
   String sector
   String coordenadaX
   String coordenadaY
@@ -198,6 +199,32 @@ class FichaCampo {
     } else {
       sql.executeUpdate("UPDATE fichacampo SET geom = null, minx = null, miny = null, maxx = null, maxy = null WHERE codigocatastral = '${codigoCatastral}'")
     }
+  }
+
+  // -- cambio de DPA a DPALP --
+  // borra las columnas provincia_id, canton_id y parroquia_id
+  // correr el siguiente script:
+  /*
+
+  import sinat.express.FichaCampo
+
+  FichaCampo.findAll().each { fc ->
+    fc.updateDPALP().save(flush:true)
+    println fc.provincia?.codigo + ', ' + fc.canton?.codigo + ', ' + fc.parroquia?.codigo
+  }
+
+   */
+
+  FichaCampo updateDPALP() {
+    // -- función para actualizar la división política administrativa en base al campo codigoCatastral
+    // -- y su bùsqueda de instancias de la clase DPALP
+    if(codigoCatastral?.length() >= 6 ) {
+      provincia = DPALP.findByCodigo(codigoCatastral[0..1])
+      canton = DPALP.findByCodigo(codigoCatastral[0..3])
+      parroquia = DPALP.findByCodigo(codigoCatastral[0..5])
+    }
+
+    return this
   }
 
 }

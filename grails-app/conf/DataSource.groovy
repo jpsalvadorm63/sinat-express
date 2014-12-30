@@ -9,7 +9,6 @@ dataSource {
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
-//    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
     singleSession = true // configure OSIV singleSession mode
 }
@@ -19,6 +18,10 @@ environments {
 
     development {
       dataSource {
+        /*dbCreate = "update"
+        url="jdbc:postgresql://localhost:5432/sinatexpressdb"
+        username = "postgres"
+        password = "sqlgis1606"*/
         dbCreate = "update"
         url="jdbc:postgresql://localhost:5432/sinatexpressdb"
         username = "postgres"
@@ -32,7 +35,6 @@ environments {
         url="jdbc:postgresql://172.21.1.25:5432/sinatexpressdb"
         username = "postgres"
         password = "postgres"
-
       }
     }
 

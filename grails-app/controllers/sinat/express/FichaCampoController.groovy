@@ -1,9 +1,8 @@
 package sinat.express
 
 import groovy.sql.Sql
-import org.hibernate.jdbc.Work
-
-import java.sql.Connection
+import externos.DPALP
+import util.AppSession
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -19,9 +18,12 @@ class FichaCampoController {
 
   def index(Integer max) {
     params.max = Math.min(max ?: 16, 100)
+
+    // AppSession.setSessionVar(session.id,'pruebas','Hola Mundo . . . 3')
+    // println AppSession.getSessionVar(session.id,'pruebas')
     def lista
-    if(session.canton != null)
-      lista = FichaCampo.findAllByCanton(DPA.findByCodigo(session.canton),params)
+    if(AppSession.getSessionVar(session.id,'canton') != null)
+      lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton')),params)
     else
       lista = FichaCampo.list(params)
     respond lista, model: [fichaCampoInstanceCount: FichaCampo.count()]
@@ -52,18 +54,18 @@ class FichaCampoController {
       fichaNueva.coordenadaX = "${x.toString()}"
       Double y = data[2] * 10.0; y = y.trunc()/10.0
       fichaNueva.coordenadaY = "${y.toString()}"
-      fichaNueva.provincia = DPA.findByCodigo(params.id[0..1])
-      fichaNueva.canton = DPA.findByCodigo(params.id[0..3])
-      fichaNueva.parroquia = DPA.findByCodigo(params.id[0..5])
+      fichaNueva.provincia = DPALP.findByCodigo(params.id[0..1])
+      fichaNueva.canton = DPALP.findByCodigo(params.id[0..3])
+      fichaNueva.parroquia = DPALP.findByCodigo(params.id[0..5])
       strqry = "select zh from chunchiforweb_zh where st_contains(geom, ST_GeomFromText('POINT(" + x + " " + y + ")', 32717))"
       data = sql.firstRow(strqry)
       fichaNueva.zonaHomogenea = (data)?data[0]:'?'
       fichaNueva.construccion = ''
       fichaNueva.legalizacion = ''
     } else
-    if(session.provincia != null && session.canton != null) {
-      fichaNueva.provincia = DPA.findByCodigo(session.provincia)
-      fichaNueva.canton = DPA.findByCodigo(session.canton)
+    if(AppSession.getSessionVar(session.id,'provincia') != null && AppSession.getSessionVar(session.id,'canton') != null) {
+      fichaNueva.provincia = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia'))
+      fichaNueva.canton = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton'))
     }
     respond fichaNueva, model:[showing:'false',opname:'CREACIÓN']
   }
@@ -72,9 +74,9 @@ class FichaCampoController {
     def fichaNueva = new FichaCampo()
     fichaNueva.fecha = new Date()
     fichaNueva.numeroFicha = "(GENERAR)"
-    fichaNueva.provincia = DPA.findByCodigo('11')
-    fichaNueva.canton = DPA.findByCodigo('1104')
-    fichaNueva.parroquia = DPA.findByCodigo('110455')
+    fichaNueva.provincia = DPALP.findByCodigo('11')
+    fichaNueva.canton = DPALP.findByCodigo('1104')
+    fichaNueva.parroquia = DPALP.findByCodigo('110455')
     fichaNueva.construccion = ''
     fichaNueva.legalizacion = ''
     fichaNueva.confiabilidad = ''
@@ -173,12 +175,12 @@ class FichaCampoController {
   }
 
   def cantones() {
-    def provincia = DPA.get(params.id)
+    def provincia = DPALP.get(params.id)
 
     render g.select(style:'width:160px;',
                     id:'canton',
                     name:'canton.id',
-                    from:DPA.cantones(provincia),
+                    from:DPALP.cantones(provincia),
                     optionKey:'id',
                     required:'',
                     value:'',
@@ -187,12 +189,12 @@ class FichaCampoController {
   }
 
   def parroquias() {
-    def canton = DPA.get(params.id)
+    def canton = DPALP.get(params.id)
 
     render g.select(style:'width:160px;',
         id:'parroquia',
         name:'parroquia.id',
-        from:DPA.parroquias(canton),
+        from:DPALP.parroquias(canton),
         optionKey:'id',
         required:'', value:'',class:'many-to-one')
   }

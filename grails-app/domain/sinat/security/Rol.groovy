@@ -17,7 +17,7 @@ class Rol {
   }
 
   static def fillData() {
-    ['ROLE_ADMIN','ROLE_MAINUSER','ROLE_USER','ROLE_OBSERVER'].each { rol ->
+    ['ROLE_ADMIN','ROLE_MAINUSER','ROLE_USER','ROLE_OBSERVER','ROLE_FIC'].each { rol ->
       if(!Rol.findByAuthority(rol)) {
         def rolInstance = new Rol()
         rolInstance.authority = rol
