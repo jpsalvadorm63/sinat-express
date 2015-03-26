@@ -118,7 +118,7 @@
         <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.70869035">
-              <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+              <caret line="120" column="28" selection-start-line="120" selection-start-column="25" selection-end-line="120" selection-end-column="25" />
               <folding>
                 <marker date="1427346330913" expanded="true" signature="1412:1429" placeholder="..." />
                 <marker date="1427346330913" expanded="true" signature="1667:1694" placeholder="..." />
@@ -1089,7 +1089,7 @@
       <workItem from="1427296338008" duration="1821000" />
       <workItem from="1427326293346" duration="2418000" />
       <workItem from="1427343386768" duration="4372000" />
-      <workItem from="1427396637496" duration="2206000" />
+      <workItem from="1427396637496" duration="2679000" />
     </task>
     <task id="LOCAL-00001" summary="Testing some changes">
       <created>1405170648308</created>
@@ -1127,11 +1127,17 @@
       <option name="project" value="LOCAL" />
       <updated>1427400953981</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="upgraded to grails 2.4.4, srping security core - working OK now">
+      <created>1427401596736</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1427401596736</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1439620000" />
+    <option name="totallyTimeSpent" value="1440093000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1672,7 +1678,7 @@
     <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70869035">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <caret line="120" column="28" selection-start-line="120" selection-start-column="25" selection-end-line="120" selection-end-column="25" />
           <folding>
             <marker date="1427346330913" expanded="true" signature="1412:1429" placeholder="..." />
             <marker date="1427346330913" expanded="true" signature="1667:1694" placeholder="..." />
