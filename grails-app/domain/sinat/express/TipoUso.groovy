@@ -35,7 +35,7 @@ class TipoUso {
   }
 
   static void fillData() {
-    Map dpaTipoUsos = ['hab':'Habitacional',
+    Map dpaTipoUsos = [/*'hab':'Habitacional',*/
                        'agr':'Agrícola',
                        'pec':'Pecuario',
                        'for':'Forestal',

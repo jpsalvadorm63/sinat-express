@@ -4,7 +4,7 @@
 
   <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'codigoCatastral', 'error')} ">
     <div class="label">Código Catastral</div>
-    <g:textField name="codigoCatastral" maxlength="13" value="${fichaCampoInstance?.codigoCatastral}"/>
+    <g:textField name="codigoCatastral" maxlength="16" value="${fichaCampoInstance?.codigoCatastral}"/>
   </div>
   <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'grupo', 'error')} ">
     <div class="label">Grupo</div>

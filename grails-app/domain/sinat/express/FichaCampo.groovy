@@ -10,6 +10,7 @@ class FichaCampo {
   String responsable
   Date fecha
   String numeroFicha
+  String gad
 
   // I. Información General
   // I.a Ubicación Geográfica
@@ -72,7 +73,7 @@ class FichaCampo {
   Double maxy
 
   static constraints = {
-    codigoCatastral(size:1..13,nullable:false,unique:true)
+    codigoCatastral(size:1..16,nullable:false,unique:true)
     responsable(size:0..64,nullable:true)
     fecha(nullable:false,unique:false)
     numeroFicha(size:1..64,nullable:false,unique:true)
@@ -80,14 +81,15 @@ class FichaCampo {
     provincia(nullable:true , unique:false)
     canton(nullable:true , unique:false)
     parroquia(nullable:true , unique:false)
+    gad(maxSize:4, unique:false,nullable:true)
     sector(size:1..64,nullable:true,unique:false)
-    coordenadaX(size:1..16,nullable:true,unique:false)
-    coordenadaY(size:1..16,nullable:true,unique:false)
+    coordenadaX(maxSize:16,nullable:true)
+    coordenadaY(maxSize:16,nullable:true)
     altitud (nullable:true)
-    nombrePropietario(size:1..64,nullable:false,unique:false)
-    nombreArrendatario(size:1..64,nullable:true,unique:false)
-    nombreAdministrador(size:1..64,nullable:true,unique:false)
-    encuestado(size:1..64,nullable:true,unique:false)
+    nombrePropietario(maxSize:64,nullable:false,unique:false)
+    nombreArrendatario(maxSize:64,nullable:true,unique:false)
+    nombreAdministrador(maxSize:64,nullable:true,unique:false)
+    encuestado(maxSize:64,nullable:true,unique:false)
     superficieTotal(nullable:false,defoult:0)
     construccion(size:1..16,nullable:true,unique:false,inList:['SI POSEE','NO POSEE'],default:'')
     legalizacion(size:1..16,nullable:true,unique:false,inList:['CON ESCRITURAS','SIN ESCRITURAS'],default:'')
@@ -118,13 +120,14 @@ class FichaCampo {
     cache false
 
     id                    column: "id"
-    codigoCatastral	      column:"codigocatastral"
+    codigoCatastral	      column:"codigocatastral", index:'cc_idx'
     responsable           column:"responsable"
     fecha            	    column:"fregistro"
     numeroFicha     		  column:"numeroficha"
     zonaHomogenea   		  column:"zonahomogenea"
     provincia             column:"provincia_id"
-    canton                column:"canton_id"
+    canton                column:"canton_id",       index:'canton_idx'
+    gad                   column:"gad",             index:'gad_idx'
     parroquia             column:"parroquia_id"
     sector          		  column:"sector"
     coordenadaX     		  column:"coordenadax"
@@ -189,7 +192,9 @@ class FichaCampo {
   static Sql sql = null
 
   def updatePolygon() {
-    if(sql == null)
+    // **** DEPRECATED - - - ES UN ASUNTO DE ADMINISTRACÓN DE LA BASE DE DATOS
+    // **** EL CODIGO ERA VÁLIDO SOLAMENTE PARA CHUNCHI
+    /*if(sql == null)
       sql = new Sql(dataSource)
     String contador = "SELECT count(*) FROM chunchiforweb WHERE codigocata = '${codigoCatastral}' AND geom IS NOT NULL"
     def n = sql.firstRow(contador)[0]
@@ -198,7 +203,48 @@ class FichaCampo {
       sql.executeUpdate("update fichacampo set minx = st_xmin(geom),miny = st_ymin(geom),maxx = st_xmax(geom),maxy = st_ymax(geom) WHERE codigocatastral = '${codigoCatastral}'")
     } else {
       sql.executeUpdate("UPDATE fichacampo SET geom = null, minx = null, miny = null, maxx = null, maxy = null WHERE codigocatastral = '${codigoCatastral}'")
-    }
+    }*/
+  }
+
+  String updatePolygon(String gadm, String dbTable, String campoCodigoCata, String campoGeon) {
+
+    // -- EJEMPLO DE UTILIZACION EN SCRIPT:
+    //  def gad = '0605' /*- Antonio Ante- */
+    //  def dbTable = 'chunchiforweb'
+    //  def ccCampo = 'codigocata'
+    //  def geomCampo = 'geom'
+    //  def canton = externos.DPALP.findByCodigo(gad)
+    //
+    //  //def gad = '1002' /*- Antoni Ante- */
+    //  //def dbTable = 'lp.prediogr'
+    //  //def ccCampo = 'cc'
+    //  //def geomCampo = 'geom'
+    //  //def canton = externos.DPALP.findByCodigo(gad)
+    //
+    //  def n = 0
+    //  sinat.express.FichaCampo.findAllByCanton(canton).each { fc ->
+    //    print "${fc.canton.nombre} - ${fc.canton.codigo}, cc: ${fc.codigoCatastral} "
+    //    println fc.updatePolygon(gad, dbTable, ccCampo, geomCampo)
+    //    n++
+    //  }
+    //  return n
+
+    if( codigoCatastral != null && codigoCatastral.size() >= 4 && codigoCatastral[0..3] == gadm && dbTable != null ) {
+      if(sql == null)
+        sql = new Sql(dataSource)
+      String contadorSql = "SELECT count(*) FROM " + dbTable + " WHERE " + campoCodigoCata + " = '" + codigoCatastral + "' AND " + campoGeon + " IS NOT NULL"
+      def n = sql.firstRow(contadorSql)[0]
+      if( n > 0) {
+        String updateSql = "UPDATE fichacampo f SET geom = (SELECT ST_Multi(c." + campoGeon + ") FROM " + dbTable + " c WHERE f.codigocatastral = c." + campoCodigoCata + ") WHERE f.codigocatastral like '${codigoCatastral}';"
+        sql.executeUpdate(updateSql)
+        sql.executeUpdate("update fichacampo set minx = st_xmin(geom),miny = st_ymin(geom),maxx = st_xmax(geom),maxy = st_ymax(geom) WHERE codigocatastral = '${codigoCatastral}'")
+        return 'OK'
+      } else {
+        sql.executeUpdate("UPDATE fichacampo SET geom = null, minx = null, miny = null, maxx = null, maxy = null WHERE codigocatastral = '${codigoCatastral}'")
+        return 'NO OK'
+      }
+    } else
+      return '-'
   }
 
   // -- cambio de DPA a DPALP --
@@ -222,9 +268,14 @@ class FichaCampo {
       provincia = DPALP.findByCodigo(codigoCatastral[0..1])
       canton = DPALP.findByCodigo(codigoCatastral[0..3])
       parroquia = DPALP.findByCodigo(codigoCatastral[0..5])
+
     }
 
     return this
   }
+
+  // Para cambiar longitud de código catastral
+  // SELECT atttypmod FROM pg_attribute WHERE attrelid = 'fichacampo'::regclass AND attname = 'codigocatastral';
+  // UPDATE pg_attribute SET atttypmod = 16+4 WHERE attrelid = 'fichacampo'::regclass AND attname = 'codigocatastral';
 
 }

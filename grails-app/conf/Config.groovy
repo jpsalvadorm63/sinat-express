@@ -116,27 +116,6 @@ environments {
     }
 }
 
-// log4j configuration
-log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-}
-
 grails.resources.modules = {
   core {
     dependsOn 'jquery, jquery-ui'
@@ -146,22 +125,53 @@ grails.resources.modules = {
 
 // SPRING SECURITY CORE
 grails.plugin.springsecurity.password.algorithm='bcrypt'
-grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.rejectIfNoRule = true
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'sinat.security.Usuario'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'sinat.security.UsuarioRol'
 grails.plugin.springsecurity.authority.className = 'sinat.security.Rol'
-grails.plugin.springsecurity.requestMap.className = 'sinat.security.Requestmap'
-grails.plugin.springsecurity.securityConfigType = 'Requestmap'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.interceptUrlMap = [
+    '/index':            ['isFullyAuthenticated()'],
+    '/index.gsp':        ['isFullyAuthenticated()'],
+    '/assets/**':        ['permitAll'],
+    '/upload/**':        ['permitAll'],
+    '/**/js/**':         ['permitAll'],
+    '/**/css/**':        ['permitAll'],
+    '/**/images/**':     ['permitAll'],
+    '/**/favicon.ico':   ['permitAll'],
+    '/login/**':         ['permitAll'],
+    '/logout/**':        ['permitAll'],
+    '/DPA/**':           ['isFullyAuthenticated()'],
+    '/fichaCampo/**':    ['permitAll'],
+    '/**/jquery/**':     ['permitAll'],
+    '/**/jquery-ui/**':  ['permitAll'],
+    '/**/menu/**':       ['permitAll'],
+    '/**/openlayers/**': ['permitAll'],
+    '/**/popwindow/**':  ['permitAll'],
+
+    '/':                 ['isFullyAuthenticated()']
 ]
 
+// log4j configuration
+log4j = {
+  // Example of changing the log pattern for the default console appender:
+  //
+  //appenders {
+  //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+  //}
+
+  error  'org.codehaus.groovy.grails.web.servlet',     // controllers
+      'org.codehaus.groovy.grails.web.pages',          // GSP
+      'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+      'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+      'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+      'org.codehaus.groovy.grails.commons',            // core / classloading
+      'org.codehaus.groovy.grails.plugins',            // plugins
+      'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+      'org.springframework',
+      'org.hibernate',
+      'net.sf.ehcache.hibernate'
+}

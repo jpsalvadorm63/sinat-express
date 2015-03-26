@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
@@ -15,8 +16,27 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:layoutHead/>
-		<g:javascript library="application"/>		
-		<r:layoutResources />
+
+		<g:javascript library="application"/>
+
+    <script>
+      var myVar=setInterval(function(){myTimer()},60000);
+      function myTimer() {
+        $('#ping').html('<span style="font-weight:bold;">ping !</span>');
+        $.ajax({
+          url:'/express/fichaCampo/ping',
+          success: function(data) {
+            $('#ping').html(data);
+          },
+          error: function(data) {
+            $('#ping').html('<span style="color:red;font-weight:bold;">error!</span>');
+          }
+        });
+      }
+    </script>
+
+
+
     <style>
 
       body {
@@ -73,18 +93,25 @@
   <div class="main_container">
     <div class="main_top" >
       <div class="app_top">
-        <div style="margin-left:50%; text-align: center;">
+        <div style="margin-left:30%; text-align: right;">
           Aplicacion: <span><g:meta name="app.name"/> <g:meta name="app.version"/></span> |
+          <g:if test="${util.AppSession.getSessionVar(session.id,'canton') != null}">
+            Provincia:
+            <span>${externos.DPALP.findByCodigo(util.AppSession.getSessionVar(session.id,'canton')).superior?.nombre?.toLowerCase().capitalize()}</span> |
+            Cantón:
+            <span>${externos.DPALP.findByCodigo(util.AppSession.getSessionVar(session.id,'canton'))?.nombre?.toLowerCase().capitalize()}</span> |
+          </g:if>
           <sec:ifLoggedIn>
             Usuario: <span><sec:username/></span> |
             <g:link controller="logout">Terminar Sesión</g:link>
           </sec:ifLoggedIn>
-          <sec:access expression="!hasRole('ROLE_ADMIN')">
-            | <g:link controller="login" action="changePass2">Cambiar de Clave</g:link>
-          </sec:access>
+          <!-- <sec:access expression="!hasRole('ROLE_ADMIN')">
+            | <g:link controller="login" action="changePass2">Cambiar clave</g:link>
+          </sec:access> -->
           <sec:ifNotLoggedIn>
             <g:link controller='login' action='auth'>Ingresar al Sistema</g:link>
           </sec:ifNotLoggedIn>
+          | net: <span id="ping">+</span>
         </div>
       </div>
     </div>

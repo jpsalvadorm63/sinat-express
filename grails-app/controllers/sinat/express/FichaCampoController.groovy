@@ -11,33 +11,61 @@ import grails.transaction.Transactional
 class FichaCampoController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
   def dataSource
-
   Sql sql = null
+  static wms = 'http://172.21.1.25:9090/geoserver/wms'
+  //static wms = 'http://localhost:9090/geoserver/wms'
+  static photoDirBase = '/var/fic'
+  static allowedExtensions = ["gif","png","jpg","jpeg","PNG","JPG","JPEG"]
+
+  def GeomsService
+
+  def ping() { render "<span>pung !</span>" }
 
   def index(Integer max) {
     params.max = Math.min(max ?: 16, 100)
-
-    // AppSession.setSessionVar(session.id,'pruebas','Hola Mundo . . . 3')
-    // println AppSession.getSessionVar(session.id,'pruebas')
+    def n = 0
     def lista
-    if(AppSession.getSessionVar(session.id,'canton') != null)
-      lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton')),params)
-    else
+    if (AppSession.getSessionVar(session.id, 'canton') != null) {
+      lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')), params)
+      n = FichaCampo.countByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')))
+    } else {
+      n = FichaCampo.count
       lista = FichaCampo.list(params)
-    respond lista, model: [fichaCampoInstanceCount: FichaCampo.count()]
+    }
+    respond lista, model: [fichaCampoInstanceCount: n]
   }
 
   def show(FichaCampo fichaCampoInstance) {
+    def photoFilesList = []
+    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    }
     def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
     def habitacionalInstanceList = Habitacional.findAllByFichaCampo(fichaCampoInstance)
     respond fichaCampoInstance,
-        model:[showing:'true',
-               opname:'PRESENTACIÓN',
-               actionName:'SHOWING',
-               coberturaInstanceList:coberturaInstanceList,
-               habitacionalInstanceList:habitacionalInstanceList]
+        model:[ showing:'true',
+                opname:'PRESENTACIÓN',
+                actionName:'SHOWING',
+                coberturaInstanceList:coberturaInstanceList,
+                habitacionalInstanceList:habitacionalInstanceList,
+                claveCatastral: fichaCampoInstance.codigoCatastral,
+                photos:photoFilesList ]
+  }
+
+  def allPhotos(photoDirBase,cc) {
+    def photoFilesList = []
+    def photoDir = new File(photoDirBase)
+    if(photoDir.exists() && photoDir.isDirectory()) {
+      photoDir = new File(photoDirBase + "/" + cc)
+      if(!photoDir.exists())
+        photoDir.mkdir();
+      // buuild list of graphic files
+      photoDir.listFiles().each() {
+        photoFilesList << it.getName()
+      }
+    }
+    return photoFilesList
   }
 
   @Transactional
@@ -57,9 +85,11 @@ class FichaCampoController {
       fichaNueva.provincia = DPALP.findByCodigo(params.id[0..1])
       fichaNueva.canton = DPALP.findByCodigo(params.id[0..3])
       fichaNueva.parroquia = DPALP.findByCodigo(params.id[0..5])
-      strqry = "select zh from chunchiforweb_zh where st_contains(geom, ST_GeomFromText('POINT(" + x + " " + y + ")', 32717))"
+      /*strqry = "select zh from chunchiforweb_zh where st_contains(geom, ST_GeomFromText('POINT(" + x + " " + y + ")', 32717))"
       data = sql.firstRow(strqry)
       fichaNueva.zonaHomogenea = (data)?data[0]:'?'
+      */
+      fichaNueva.zonaHomogenea = '?'
       fichaNueva.construccion = ''
       fichaNueva.legalizacion = ''
     } else
@@ -239,20 +269,44 @@ class FichaCampoController {
 
   def editRegistroFotografico() {
     def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "editRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
+    def photoFilesList = []
+    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    }
+    render template: "editRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
+                                                       actionName:'EDITING',
+                                                       showing:'false',
+                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
+                                                       photos:photoFilesList]
   }
 
   def cancelRegistroFotografico() {
     def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    def photoFilesList = []
+    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    }
+    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
+                                                       actionName:'SHOWING',
+                                                       showing:'true',
+                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
+                                                       photos:photoFilesList]
   }
 
   @Transactional
   def updateRegistroFotografico() {
     def fichaCampoInstance = FichaCampo.get(params.id)
+    def photoFilesList = []
+    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    }
     fichaCampoInstance.properties = params
     fichaCampoInstance.save(flush:true)
-    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
+                                                       actionName:'SHOWING',
+                                                       showing:'true',
+                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
+                                                       photos:photoFilesList]
   }
 
   def editObservaciones() {
@@ -311,7 +365,7 @@ class FichaCampoController {
           model:[ fichaCampoInstance:coberturaInstance.fichaCampo,
                   coberturaInstanceList:coberturaInstanceList,
                   actionName:'SHOWING',
-                  showing:'true']
+                  showing:'true' ]
     }
   }
 
@@ -419,12 +473,12 @@ class FichaCampoController {
 
   def habilitacion =
   [ 'AGRÍCOLA':['superficie':'*','rendimiento':'*','rotacion':'*','cosechasPorAnio':'*','cargaAnimal':'disabled','tecnologiaPredominante':'*','sistemaDeRiego':'*','mecanizacion':'*','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
-    'PECUARIO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'*','tecnologiaPredominante':'*','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
+    'PECUARIO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'*','tecnologiaPredominante':'*','sistemaDeRiego':'*','mecanizacion':'*','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
     'FORESTAL':['superficie':'*','rendimiento':'*','rotacion':'*','cosechasPorAnio':'*','cargaAnimal':'disabled','tecnologiaPredominante':'*','sistemaDeRiego':'*','mecanizacion':'*','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
     'CONSERVACIÓN':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'ACUACULTURA':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'*','tecnologiaPredominante':'*','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
     'SIN USO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
-    'HABITACIONAL':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
+    /*'HABITACIONAL':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],*/
     'COMERCIAL':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'TURISMO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'INDUSTRIA':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
@@ -535,11 +589,14 @@ class FichaCampoController {
   // - - - - Geoserver  - - - - -
 
   def geoserver() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render view:"geoserver", model:[fichaCampoInstance:fichaCampoInstance, wms:wms]
+    def fichaCampoInstance = (params?.id != null)?FichaCampo.get(params.id):null
+    def minx = AppSession.getSessionVar(session.id,'cantonminx')
+    def miny = AppSession.getSessionVar(session.id,'cantonminy')
+    def maxx = AppSession.getSessionVar(session.id,'cantonmaxx')
+    def maxy = AppSession.getSessionVar(session.id,'cantonmaxy')
+    def gad = AppSession.getSessionVar(session.id,'canton')
+    render view:"geoserver", model:[wms:wms,fichaCampoInstance:fichaCampoInstance,minx:minx,miny:miny,maxx:maxx,maxy:maxy,gad:gad]
   }
-
-  static wms = 'http://172.21.1.25:9090/geoserver/wms'
 
   def selectPredio() {
     def longitud = params.longitud
@@ -549,7 +606,7 @@ class FichaCampoController {
     sql = new Sql(dataSource)
     def myTable = ""
 
-    strqry = "select codigocata from chunchiforweb where ST_Contains(geom,ST_GeomFromText('POINT(' || ${longitud} || ' ' || ${latitud} || ' )',32717))"
+    strqry = "select cc, st_x(st_centroid(geom)), st_y(st_centroid(geom)) from lp.prediogr where ST_Contains(geom,ST_GeomFromText('POINT(' || ${longitud} || ' ' || ${latitud} || ' )',32717))"
     data = sql.firstRow(strqry)
     if(data != null) {
       def cod = data[0]
@@ -561,11 +618,46 @@ class FichaCampoController {
     }
   }
 
-  def GeomsService
+  def searchPredio() {
+    sql = new Sql(dataSource)
+    def myTable = ""
+    def strqry = "select cc, st_x(st_centroid(geom)), st_y(st_centroid(geom)) from lp.prediogr where cc = '" + params.cc + "'"
+    def data = sql.firstRow(strqry)
+    if(data != null) {
+      def cod = data[0]
+      def x = data[1]
+      def y = data[2]
+      def fichaCampoInstance = FichaCampo.findByCodigoCatastral(cod)
+      def id = fichaCampoInstance?"${fichaCampoInstance.id}":''
+      render(contentType: 'text/json') {['codigoCatastral':data[0],'id':id, x:x, y:y, info:myTable]}
+    } else {
+      render(contentType: 'text/json') {['codigoCatastral':'','id':'', x:x, y:y, info:myTable]}
+    }
+  }
 
   @Transactional
   def testService() {
     render GeomsService.loadDataToLp('chunchiforweb', 'geom','codigocata')
+  }
+
+  def uploadPhoto() {
+    println params
+    render ""
+  }
+
+  def displayPhoto() {
+    def path = photoDirBase + "/${params['cc']}/${params['photo']}"
+    java.awt.image.BufferedImage originalImage = javax.imageio.ImageIO.read(new File(path));
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    def fileext = path.substring(path.indexOf(".")+1, path.length())
+    javax.imageio.ImageIO.write( originalImage, fileext, baos );
+    baos.flush();
+    byte[] img = baos.toByteArray();
+    baos.close();
+    response.setHeader('Content-length', img.length.toString())
+    response.contentType = "image/"+fileext // or the appropriate image content type
+    response.outputStream << img
+    response.outputStream.flush()
   }
 
 }

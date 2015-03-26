@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="159135099">
+  <component name="DataSourceManagerImpl" format="xml" hash="1274409798">
     <data-source source="LOCAL" name="sinat-express dev" uuid="2d1dc436-2aba-4292-9882-9d3af04b45f4">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://192.168.9.95:5432/hidrodb</jdbc-url>
-      <user-name>postgres</user-name>
-      <user-password>dfdcdfc3dfc9dfd9dfcfdfc9dfd8dfcfdfde</user-password>
+      <jdbc-url>jdbc:postgresql://localhost:5432/ficdb</jdbc-url>
       <libraries>
         <library>
           <url>file://$PROJECT_DIR$/lib/postgresql-9.2-1001.jdbc4.jar</url>
@@ -15,4 +13,3 @@
     </data-source>
   </component>
 </project>
-

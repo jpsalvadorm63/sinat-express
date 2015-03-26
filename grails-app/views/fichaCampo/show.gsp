@@ -158,12 +158,26 @@
       });
     }
 
+    function viewPhoto(cc,photoFile) {
+      $('img#photovw').attr('src','/express/fichaCampo/displayPhoto?cc=' + cc + '&photo=' + photoFile);
+
+    }
+
+    function clearPhoto() {
+      $('img#photovw').attr('src','');
+    }
+
     function isNumberKey(evt){
       var charCode = (evt.which) ? evt.which : event.keyCode
       if(charCode == 44)
         return true;
       else
         return !(charCode > 31 && (charCode < 48 || charCode > 57));
+    }
+
+    function isIntegerKey(evt){
+      var charCode = (evt.which) ? evt.which : event.keyCode
+      return !(charCode > 31 && (charCode < 48 || charCode > 57));
     }
 
   </script>
@@ -210,7 +224,38 @@
     input[type=checkbox][disabled] {
       /*outline:1px solid dar;*/
     }
+
+    .clearshow,
+    .showing,
+    .toshow {
+      color: white;
+      border-radius: 4px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      padding: 8px;
+      margin: 2px;
+      font-size: 120%;
+      height: 16px;
+    }
+
+    .showing {
+      background: rgb(202, 60, 60); /* this is a maroon */
+    }
+
+    .toshow {
+      background: rgb(28, 184, 65); /* this is a green */
+    }
+
+    .clearshow {
+      background: rgb(66, 184, 221); /* this is a light blue */
+    }
+
   </style>
+
+  <asset:javascript src="uploadr.manifest.js"/>
+  <asset:javascript src="uploadr.demo.manifest.js"/>
+  <asset:stylesheet href="uploadr.manifest.css"/>
+  <asset:stylesheet href="uploadr.demo.manifest.css"/>
+
 </head>
 <body>
 

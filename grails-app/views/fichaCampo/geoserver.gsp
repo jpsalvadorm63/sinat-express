@@ -35,14 +35,15 @@
   var map;
 
   var catastro;
+  var busqueda;
   var pecs;
   var fics;
   var zh;
   var fic;
-  var minx = 715679.5539 + 1000;
-  var miny = 9731074.0878 + 1000;
-  var maxx = 745359.5046 - 1000;
-  var maxy = 9754512.8741 - 1000;
+  var minx = ${minx} + 1000;
+  var miny = ${miny} + 1000;
+  var maxx = ${maxx} - 1000;
+  var maxy = ${maxy} - 1000;
   var boxMinx = ${(fichaCampoInstance != null)?fichaCampoInstance.minx:'minx'} ;
   var boxMiny = ${(fichaCampoInstance != null)?fichaCampoInstance.miny:'miny'} ;
   var boxMaxx = ${(fichaCampoInstance != null)?fichaCampoInstance.maxx:'maxx'} ;
@@ -55,6 +56,56 @@
   OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
   function initMaps() {
+
+    /*$("#buscarcc").click(function() {
+      var cc = $('#abuscar').val();
+      $.ajax({
+        url:'/express/fichaCampo/searchPredio',
+        data: {cc: cc},
+        success: function(data) {
+          $('div#info').html(data);
+          if(data.codigoCatastral != '') {
+            $("#abuscar").val(data.codigoCatastral) ;
+            codigoCatastral = data.codigoCatastral;
+            if(fic) {
+              map.removeLayer(fic);
+              fic.destroy();
+            }
+            fic = selectPredio(codigoCatastral);
+            map.addLayer(fic);
+            var pointCenter = new OpenLayers.LonLat(data.x, data.y);
+            map.setCenter(pointCenter);
+          } else {
+            alert("PREDIO DE CLAVE CATASTRAL '" + cc + "' NO ENCONTRADO !")
+          }
+          if(data.id != '' ) {
+            $('li#optShowFicha').css('display','block');
+            $('li#optShowFicha a').attr('href','/express/fichaCampo/show/' + data.id);
+            $('li#optCreateFicha').css('display','none');
+          } else
+          if(data.codigoCatastral != '' ) {
+            $('li#optShowFicha').css('display','none');
+            $('li#optCreateFicha').css('display','block');
+            $('li#optCreateFicha a').attr('href','/express/fichaCampo/create/' + data.codigoCatastral);
+          } else {
+            $('li#optShowFicha').css('display','none');
+            $('li#optCreateFicha').css('display','none');
+          }
+        }
+      });
+    });*/
+
+    $("#buscarcc").click(function() {
+      var cc = $('#abuscar').val().trim();
+      if(busqueda) {
+        map.removeLayer(busqueda);
+        busqueda.destroy();
+      }
+      if(cc != '') {
+        busqueda = searchPredios(cc);
+        map.addLayer(busqueda);
+      }
+    });
 
     $('li#optCreateFicha').css('display','none');
 
@@ -75,9 +126,10 @@
     map = new OpenLayers.Map('map', options);
 
     catastro = new OpenLayers.Layer.WMS(
-        "Catastro","${wms}",
+        "Levantamiento predial","${wms}",
         {
-          LAYERS: 'sinatexpress:levantamientoPredial',
+          LAYERS: 'sinatexpress:lp',
+          VIEWPARAMS: 'canton:${gad}',
           STYLES: '',
           transparent:false,
           format: format
@@ -91,27 +143,12 @@
         }
     );
     map.addLayer(catastro);
-    pecs = new OpenLayers.Layer.WMS(
-        "PECs","${wms}",
-        {
-          LAYERS: 'sinatexpress:pecs',
-          STYLES: '',
-          transparent:true,
-          format: format
-        },
-        {
-          singleTile: true,
-          buffer: 0,
-          displayOutsideMaxExtent: true,
-          isBaseLayer: false,
-          yx : {'EPSG:32717' : false}
-        }
-    );
-    map.addLayer(pecs);
+
     fics = new OpenLayers.Layer.WMS(
         "Fichas de Investigación","${wms}",
         {
           LAYERS: 'sinatexpress:fics',
+          VIEWPARAMS: 'canton:${gad}',
           STYLES: '',
           transparent:true,
           format: format
@@ -125,23 +162,7 @@
         }
     );
     map.addLayer(fics);
-    zh = new OpenLayers.Layer.WMS(
-        "Zona Homogenea","${wms}",
-        {
-          LAYERS: 'sinatexpress:zh',
-          STYLES: '',
-          transparent:true,
-          format: format
-        },
-        {
-          singleTile: true,
-          buffer: 0,
-          displayOutsideMaxExtent: true,
-          isBaseLayer: false,
-          yx : {'EPSG:32717' : false}
-        }
-    );
-    map.addLayer(zh);
+
     if(codigoCatastral != '') {
       fic = selectPredio(codigoCatastral);
       map.addLayer(fic);
@@ -149,6 +170,7 @@
 
     map.events.register('click', map, function (e) {
       var lonLat = map.getLonLatFromPixel(e.xy);
+      $("#abuscar").val('') ;
       $.ajax({
         url:'/express/fichaCampo/selectPredio',
         data: {
@@ -156,8 +178,10 @@
           latitud: lonLat.lat
         },
         success: function(data) {
+
           $('div#info').html(data.info);
           if(data.codigoCatastral != '') {
+            $("#abuscar").val(data.codigoCatastral) ;
             codigoCatastral = data.codigoCatastral;
             if(fic) {
               map.removeLayer(fic);
@@ -205,7 +229,28 @@
           STYLES: '',
           transparent:true,
           format: format,
-          viewparams:"codigocatastral:" + codigoCatastral
+          viewparams:"cc:" + codigoCatastral
+        },
+        {
+          singleTile: true,
+          buffer: 0,
+          displayOutsideMaxExtent: true,
+          isBaseLayer: false,
+          yx : {'EPSG:32717' : false}
+        }
+    );
+    return layer;
+  }
+
+  function searchPredios(codigoCatastral) {
+    var layer = new OpenLayers.Layer.WMS(
+        "Predios encontrados","${wms}",
+        {
+          LAYERS: 'sinatexpress:searchPrediosGr',
+          STYLES: '',
+          transparent:true,
+          format: format,
+          viewparams:'cc:' + codigoCatastral + ";gad:${gad}"
         },
         {
           singleTile: true,
@@ -240,6 +285,11 @@
   <div id="scale"></div>
 </div>
 <div id="info" style="width:100%;clear:both"></div>
+<div id="busqueda" style="width:100%;clear:both;margin-top:16px;">
+  Clave Catastral:
+  <input id="abuscar" type="text"/>
+  <span id="buscarcc" style="cursor: pointer;color: red;">[ buscar ]</span>
+</div>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package sinat.express
 
+// YA NO DEBE USARSE - - - en su lugar externos.DPALP
 class DPA {
 
   String codigo

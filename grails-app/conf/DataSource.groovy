@@ -18,14 +18,14 @@ environments {
 
     development {
       dataSource {
-        /*dbCreate = "update"
-        url="jdbc:postgresql://localhost:5432/sinatexpressdb"
-        username = "postgres"
-        password = "sqlgis1606"*/
         dbCreate = "update"
-        url="jdbc:postgresql://localhost:5432/sinatexpressdb"
+        ////url="jdbc:postgresql://localhost:5432/ficdb"
+        url="jdbc:postgresql://localhost:5432/ficdb"
         username = "postgres"
         password = "sqlgis1606"
+        /*url="jdbc:postgresql://172.21.1.25:5432/ficdb"
+        username = "postgres"
+        password = "postgres" */
       }
     }
 
@@ -41,7 +41,7 @@ environments {
     production {
       dataSource {
         dbCreate = "update"
-        url="jdbc:postgresql://172.21.1.25:5432/sinatexpressdb"
+        url="jdbc:postgresql://172.21.1.25:5432/ficdb"
         username = "postgres"
         password = "postgres"
         properties {

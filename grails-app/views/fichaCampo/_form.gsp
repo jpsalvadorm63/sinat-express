@@ -34,11 +34,11 @@
     <div class="title">a. Ubicación Geográfica</div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'coordenadaX', 'error')} ">
       <div class="label">Coordenada UTM X</div>
-      <g:textField disabled="${showing}" name="coordenadaX" maxlength="6" value="${fichaCampoInstance?.coordenadaX}" onkeypress="return isNumberKey(event)"/>
+      <g:textField disabled="${showing}" name="coordenadaX" maxlength="6" value="${fichaCampoInstance?.coordenadaX}" onkeypress="return isIntegerKey(event)"/>
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'coordenadaY', 'error')} ">
       <div class="label">Coordenada UTM Y</div>
-      <g:textField disabled="${showing}" name="coordenadaY" maxlength="9" value="${fichaCampoInstance?.coordenadaY}" onkeypress="return isNumberKey(event)"/>
+      <g:textField disabled="${showing}" name="coordenadaY" maxlength="9" value="${fichaCampoInstance?.coordenadaY}" onkeypress="return isIntegerKey(event)"/>
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'altitud', 'error')} required">
       <div class="label">Altitud</div>
@@ -57,8 +57,9 @@
       <g:select disabled="${showing}" style="width:160px;"
                 id="provincia"
                 name="provincia.id"
-                from="${sinat.express.DPA.provincias()}"
+                from="${externos.DPALP.provincias()}"
                 optionKey="id"
+                optionValue="nombreYCodigo"
                 required=""
                 value="${fichaCampoInstance?.provincia?.id}"
                 class="many-to-one"
@@ -70,8 +71,9 @@
         <g:select disabled="${showing}" style='width:160px;'
                   id='canton'
                   name='canton.id'
-                  from='${sinat.express.DPA.cantones(fichaCampoInstance?.provincia)}'
+                  from='${externos.DPALP.cantones(fichaCampoInstance?.provincia)}'
                   optionKey='id'
+                  optionValue="nombreYCodigo"
                   required=''
                   value='${fichaCampoInstance?.canton?.id}'
                   class='many-to-one'/>
@@ -83,8 +85,9 @@
         <g:select disabled="${showing}" style="width:160px;"
                   id="parroquia"
                   name="parroquia.id"
-                  from="${sinat.express.DPA.parroquias(fichaCampoInstance?.canton)}"
+                  from="${externos.DPALP.parroquias(fichaCampoInstance?.canton)}"
                   optionKey="id"
+                  optionValue="nombreYCodigo"
                   required=''
                   value="${fichaCampoInstance?.parroquia?.id}"
                   class="many-to-one"/>
@@ -116,7 +119,7 @@
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'codigoCatastral', 'error')}">
       <div class="label">Código Catastral</div>
-      <g:textField disabled="${showing}" name="codigoCatastral" maxlength="13" value="${fichaCampoInstance?.codigoCatastral}" />
+      <g:textField disabled="${showing}" name="codigoCatastral" maxlength="16" value="${fichaCampoInstance?.codigoCatastral}" />
     </div>
     <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'construccion', 'error')} ">
       <div class="label">Construcción</div>

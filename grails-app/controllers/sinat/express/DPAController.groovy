@@ -38,6 +38,16 @@ class DPAController {
   def updateCanton() {
     def canton = DPALP.get(params.cantonId)
     AppSession.setSessionVar(session.id,'canton',canton?.codigo)
+
+    def sqlstr = "select min(minx), min(miny), max(maxx), max(maxy) from lp.Prediogr where gad = '" + canton.codigo + "'"
+    def data = lp.Prediogr.executeQuery(sqlstr)
+    data.each {
+      AppSession.setSessionVar(session.id,'cantonminx',it[0])
+      AppSession.setSessionVar(session.id,'cantonminy',it[1])
+      AppSession.setSessionVar(session.id,'cantonmaxx',it[2])
+      AppSession.setSessionVar(session.id,'cantonmaxy',it[3])
+    }
+
     render ""
   }
 

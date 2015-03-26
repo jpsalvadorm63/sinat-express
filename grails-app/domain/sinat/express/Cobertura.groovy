@@ -8,11 +8,12 @@ class Cobertura {
   TipoCobertura tipoCobertura
   Double superficie
   String rendimiento
-  Integer cargaAnimal
+  Double cargaAnimal
   String rotacion
   Integer cosechasPorAnio
   TipoTecnologiaPredominante tecnologiaPredominante
   String sistemaDeRiego
+  String permanenciaDeRiego
   String mecanizacion
   Double venta
   Double oferta
@@ -35,7 +36,8 @@ class Cobertura {
     cosechasPorAnio(nullable:true, default:0)
     tecnologiaPredominante(nullable:true)
     sistemaDeRiego(nullable:true, inList: ['GOTEO','ASPERCIÓN','GRAVEDAD','BOMBA','OTROS','NO TIENE'],default:'')
-    mecanizacion(nullable:true, inList: ['FACIL','MODERADA','NO MECANIZABLE','NO TIENE'],default:'')
+    permanenciaDeRiego(nullable:true, inList: ['Ocasional','Permanente','No tiene'],default:null,size:0..16)
+    mecanizacion(nullable:true, inList: ['FACIL','MODERADA','NO MECANIZABLE'],default:'')
     venta(nullable:true)
     oferta(nullable:true)
     arriendo(nullable:true)
@@ -64,6 +66,7 @@ class Cobertura {
     cosechasPorAnio        column: 'cosechasporanio'
     tecnologiaPredominante column: 'tecnologiapredominante_id'
     sistemaDeRiego         column: 'sistemaderiego'
+    permanenciaDeRiego     column: 'permanenciaderiego'
     mecanizacion           column: 'mecanizacion'
     venta                  column: 'venta'
     oferta                 column: 'oferta'
@@ -75,9 +78,7 @@ class Cobertura {
     fechaActualizacion     column: "actualizacion"
   }
 
-  static void fillData() {
-
-  }
+  static void fillData() {}
 
   String toString() { tipoUso?.nombre + ' - ' + tipoCobertura?.nombre }
 

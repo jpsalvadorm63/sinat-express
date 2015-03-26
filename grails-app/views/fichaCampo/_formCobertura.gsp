@@ -6,10 +6,10 @@
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'tipoUso', 'error')} required">
       <div class="label">Tipo de Uso</div>
         <g:if test="${showing=='true'}">
-          <g:field name="nathing" style="width:150px" disabled="${showing}" value="${coberturaInstance?.tipoUso}"/>
+          <g:field name="nathing" style="width:120px" disabled="${showing}" value="${coberturaInstance?.tipoUso}"/>
         </g:if>
         <g:if test="${showing=='false'}">
-          <g:select disabled="${showing}" style="width:160px;"
+          <g:select disabled="${showing}" style="width:120px;"
                     id="tipoUso"
                     name="tipoUso.id"
                     from="${sinat.express.TipoUso.list()}"
@@ -25,12 +25,12 @@
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'tipoCobertura', 'error')} required">
       <div class="label">Cobertura</div>
       <g:if test="${showing=='true'}">
-          <g:field name="nathing" style="width:150px" disabled="${showing}" value="${coberturaInstance?.tipoCobertura}"/>
+          <g:field name="nathing" style="width:120px" disabled="${showing}" value="${coberturaInstance?.tipoCobertura}"/>
       </g:if>
       <g:if test="${showing=='false'}">
         <div id="ajaxCoberturas">
         <g:select disabled="${showing}"
-                  style="width:160px;"
+                  style="width:120px;"
                   id="tipoCobertura"
                   name="tipoCobertura.id"
                   from="${coberturas0}"
@@ -48,20 +48,20 @@
     <div id="otros" class="${(deshabilitarOtros == null || deshabilitarOtros==true)?'desabilitado':''}" style="clear:both;">
       <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'otrosCultivo', 'error')} ">
         <div class="label">Otros Cultivos</div>
-        <g:textField disabled="${showing}" name="otrosCultivo" maxlength="64" value="${coberturaInstance?.otrosCultivo}" style="width:150px;"/>
+        <g:textField disabled="${showing}" name="otrosCultivo" maxlength="64" value="${coberturaInstance?.otrosCultivo}" style="width:120px;"/>
       </div>
     </div>
 
   </div>
 
   <div style="min-height: 32px;padding: 12px 0 12px 4px;float:left;">
-    <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'superficie', 'error')} ">
+    <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'superficie', 'error')}">
       <div class="label">Superficie (ha)</div>
       <g:field disabled="${showing}" name="superficie" value="${fieldValue(bean: coberturaInstance, field: 'superficie')}"  onkeypress="return isNumberKey(event)"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'cargaAnimal', 'error')} ">
       <div class="label">Carga animal</div>
-      <g:field disabled="${showing}" name="cargaAnimal" type="number" value="${coberturaInstance.cargaAnimal}"/>
+      <g:field disabled="${showing}" name="cargaAnimal" value="${coberturaInstance.cargaAnimal}" style="width:64px;"  onkeypress="return isNumberKey(event)"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'tecnologiaPredominante', 'error')} ">
       <div class="label">Tecnología Predominante</div>
@@ -85,7 +85,7 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'oferta', 'error')} ">
       <div class="label">Valor Oferta (USD/ha)</div>
-      <g:field disabled="${showing}" name="oferta" value="${fieldValue(bean: coberturaInstance, field: 'oferta')}" onkeypress="return isNumberKey(event)"/>
+      <g:field disabled="${showing}" name="oferta" value="${fieldValue(bean: coberturaInstance, field: 'oferta')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
     </div>
     <div style="clear:both;height:4px;"></div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'rotacion', 'error')} ">
@@ -94,7 +94,7 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'rendimiento', 'error')} ">
       <div class="label">Rendimiento</div>
-      <g:textField disabled="${showing}" name="rendimiento" maxlength="64" value="${coberturaInstance?.rendimiento}"/>
+      <g:textField disabled="${showing}" name="rendimiento" maxlength="64" value="${coberturaInstance?.rendimiento}" style="width:64px;"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'sistemaDeRiego', 'error')} ">
       <div class="label">Sistema de riego</div>
@@ -111,7 +111,7 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'venta', 'error')} ">
       <div class="label">Valor Venta (USD/ha)</div>
-      <g:field disabled="${showing}" name="venta" value="${fieldValue(bean: coberturaInstance, field: 'venta')}" onkeypress="return isNumberKey(event)"/>
+      <g:field disabled="${showing}" name="venta" value="${fieldValue(bean: coberturaInstance, field: 'venta')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
     </div>
     <div style="clear:both;height:4px;"></div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'cosechasPorAnio', 'error')} ">
@@ -120,7 +120,28 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'precioProducto', 'error')} ">
       <div class="label">Precio producto</div>
-      <g:field disabled="${showing}" name="precioProducto" value="${fieldValue(bean: coberturaInstance, field: 'precioProducto')}" onkeypress="return isNumberKey(event)"/>
+      <g:field disabled="${showing}" name="precioProducto" value="${fieldValue(bean: coberturaInstance, field: 'precioProducto')}" onkeypress="return isNumberKey(event)" style="width:64px;"/>
+    </div>
+    <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'permanenciaDeRiego', 'error')} ">
+      <div class="label">Permanencia de riego</div>
+      <g:if test="${showing=='true'}">
+        <g:field name="nathing"
+                 style="width:120px"
+                 disabled="${showing}"
+                 value="${coberturaInstance?.permanenciaDeRiego}" />
+      </g:if>
+      <g:if test="${showing=='false'}">
+        <g:select disabled="${showing}"
+                  name="permanenciaDeRiego"
+                  from="${coberturaInstance.constraints.permanenciaDeRiego.inList}"
+                  value="${coberturaInstance?.mecanizacion}"
+                  valueMessagePrefix="cobertura.permanenciaDeRiego"
+                  noSelection="['':'']"/>
+      </g:if>
+    </div>
+    <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'arriendo', 'error')} ">
+      <div class="label">Valor Arriendo (USD/ha)</div>
+      <g:field disabled="${showing}" name="arriendo" value="${fieldValue(bean: coberturaInstance, field: 'arriendo')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'mecanizacion', 'error')} ">
       <div class="label">Mecanización</div>
@@ -138,10 +159,6 @@
                   valueMessagePrefix="cobertura.mecanizacion"
                   noSelection="['':'']"/>
       </g:if>
-    </div>
-    <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'arriendo', 'error')} ">
-      <div class="label">Valor Arriendo (USD/ha)</div>
-      <g:field disabled="${showing}" name="arriendo" value="${fieldValue(bean: coberturaInstance, field: 'arriendo')}" onkeypress="return isNumberKey(event)"/>
     </div>
   </div>
 
