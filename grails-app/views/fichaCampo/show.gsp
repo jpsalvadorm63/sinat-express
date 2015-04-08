@@ -159,12 +159,27 @@
     }
 
     function viewPhoto(cc,photoFile) {
+      //$('#photoContainer').attr('visibility','visible');
       $('img#photovw').attr('src','/express/fichaCampo/displayPhoto?cc=' + cc + '&photo=' + photoFile);
+    }
 
+    function deletePhoto(cc,photoFile) {
+      if (confirm("¿Desea borrar foto " + photoFile + ", correspondioente al predio " + cc + " ?") == true) {
+        $.ajax({
+          type:'POST',
+          data:{cc:cc,photo:photoFile},
+          url:'/express/fichaCampo/deletePhoto',
+          success:function(result) {
+            alert(result.msg)
+          }
+        });
+      }
+      clearPhoto();
     }
 
     function clearPhoto() {
       $('img#photovw').attr('src','');
+      //$('div#photoContainer').attr('visibility','hidden');
     }
 
     function isNumberKey(evt){
@@ -247,6 +262,76 @@
 
     .clearshow {
       background: rgb(66, 184, 221); /* this is a light blue */
+    }
+
+    .photos {
+      width:30%;
+      max-width:30%;
+      padding:0;
+      margin:0;
+      float:left;
+    }
+
+    .photoDisplay {
+      width:70%;
+      max-width:70%;
+      padding:0;
+      margin:0;
+      background-color:green;
+      float:right;
+    }
+
+    .photo {
+      min-height: 16px;
+      margin: 0px;
+      padding: 0px;
+      display: -webkit-flex;
+      display: flex;
+      width: 100%;
+    }
+
+    .photoFile {
+      float:left;
+      margin: 4px 2px 4px 4px;
+      padding: 2px;
+      border: 1px solid #cccc33;
+      border-radius: 4pt;
+      background: #dddd88;
+      text-align:left;
+      cursor: pointer;
+      width:90%;
+    }
+
+    .photoFile2 {
+      float:left;
+      margin: 4px 4px 4px 4px;
+      padding: 2px;
+      border: 1px solid #cccc33;
+      border-radius: 4pt;
+      background: #dddd88;
+      text-align:left;
+      cursor: pointer;
+      width:94%;
+    }
+
+
+    .deleteFile {
+      float:right;
+      margin: 4px 4px 4px 2px;
+      padding: 2px;
+      border: 1px solid #8888bb;
+      border-radius: 4pt;
+      background: #ccccff;
+      text-align: center;
+      cursor: pointer;
+      width:10%;
+    }
+
+    #photoContainer {
+      float:left;
+      width:70%;
+      height:auto;
+      /*visibility: hidden;*/
     }
 
   </style>

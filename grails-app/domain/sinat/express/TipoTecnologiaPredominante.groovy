@@ -36,8 +36,8 @@ class TipoTecnologiaPredominante {
   }
 
   static void fillData() {
-    fillDataWidth('agr',['note':'No tecnificada','tecn':'Tecnificada','trad':'Tradicional','subs':'Subsistencia','huer':'Huerto Familiar'])
-    fillDataWidth('pec',['int':'Intensivo',	'ext':'Extensivo',	'subsi':'Subsistencia'])
+    fillDataWidth('agr',['note':'No tecnificada','tecn':'Tecnificada'])
+    fillDataWidth('pec',['int':'Intensivo',	'ext':'Extensivo'])
     fillDataWidth('for',['ind':'Industrial', 'art':'Artesanal'])
     fillDataWidth('acua',['aint':'Intensivo',	'aext':'Extensivo'])
   }

@@ -105,9 +105,11 @@
             Usuario: <span><sec:username/></span> |
             <g:link controller="logout">Terminar Sesión</g:link>
           </sec:ifLoggedIn>
-          <!-- <sec:access expression="!hasRole('ROLE_ADMIN')">
+          <!--
+          <sec:access expression="!hasRole('ROLE_ADMIN')">
             | <g:link controller="login" action="changePass2">Cambiar clave</g:link>
-          </sec:access> -->
+          </sec:access>
+          -->
           <sec:ifNotLoggedIn>
             <g:link controller='login' action='auth'>Ingresar al Sistema</g:link>
           </sec:ifNotLoggedIn>

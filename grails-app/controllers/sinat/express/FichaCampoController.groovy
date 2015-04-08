@@ -62,7 +62,8 @@ class FichaCampoController {
         photoDir.mkdir();
       // buuild list of graphic files
       photoDir.listFiles().each() {
-        photoFilesList << it.getName()
+        if(!it.isDirectory())
+          photoFilesList << it.getName()
       }
     }
     return photoFilesList
@@ -658,6 +659,21 @@ class FichaCampoController {
     response.contentType = "image/"+fileext // or the appropriate image content type
     response.outputStream << img
     response.outputStream.flush()
+  }
+
+  def deletePhoto() {
+    def path = photoDirBase + "/${params['cc']}/${params['photo']}"
+    def deletedPath = photoDirBase + "/${params['cc']}/deleted"
+    def deletedDir = new File(deletedPath)
+    if(!deletedDir.exists() || !deletedDir.isDirectory())
+      deletedDir.mkdir()
+    def file2move = new File(path)
+    if(file2move.exists() && deletedDir.exists() && deletedDir.isDirectory()) {
+      file2move.renameTo(deletedPath + '/' + params['photo'])
+      render(contentType: 'text/json') {['msg':"Archivo ${params['photo']} ha sido borrado . . ."]}
+    } else {
+      render(contentType: 'text/json') {['msg':"Error: Archivo ${params['photo']} NO PUDO se borrado . . ."]}
+    }
   }
 
 }

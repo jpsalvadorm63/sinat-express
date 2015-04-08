@@ -2,7 +2,25 @@
 
   <div class="title" style="border-top:1px solid black;">V. REGISTRO FOTOGRÁFICO</div>
 
-  <div style="float:left;width:30%;height:auto;">
+  <div class="photos">
+
+    <g:if test="${actionName?.toUpperCase() == 'EDITING'}">
+      <g:each in="${photos}">
+        <div class='photo'>
+          <div class="photoFile" onclick="viewPhoto('${claveCatastral}','${it}')">${it}</div>
+          <div class="deleteFile" onclick="deletePhoto('${claveCatastral}','${it}')">X</div>
+        </div>
+      </g:each>
+    </g:if>
+
+    <g:if test="${actionName?.toUpperCase() == 'SHOWING'}">
+      <g:each in="${photos}">
+        <div class="photoFile2" onclick="viewPhoto('${claveCatastral}','${it}')">${it}</div>
+      </g:each>
+    </g:if>
+
+    <div class="photoFile2" style='text-align: center;font-weight: bold;' onclick="clearPhoto()">ocultar la foto !</div>
+
     <g:if test="${actionName?.toUpperCase() == 'EDITING'}">
       <%def path = new File("/var/fic/${fichaCampoInstance.codigoCatastral}")%>
       <uploadr:add name="${'uploadPhotoRW' + fichaCampoInstance.id}"
@@ -10,20 +28,15 @@
                    direction="up"
                    maxVisible="4"
                    allowedExtensions="gif,giff,png,jpg,jpeg,JPEG,JPG,PNG,GIF,GIFF"
-                   maxSize="1048576">
+                   maxSize="1048576"
+                   style="width:90%;">
       </uploadr:add>
     </g:if>
-    <g:each in="${photos}">
-      <div style="clear:both;width:100%;display: table-cell;">
-        <div class="toshow" style="width:80%;float:left;" onclick="viewPhoto('${claveCatastral}','${it}')">${it}</div>
-        <div class="toshow" style="width:18%;float:right" onclick="deletePhoto('${claveCatastral}','${it}')">X</div>
-      </div>
-    </g:each>
-    <div class="clearshow" onclick="clearPhoto()">ocultar la foto !</div>
+
   </div>
 
   <g:if test="${photos.size() > 0}">
-    <div style="float:left;width:70%;height:auto;">
+    <div id="photoContainer">
       <img id="photovw" src="" style="max-width:100%;height:auto;"/>
     </div>
   </g:if>
