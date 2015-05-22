@@ -7,7 +7,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/ficdb</jdbc-url>
       <libraries>
         <library>
-          <url>file://$PROJECT_DIR$/lib/postgresql-9.2-1001.jdbc4.jar</url>
+          <url>file://$MAVEN_REPOSITORY$/org/postgresql/postgresql/9.3-1101-jdbc41/postgresql-9.3-1101-jdbc41.jar</url>
         </library>
       </libraries>
     </data-source>

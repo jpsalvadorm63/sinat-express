@@ -23,7 +23,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-grails.project.dependency.resolver = "maven" // or ivy
+grails.project.dependency.resolver = "maven" // or maven
 grails.project.dependency.resolution = {
 
     // inherit Grails' default dependencies
@@ -47,14 +47,14 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://www.hibernatespatial.org/repository"
+        //mavenRepo "http://www.hibernatespatial.org/repository"
     }
 
     dependencies {
-      runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
-      runtime "org.postgis:postgis-jdbc:1.5.2" //local repo addition
+      //runtime 'org.postgresql:postgresql-jdbc:9.2-1001-jdbc4'
+      //runtime "org.postgis:postgis-jdbc:2.1.3" //local repo addition
       //runtime "org.hibernatespatial:hibernate-spatial-postgis:1.1.1"
-      compile "com.vividsolutions:jts:1.13"
+      //compile "com.vividsolutions:jts:1.13"
     }
 
     plugins {
