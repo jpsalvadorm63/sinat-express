@@ -179,7 +179,7 @@
 
     function clearPhoto() {
       $('img#photovw').attr('src','');
-      //$('div#photoContainer').attr('visibility','hidden');
+      $('div#photoContainer').attr('visibility','hidden');
     }
 
     function isNumberKey(evt){

@@ -81,7 +81,7 @@ class DPALP {
     dpaProvincias.each {dpap->
       String codigo = dpap.key
       String nombre = dpap.value
-      if(!findByCodigo(codigo)) {
+      if(!DPALP.findByCodigo(codigo)) {
         def provincia = new DPALP()
         provincia.nivel = 'PROVINCIA'
         provincia.codigo = codigo
