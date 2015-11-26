@@ -122,7 +122,6 @@ grails.resources.modules = {
   }
 }
 
-
 // SPRING SECURITY CORE
 grails.plugin.springsecurity.password.algorithm='bcrypt'
 grails.plugin.springsecurity.rejectIfNoRule = true

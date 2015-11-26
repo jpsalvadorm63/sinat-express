@@ -13,7 +13,8 @@ class FichaCampoController {
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
   def dataSource
   Sql sql = null
-  static wms = 'http://172.21.1.25:9090/geoserver/wms'
+  //static wms = 'http://172.21.1.25:9090/geoserver/wms'
+  static wms = 'http://45.55.142.238:9090/geoserver/wms'
   //static wms = 'http://localhost:9090/geoserver/wms'
   static photoDirBase = '/var/fic'
   static allowedExtensions = ["gif","png","jpg","jpeg","PNG","JPG","JPEG"]
@@ -24,7 +25,7 @@ class FichaCampoController {
 
   def index(Integer max) {
     params.max = Math.min(max ?: 16, 100)
-    def n = 0
+    def n
     def lista
     if (AppSession.getSessionVar(session.id, 'canton') != null) {
       lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')), params)
@@ -86,10 +87,6 @@ class FichaCampoController {
       fichaNueva.provincia = DPALP.findByCodigo(params.id[0..1])
       fichaNueva.canton = DPALP.findByCodigo(params.id[0..3])
       fichaNueva.parroquia = DPALP.findByCodigo(params.id[0..5])
-      /*strqry = "select zh from chunchiforweb_zh where st_contains(geom, ST_GeomFromText('POINT(" + x + " " + y + ")', 32717))"
-      data = sql.firstRow(strqry)
-      fichaNueva.zonaHomogenea = (data)?data[0]:'?'
-      */
       fichaNueva.zonaHomogenea = '?'
       fichaNueva.construccion = ''
       fichaNueva.legalizacion = ''

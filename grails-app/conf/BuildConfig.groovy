@@ -51,10 +51,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-      //runtime 'org.postgresql:postgresql-jdbc:9.2-1001-jdbc4'
-      //runtime "org.postgis:postgis-jdbc:2.1.3" //local repo addition
-      //runtime "org.hibernatespatial:hibernate-spatial-postgis:1.1.1"
-      //compile "com.vividsolutions:jts:1.13"
+
     }
 
     plugins {

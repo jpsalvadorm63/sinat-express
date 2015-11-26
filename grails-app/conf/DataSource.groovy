@@ -17,22 +17,18 @@ hibernate {
 environments {
 
     development {
-      dataSource {
-        dbCreate = "update"
-        ////url="jdbc:postgresql://localhost:5432/ficdb"
-        url="jdbc:postgresql://localhost:5432/ficdb"
-        username = "postgres"
-        password = "sqlgis1606"
-        /*url="jdbc:postgresql://172.21.1.25:5432/ficdb"
-        username = "postgres"
-        password = "postgres" */
-      }
+        dataSource {
+            dbCreate = "update"
+            url="jdbc:postgresql://localhost:5432/ficdb"
+            username = "postgres"
+            password = "sqlgis1606"
+        }
     }
 
     test {
       dataSource {
         dbCreate = "update"
-        url="jdbc:postgresql://172.21.1.25:5432/sinatexpressdb"
+        url="jdbc:postgresql://172.21.1.25:5432/ficdb"
         username = "postgres"
         password = "postgres"
       }
@@ -41,9 +37,9 @@ environments {
     production {
       dataSource {
         dbCreate = "update"
-        url="jdbc:postgresql://172.21.1.25:5432/ficdb"
+        url="jdbc:postgresql://127.0.0.1:5432/ficdb"
         username = "postgres"
-        password = "postgres"
+        password = "sqlgis2101"
         properties {
           // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
           jmxEnabled = true
@@ -66,8 +62,5 @@ environments {
         }
       }
     }
-  // - - - downloaded - - -
-  //postgis-jdbc-1.3.3.jar
-  //postgis-stubs-1.3.3.jar (compile)
-  //postgresql-8.3-603.jdbc4.jar (compile)
+
 }

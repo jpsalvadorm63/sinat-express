@@ -53,8 +53,8 @@ class DPALP {
     cache true
 
     id                  column: "id"
-    codigo 				      column: "codigo"
-    nombre				      column: "nombre"
+    codigo 				column: "codigo"
+    nombre				column: "nombre"
     minx                column: "minx"
     miny                column: "miny"
     maxx                column: "maxx"
@@ -62,7 +62,7 @@ class DPALP {
     preIndice           column: "preindice"
     indice              column: "indice"
     appUsuario          column: "appUsuario"
-    fechaCreacion 		  column: "creacion"
+    fechaCreacion 		column: "creacion"
     fechaActualizacion  column: "actualizacion"
   }
 
@@ -81,7 +81,7 @@ class DPALP {
     dpaProvincias.each {dpap->
       String codigo = dpap.key
       String nombre = dpap.value
-      if(!DPALP.findByCodigo(codigo)) {
+      if(!findByCodigo(codigo)) {
         def provincia = new DPALP()
         provincia.nivel = 'PROVINCIA'
         provincia.codigo = codigo
