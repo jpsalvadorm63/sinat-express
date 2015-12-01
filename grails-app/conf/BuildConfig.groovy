@@ -6,7 +6,6 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-
 //http://thespatialperspective.wordpress.com/2013/10/02/grails-hibernate-spatial-and-postgis/
 
 grails.project.fork = [
@@ -51,7 +50,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-
+        runtime 'org.postgresql:postgresql:9.3-1104-jdbc4'
     }
 
     plugins {

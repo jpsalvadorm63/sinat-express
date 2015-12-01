@@ -10,46 +10,53 @@ class DPAController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-  def index(Integer max) {
-    params.max = Math.min(max ?: 24, 100)
-    params.sort = (params.sort)?:'nombre'
-    params.order = (params.order)?:'ASC'
-    render view:'index', model:[DPAInstanceList: DPALP.findAllByNivel('PROVINCIA',params), DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size()]
-  }
-
-  @Transactional
-  def updateProvincia() {
-    def provincia = DPALP.get(params.provinciaId)
-    def canton = DPALP.findBySuperior(provincia)
-    AppSession.setSessionVar(session.id,'provincia',provincia?.codigo)
-    AppSession.setSessionVar(session.id,'canton',canton?.codigo)
-
-    render g.select(style:'width:260px;',
-           id:'canton',
-           name:'canton.id',
-           from:DPALP.cantones(provincia),
-           optionKey:'id',
-           value:canton?.id,
-           class:'many-to-one',
-           onchange: 'cambiaCanton(this.value)' )
-  }
-
-  @Transactional
-  def updateCanton() {
-    def canton = DPALP.get(params.cantonId)
-    AppSession.setSessionVar(session.id,'canton',canton?.codigo)
-
-    def sqlstr = "select min(minx), min(miny), max(maxx), max(maxy) from lp.Prediogr where gad = '" + canton.codigo + "'"
-    def data = lp.Prediogr.executeQuery(sqlstr)
-    data.each {
-      AppSession.setSessionVar(session.id,'cantonminx',it[0])
-      AppSession.setSessionVar(session.id,'cantonminy',it[1])
-      AppSession.setSessionVar(session.id,'cantonmaxx',it[2])
-      AppSession.setSessionVar(session.id,'cantonmaxy',it[3])
+    def index(Integer max) {
+        params.max = Math.min(max ?: 24, 100)
+        params.sort = (params.sort)?:'nombre'
+        params.order = (params.order)?:'ASC'
+        render view:'index',
+               model:[ DPAInstanceList: DPALP.findAllByNivel('PROVINCIA',params),
+                       DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size() ]
     }
 
-    render ""
-  }
+    @Transactional
+    def updateProvincia() {
+        def provincia = DPALP.get(params.provinciaId)
+        def cantones = DPALP.findAllBySuperior(provincia)
+        def canton = cantones?cantones[0]:null
+        // println "\n$params\n$provincia\n$canton\n${getSession().id}"
+        AppSession.setSessionVar(session.id,'provincia',provincia?.codigo)
+        AppSession.setSessionVar(session.id,'canton',canton?.codigo)
+        setEnvelope(canton)
+        render g.select(
+              style:'width:260px;',
+              id:'canton',
+              name:'canton.id',
+              from:DPALP.cantones(provincia),
+              optionKey:'id',
+              value:canton?.id,
+              class:'many-to-one',
+              onchange: 'cambiaCanton(this.value)' )
+    }
+
+    @Transactional
+    def updateCanton() {
+        def canton = DPALP.get(params.cantonId)
+        AppSession.setSessionVar(session.id,'canton',canton?.codigo)
+        setEnvelope(canton)
+        render ""
+    }
+
+    def setEnvelope(canton) {
+        def sqlstr = "select min(minx), min(miny), max(maxx), max(maxy) from lp.Prediogr where gad = '" + canton.codigo + "'"
+        def data = lp.Prediogr.executeQuery(sqlstr)
+        data.each {
+            AppSession.setSessionVar(session.id,'cantonminx',it[0])
+            AppSession.setSessionVar(session.id,'cantonminy',it[1])
+            AppSession.setSessionVar(session.id,'cantonmaxx',it[2])
+            AppSession.setSessionVar(session.id,'cantonmaxy',it[3])
+        }
+    }
 
   @Transactional
   def cambiarCanton() {
@@ -57,8 +64,9 @@ class DPAController {
       AppSession.setSessionVar(session.id,'provincia','01')
       AppSession.setSessionVar(session.id,'canton','0101')
     }
-    render(view:"cambiarCanton", model:[ provincia:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia')),
-                                         canton:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton')) ])
+    render( view:"cambiarCanton",
+            model:[ provincia:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia')),
+                    canton:DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton')) ])
   }
 
   def cantones() {

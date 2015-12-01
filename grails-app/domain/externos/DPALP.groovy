@@ -48,9 +48,10 @@ class DPALP {
   }
 
   static mapping = {
-    table name:'dpa', schema: 'entidades_externas'
-    version true
-    cache true
+      table name:'dpa', schema: 'entidades_externas'
+      version true
+      cache true
+      sort 'nombre'
 
     id                  column: "id"
     codigo 				column: "codigo"
