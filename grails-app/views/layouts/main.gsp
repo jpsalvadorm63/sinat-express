@@ -94,6 +94,7 @@
     <div class="main_top" >
       <div class="app_top">
         <div style="margin-left:30%; text-align: right;">
+          <g:if test="${sinat.express.KV.locUE}">UE * </g:if>
           Aplicacion: <span><g:meta name="app.name"/> <g:meta name="app.version"/></span> |
           <g:if test="${util.AppSession.getSessionVar(session.id,'canton') != null}">
             Provincia:

@@ -135,6 +135,7 @@ class FichaCampoController {
       respond fichaCampoInstance.errors, view: 'create'
       return
     }
+    fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEMATICA'
     fichaCampoInstance.save flush: true
     canton.updateIndice()
     request.withFormat {
@@ -242,6 +243,9 @@ class FichaCampoController {
     def fichaCampoInstance = FichaCampo.get(params.id)
     fichaCampoInstance.properties = params
     fichaCampoInstance.fechaActualizacion = new Date()
+    if(fichaCampoInstance.origen == null) {
+        fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEMATICA'
+    }
     fichaCampoInstance.save(flush:true)
     fichaCampoInstance.refresh()
     render template: "form", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
@@ -300,11 +304,11 @@ class FichaCampoController {
     }
     fichaCampoInstance.properties = params
     fichaCampoInstance.save(flush:true)
-    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
-                                                       actionName:'SHOWING',
-                                                       showing:'true',
-                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
-                                                       photos:photoFilesList]
+    render template: "formRegistroFotografico", model:[ fichaCampoInstance:fichaCampoInstance,
+                                                        actionName:'SHOWING',
+                                                        showing:'true',
+                                                        claveCatastral: fichaCampoInstance.codigoCatastral,
+                                                        photos:photoFilesList ]
   }
 
   def editObservaciones() {

@@ -41,7 +41,7 @@
   <ul class="menu">
     <li><a href="${createLink(uri: '/')}"><span>Principal</span></a></li>
     <li><g:link class="create" action="create"><span>Nueva Ficha</span></g:link></li>
-    <li><a href="${createLink(uri: '/fichaCampo/geoserver')}"><span>Mapa</span></a></li>
+    <!-- <li><a href="${createLink(uri: '/fichaCampo/geoserver')}"><span>Mapa</span></a></li> -->
     <li><a href="#"><span>Ayuda</span></a></li>
   </ul>
 </div>

@@ -1,8 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a99eedb4-0bc1-4a23-a87f-1f63a4f99bd0" name="Default" comment="">
+    <list default="true" id="a99eedb4-0bc1-4a23-a87f-1f63a4f99bd0" name="Default" comment="Primeros Cambios para INGEMATICA">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_Annotations$AnnotationChecker$1_2006.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_Annotations_6254.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_ConstructorBindingImpl_13930.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_DefaultConstructionProxyFactory$1_2160.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_DefaultConstructionProxyFactory_2000.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_InjectorImpl_34320.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_ProviderMethodsModule_7719.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_SingleFieldInjector_3751.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_SingleMethodInjector$1_1300.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_SingleMethodInjector_4029.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_TypeConverterBindingProcessor$5_2256.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_TypeConverterBindingProcessor_5802.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_internal_util_Classes_2349.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_matcher_Matchers_5242.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_google_inject_spi_InjectionPoint_18683.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_intellij_rt_execution_application_AppMain_4910.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_sun_tools_javac_Main_1557.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_sun_tools_javac_model_JavacElements_20629.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_sun_tools_javac_processing_JavacProcessingEnvironment$ServiceIterator_3349.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_sun_tools_javac_processing_JavacProcessingEnvironment_28380.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/com_sun_tools_javac_util_BaseFileManager_10346.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/grails_build_logging_GrailsConsole_19763.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/grails_util_Holders_7985.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovy_grape_Grape_5162.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovy_lang_GroovyShell_18097.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovy_lang_MetaClassRegistry$MetaClassCreationHandle_2886.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovy_util_AntBuilder_14709.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovy_xml_XmlUtil_9864.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovyjarjarantlr_ASTFactory_6276.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovyjarjarantlr_CharScanner_8286.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/groovyjarjarantlr_Utils_1849.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/javassist_util_proxy_ProxyFactory_29782.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/javax_mail_Session_18772.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/javax_servlet_http_HttpServlet_8296.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/jline_TerminalFactory_4721.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_change_ChangeFactory_3240.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_change_custom_CustomChangeWrapper_6255.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_database_DatabaseFactory_4285.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_database_typeconversion_TypeConverterFactory_2985.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_parser_ChangeLogParserFactory_3550.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_precondition_CustomPreconditionWrapper_4770.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_precondition_PreconditionFactory_2849.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_serializer_ChangeLogSerializerFactory_4207.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_serializer_core_string_StringChangeLogSerializer_7762.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_serializer_core_xml_XMLChangeLogSerializer_14710.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_servicelocator_ServiceLocator_9501.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_snapshot_DatabaseSnapshotGeneratorFactory_3991.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_sql_visitor_SqlVisitorFactory_2239.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_sqlgenerator_SqlGeneratorFactory_7806.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/liquibase_util_ObjectUtil_3343.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_catalina_connector_Connector_15735.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_catalina_deploy_NamingResources_24873.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_commons_lang_builder_HashCodeBuilder_9642.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_ivy_core_settings_IvySettings_42964.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_log4j_config_PropertySetter_8022.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_log4j_helpers_Loader_4244.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_log4j_helpers_OptionConverter_10730.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_log4j_spi_LoggingEvent_9937.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_maven_model_interpolation_StringSearchModelInterpolator$InterpolateObjectAction$CacheItem_4610.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_maven_model_interpolation_StringSearchModelInterpolator$InterpolateObjectAction$ListField_2678.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_maven_model_interpolation_StringSearchModelInterpolator$InterpolateObjectAction$MapField_3038.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_maven_model_interpolation_StringSearchModelInterpolator$InterpolateObjectAction$ObjectField_1869.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_maven_model_interpolation_StringSearchModelInterpolator$InterpolateObjectAction$StringField_1833.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tomcat_util_net_SSLImplementation_2818.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_AntClassLoader_24091.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_AntTypeDefinition_7441.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_ComponentHelper_24103.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$10_2345.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$11_2942.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$13_1951.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$3_1433.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$5_1586.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$7_1504.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$8_1670.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$9_1944.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$AddNestedCreator_2311.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$AttributeSetter_2415.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper$CreateNestedCreator_1174.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_IntrospectionHelper_27155.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_ProjectHelperRepository$ConstructingIterator_1722.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_ProjectHelperRepository_7631.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_Project_34948.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_TaskAdapter_4324.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_dispatch_DispatchUtils_3253.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_taskdefs_Execute_15331.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_taskdefs_ProcessDestroyer_4865.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_taskdefs_Property_12965.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_taskdefs_optional_native2ascii_SunNative2Ascii_3001.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_types_EnumeratedAttribute_2731.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_types_Mapper_5689.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_types_Path_13759.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_types_selectors_ExtendSelector_4695.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_types_selectors_modifiedselector_ModifiedSelector_15818.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_util_ClasspathUtils_5819.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_ant_util_ReflectUtil_3716.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_apache_tools_zip_ExtraFieldUtils_6721.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_antlr_parser_GroovyLexer_61060.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_ast_ClassNode_37315.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_ast_FieldNode_4637.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_classgen_AnnotationVisitor_13601.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_classgen_Verifier_40424.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_classgen_asm_MethodCaller_2645.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_classgen_asm_WriterController_13397.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_control_ParserPluginFactory_1977.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_control_ResolveVisitor_37506.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_cli_GrailsScriptRunner_31193.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_cli_api_BaseSettingsApi_17398.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_cli_support_ClasspathConfigurer_9884.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_cli_support_GrailsBuildEventListener_9661.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_cli_support_GrailsStarter_8744.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_AbstractGrailsClass_9426.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_AnnotationDomainClassArtefactHandler_1961.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_ArtefactHandlerAdapter_4855.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_ClassPropertyFetcher$GetterPropertyFetcher_1979.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_ClassPropertyFetcher_11162.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_DefaultGrailsControllerClass_13234.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_DomainClassArtefactHandler_5019.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_GrailsClassUtils_25895.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_GrailsDomainConfigurationUtil_14761.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_commons_GrailsMetaClassUtils_7471.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_compiler_DirectoryWatcher_3946.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_compiler_injection_GrailsAwareInjectionOperation_6460.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_io_support_GrailsResourceUtils_18011.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_orm_hibernate_cfg_AbstractGrailsDomainBinder_87388.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_AbstractGrailsPluginManager_17000.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_DefaultGrailsPluginManager_30892.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_DefaultGrailsPlugin_28004.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_GrailsVersionUtils_9323.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_log4j_web_util_Log4jConfigListener_3424.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_services_ServicesGrailsPlugin_7836.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_plugins_web_api_ControllersApi_20570.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_validation_ConstrainedProperty_27204.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_grails_web_servlet_mvc_GrailsWebRequest_16939.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedClass$1$1_1336.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedClass$2$1_1042.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedClass$3$1_1340.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedClass_12483.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedConstructor_4586.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedField_2208.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_CachedMethod_9886.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_ClassLoaderForClassArtifacts_3821.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_GeneratedMetaMethod$Proxy_3278.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_stdclasses_CachedSAMClass$1_992.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_reflection_stdclasses_CachedSAMClass_7344.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_ConversionHandler_2550.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_DefaultGroovyMethods_250260.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_InvokerHelper_24599.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_AbstractCallSite_13071.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_CallSiteGenerator_9920.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce_1846.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrap_1980.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PogoMetaMethodSite$PogoCachedMethodSite_2183.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PojoMetaMethodSite$PojoCachedMethodSiteNoUnwrapNoCoerce_1804.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PojoMetaMethodSite$PojoCachedMethodSiteNoUnwrap_1911.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_callsite_PojoMetaMethodSite$PojoCachedMethodSite_1995.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_m12n_StandardPropertiesModuleFactory_2376.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_metaclass_MetaClassRegistryImpl$1_2317.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_metaclass_MetaClassRegistryImpl_18305.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_metaclass_ReflectionMetaMethod_2566.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_runtime_typehandling_DefaultTypeTransformation_19407.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_tools_javac_JavacJavaCompiler_8638.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_ASTTransformationCollectorCodeVisitor_11202.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_ASTTransformationVisitor_14195.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_LogASTTransformation_6158.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_stc_GroovyTypeCheckingExtensionSupport_14701.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_stc_StaticTypeCheckingSupport_52112.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_stc_StaticTypeCheckingVisitor_131536.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_transform_trait_Traits_9558.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_vmplugin_VMPluginFactory_1740.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_vmplugin_v5_Java5_20257.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_groovy_vmplugin_v5_PluginDefaultGroovyMethods_3741.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_plexus_interpolation_reflection_ClassMap_7175.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_codehaus_plexus_interpolation_reflection_ReflectionValueExtractor_3476.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_aether_impl_DefaultServiceLocator$Entry_4454.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_BeanProperties_1662.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_BeanPropertyField_3127.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_BeanPropertySetter_3709.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_DeclaredMembers$View$1_956.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_DeclaredMembers$View$2_946.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_bean_DeclaredMembers$View$3_944.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_inject_LazyBeanEntry_4333.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_inject_QualifyingStrategy$4_1905.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_inject_TypeArguments_4895.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_plexus_ClassRealmUtils_2913.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_plexus_PlexusAnnotatedBeanModule$PlexusAnnotatedBeanSource_1348.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_plexus_PlexusPropertyBinder_3645.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_plexus_PlexusXmlBeanConverter_11330.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_eclipse_sisu_space_QualifiedTypeBinder_10066.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_grails_datastore_gorm_finders_DynamicFinder_18942.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_grails_datastore_mapping_reflect_ClassPropertyFetcher_13909.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_grails_plugins_web_rest_api_ControllersRestApi_25321.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_grails_plugins_web_rest_plugin_RestResponderGrailsPlugin_8393.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_hibernate_dialect_Dialect_35679.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_hibernate_mapping_Collection_18766.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_jruby_Ruby_137054.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_ContextFactory_7809.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_Context_40475.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_NativeJavaClass_10985.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_NativeJavaObject_18540.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_ScriptableObject_44262.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_mozilla_javascript_tools_shell_Global_28631.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_BeanUtils_15523.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_BeanWrapperImpl_31535.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_ExtendedBeanInfoFactory_1508.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_GenericTypeAwarePropertyDescriptor_4763.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_TypeConverterDelegate_19772.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_factory_config_DependencyDescriptor_7937.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_factory_support_AbstractAutowireCapableBeanFactory_45932.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_factory_support_AbstractBeanDefinition_19205.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_beans_factory_support_SimpleInstantiationStrategy_7118.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_$Proxy17_2849.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_Constants_6802.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_MethodParameter_9306.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_SerializableTypeWrapper$MethodParameterTypeProvider_2775.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_SerializableTypeWrapper$TypeProxyInvocationHandler_2610.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_annotation_AnnotationUtils_14381.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_convert_TypeDescriptor_14210.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_convert_support_IdToEntityConverter_4236.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_convert_support_ObjectToObjectConverter_4868.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_io_support_PathMatchingResourcePatternResolver_14116.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_io_support_SpringFactoriesLoader_5168.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_type_classreading_AbstractRecursiveAnnotationVisitor_3781.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_type_classreading_AnnotationAttributesReadingVisitor_3979.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_type_classreading_RecursiveAnnotationAttributesVisitor_3523.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_core_type_filter_AnnotationTypeFilter_3383.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_orm_jpa_support_PersistenceAnnotationBeanPostProcessor_15170.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_security_authentication_DefaultAuthenticationEventPublisher_7586.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_security_authentication_dao_ReflectionSaltSource_2939.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_security_core_context_SecurityContextHolder_3494.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_util_ClassUtils_24248.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_util_MethodInvoker_6199.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_util_ReflectionUtils_14493.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/org_springframework_web_util_UrlPathHelper_11364.bytes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/postgis-jdbc-1.3.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/postgis-stubs-1.3.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/postgresql-8.3-603.jdbc4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.slcache/.index" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/domain/sinat/express/KV.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/services/sinat/express/FicService.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/salida" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/sinat/express/FicServiceSpec.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/sinat/express/JsonFicServiceSpec.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/sinat/express/KVSpec.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/fichaCampo/_form.gsp" afterPath="$PROJECT_DIR$/grails-app/views/fichaCampo/_form.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
     </list>
     <ignored path="sinat-express.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,26 +337,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FicService.groovy" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/sinat/express/FicService.groovy">
+      <file leaf-file-name="FichaCampoController.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45945945">
-              <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+            <state vertical-scroll-proportion="34.260868">
+              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+              <folding>
+                <element signature="e#23#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FichaCampo.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.1538463">
+              <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
+              <folding>
+                <element signature="e#23#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonFicServiceSpec.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/unit/sinat/express/JsonFicServiceSpec.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Habitacional.groovy" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/Habitacional.groovy">
+      <file leaf-file-name="main.gsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.461538">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-10.827586">
+              <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+              <folding>
+                <marker date="1449462934370" expanded="true" signature="1412:1429" placeholder="..." />
+                <marker date="1449462934370" expanded="true" signature="1667:1694" placeholder="..." />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="index.gsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.75829387">
+              <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -184,8 +471,6 @@
         <option value="$PROJECT_DIR$/grails-app/domain/express/AppSesion.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/util/AppSesion.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/util/AppSession.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/DPA/cambiarCanton.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/DPA/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/DPA.groovy" />
@@ -201,23 +486,18 @@
         <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/_formOrig.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/TipoUso.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/Cobertura.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/_form.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/_formCobertura.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/sinat/express/LogoutController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/sinat/LogoutController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/TipoTecnologiaPredominante.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/_formRegistroFotografico.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/application.properties" />
         <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/ExpressConfig.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/KV.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/externos/DPALP.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/sinat/express/DPAController.groovy" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console_2.groovy" />
@@ -225,9 +505,16 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console_4.groovy" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console_5.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/sinat/express/JsonFicService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console_6.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/sinat/express/FicService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/fichaCampo/_form.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/sinat/express/KV.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy" />
       </list>
     </option>
   </component>
@@ -249,8 +536,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1282,7 +1569,12 @@
       <workItem from="1448893335425" duration="502000" />
       <workItem from="1448893875435" duration="16426000" />
       <workItem from="1448979517290" duration="7469000" />
-      <workItem from="1448999394258" duration="6530000" />
+      <workItem from="1448999394258" duration="7102000" />
+      <workItem from="1449065105357" duration="14357000" />
+      <workItem from="1449155291629" duration="12604000" />
+      <workItem from="1449324421178" duration="1342000" />
+      <workItem from="1449356446495" duration="589000" />
+      <workItem from="1449446473806" duration="14531000" />
     </task>
     <task id="LOCAL-00001" summary="Testing some changes">
       <created>1405170648308</created>
@@ -1368,11 +1660,17 @@
       <option name="project" value="LOCAL" />
       <updated>1448988590003</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="All changes, up to 01DEC2015">
+      <created>1449006941126</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1449006941126</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1580240000" />
+    <option name="totallyTimeSpent" value="1624235000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1384,46 +1682,46 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264368" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37540454" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43972445" sideWeight="0.5745474" order="2" side_tool="false" content_ui="tabs" x="4" y="724" width="1238" height="226" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13003452" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4270953" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15857606" sideWeight="0.511745" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="8.090615E-4" sideWeight="0.48850575" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15614887" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="8.090615E-4" sideWeight="0.50689656" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15048544" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15048544" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24838188" sideWeight="0.48850575" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21978852" sideWeight="0.5010661" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2184466" sideWeight="0.48825502" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16311301" sideWeight="0.48825502" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2579583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264368" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22835498" sideWeight="0.5745474" order="2" side_tool="false" content_ui="tabs" x="4" y="724" width="1238" height="226" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13003452" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4270953" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15857606" sideWeight="0.511745" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="8.090615E-4" sideWeight="0.48850575" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15614887" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="8.090615E-4" sideWeight="0.50689656" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43506494" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21978852" sideWeight="0.5010661" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32854986" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32854986" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.6510574" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16471216" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23191734" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3272101" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43513203" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1484,11 +1782,12 @@
     <MESSAGE value="All changes, up to 22MAY2015" />
     <MESSAGE value="All changes, up to 26NOV2015" />
     <MESSAGE value="All changes, up to 01DEC2015" />
-    <option name="LAST_COMMIT_MESSAGE" value="All changes, up to 01DEC2015" />
+    <MESSAGE value="Primeros Cambios para INGEMATICA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primeros Cambios para INGEMATICA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1497,34 +1796,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/_formCaracteristicasPredio.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2393321">
-          <caret line="66" column="66" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/indexOrig.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05380334">
-          <caret line="85" column="115" selection-start-line="85" selection-start-column="115" selection-end-line="85" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/_editTiposCobertura.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/_formCobertura.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1549,13 +1820,6 @@
     <entry file="file://$PROJECT_DIR$/web-app/images/empresa/LogoColor.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/DPA/index.gsp">
@@ -1697,13 +1961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.464895">
@@ -1719,13 +1976,6 @@
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04819277">
-          <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/_formRegistroFotografico.gsp">
@@ -1805,18 +2055,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36585367">
           <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="74" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/KV.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63211125">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console_5.groovy">
@@ -1830,9 +2069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.020166073">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#23#62#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1840,7 +2076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
@@ -1858,7 +2093,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44753477">
           <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
@@ -1869,7 +2103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12642226">
           <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
@@ -1880,6 +2113,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02528445">
           <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/Habitacional.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0473118">
+          <caret line="38" column="101" selection-start-line="38" selection-start-column="101" selection-end-line="38" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9366516">
+          <caret line="359" column="65" selection-start-line="359" selection-start-column="65" selection-end-line="359" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/sinat/express/FicService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.1923077">
+          <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/KV.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75829387">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1887,10 +2164,30 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/_form.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62085307">
+          <caret line="61" column="69" selection-start-line="61" selection-start-column="69" selection-end-line="61" selection-end-column="69" />
+          <folding>
+            <element signature="n#g:if#2;n#gsp:root#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/sinat/express/FichaCampoController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="34.260868">
+          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+          <folding>
+            <element signature="e#23#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/FichaCampo.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6965866">
-          <caret line="275" column="0" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
+        <state vertical-scroll-proportion="6.1538463">
+          <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
           <folding>
             <element signature="e#23#44#0" expanded="true" />
           </folding>
@@ -1900,21 +2197,29 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/sinat/express/Habitacional.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.461538">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.827586">
+          <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+          <folding>
+            <marker date="1449462934370" expanded="true" signature="1412:1429" placeholder="..." />
+            <marker date="1449462934370" expanded="true" signature="1667:1694" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/sinat/express/JsonFicServiceSpec.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/sinat/express/FicService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/fichaCampo/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45945945">
-          <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.75829387">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
           <folding />
         </state>
       </provider>

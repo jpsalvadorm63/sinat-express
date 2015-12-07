@@ -2,33 +2,69 @@
 
 <div class="bloque" id="informacionGeneral">
 
-  <div class="title">I. INFORMACIÓN GENERAL</div>
+    <div class="title">I. INFORMACIÓN GENERAL</div>
 
-  <div class="bloque2" style="width:23%;margin:16px 8px 16px 16px;background-color:lightsteelblue;">
-    <div class="title">Ficha de Investigación</div>
+    <div class="bloque2" style="width:23%;margin:16px 8px 16px 16px;background-color:lightsteelblue;">
+        <div class="title">Ficha de Investigación</div>
 
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'numeroFicha', 'error')}" style="margin-top:4px;">
-      <div class="label" style="width:100%;">Código de Ficha</div>
-      <g:textField disabled="disabled" name="numeroFicha" maxlength="64" value="${fichaCampoInstance?.numeroFicha}" style="margin-left:8px;" />
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'numeroFicha', 'error')}" style="margin-top:4px;">
+            <div class="label" style="width:100%;">Código de Ficha</div>
+            <g:textField disabled="disabled" name="numeroFicha" maxlength="64"
+                         value="${fichaCampoInstance?.numeroFicha}" style="margin-left:8px;" />
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'responsable', 'error')}" style="margin-top:4px;">
+            <div class="label" style="width:100%;">Responsable</div>
+            <g:textField disabled="${showing}" name="responsable" maxlength="64"
+                         value="${fichaCampoInstance?.responsable}" style="margin-left:8px;width:170px;" />
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'fecha', 'error')} required" style="margin-top:4px;">
+            <div class="label" style="width:100%;">Fecha<span class="required-indicator">*</span></div>
+            <div style="margin-left:8px;" >
+                <g:datePicker disabled="${showing}" name="fecha" precision="day" value="${fichaCampoInstance?.fecha}"/>
+            </div>
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'confiabilidad', 'error')} required"
+             style="margin-top:4px;">
+            <div class="label" style="width:100%;">Confiabilidad</div>
+            <g:select disabled="${showing}" name="confiabilidad" style="width:80px;margin-left:8px;"
+                      from="${fichaCampoInstance.constraints.confiabilidad.inList}"
+                      value="${fieldValue(bean: fichaCampoInstance, field: 'confiabilidad')}"
+                      valueMessagePrefix="fichaCampo.legalizacion"/>
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'statusLevantamiento', 'error')} required"
+             style="margin-top:4px;">
+            <div class="label" style="width:100%;">Estatus en levantamiento ${actionName}</div>
+            <g:if test="${actionName=='SHOWING'}">
+                <g:textField disabled="${showing}"
+                             name="statusLevantamiento"
+                             maxlength="64"
+                             value="${fichaCampoInstance?.statusLevantamiento}"
+                             style="margin-left:8px;width:170px;" />
+            </g:if>
+            <g:else>
+                <g:select name="statusLevantamiento" style="width:160px;margin-left:8px;"
+                          from="${fichaCampoInstance.constraints.statusLevantamiento.inList}"
+                          value="${fieldValue(bean: fichaCampoInstance, field: 'statusLevantamiento')}"
+                />
+            </g:else>
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'statusControl', 'error')}"
+             style="margin-top:4px;">
+            <div class="label" style="width:100%;">Control en Unidad Ejecutora</div>
+            <g:textField disabled="true"
+                         name="statusControl"
+                         maxlength="64"
+                         value="${fichaCampoInstance?.statusControl}"
+                         style="margin-left:8px;width:170px;" />
+        </div>
+
+
     </div>
-
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'responsable', 'error')}" style="margin-top:4px;">
-      <div class="label" style="width:100%;">Responsable</div>
-      <g:textField disabled="${showing}" name="responsable" maxlength="64" value="${fichaCampoInstance?.responsable}" style="margin-left:8px;width:170px;" />
-    </div>
-
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'fecha', 'error')} required" style="margin-top:4px;">
-      <div class="label" style="width:100%;">Fecha<span class="required-indicator">*</span></div>
-      <div style="margin-left:8px;" >
-        <g:datePicker disabled="${showing}" name="fecha" precision="day" value="${fichaCampoInstance?.fecha}"/>
-      </div>
-    </div>
-
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'confiabilidad', 'error')} required" style="margin-top:4px;">
-      <div class="label" style="width:100%;">Confiabilidad</div>
-      <g:select disabled="${showing}" name="confiabilidad" style="width:80px;margin-left:8px;" from="${fichaCampoInstance.constraints.confiabilidad.inList}" value="${fieldValue(bean: fichaCampoInstance, field: 'confiabilidad')}" valueMessagePrefix="fichaCampo.legalizacion"/>
-    </div>
-  </div>
 
   <div class="bloque2" style="width:33%;margin:16px 8px 16px 8px;">
     <div class="title">a. Ubicación Geográfica</div>
@@ -97,11 +133,11 @@
 
   <div class="bloque2" style="width:33%;margin:16px 8px 16px 8px;">
     <div class="title">b. Identificación del predio</div>
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'nombrePropietario', 'error')} ">
+    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'nombrePropietario', 'error')}">
       <div class="label">Nombre Propietario</div>
       <g:textField disabled="${showing}" name="nombrePropietario" maxlength="64" value="${fichaCampoInstance?.nombrePropietario}"/>
     </div>
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'nombreArrendatario', 'error')} ">
+    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'nombreArrendatario', 'error')} required">
       <div class="label">Nombre Arrendatario</div>
       <g:textField disabled="${showing}" name="nombreArrendatario" maxlength="64" value="${fichaCampoInstance?.nombreArrendatario}"/>
     </div>
@@ -117,7 +153,7 @@
       <div class="label">Superficie Total (ha)</div>
       <g:field disabled="${showing}" name="superficieTotal" maxlength="7" value="${fieldValue(bean: fichaCampoInstance, field: 'superficieTotal')}" onkeypress="return isNumberKey(event)"/>
     </div>
-    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'codigoCatastral', 'error')}">
+    <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'codigoCatastral', 'error')} required">
       <div class="label">Código Catastral</div>
       <g:textField disabled="${showing}" name="codigoCatastral" maxlength="16" value="${fichaCampoInstance?.codigoCatastral}" />
     </div>

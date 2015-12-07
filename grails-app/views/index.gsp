@@ -36,7 +36,7 @@
             </li>
           </ul></div>
         </li>
-        <li><a href="${createLink(uri: '/fichaCampo/geoserver')}"><span>Mapa</span></a></li>
+        <!-- <li><a href="${createLink(uri: '/fichaCampo/geoserver')}"><span>Mapa</span></a></li> -->
         <li id="provCanton"><a href="${createLink(uri: '/DPA/cambiarCanton')}"><span>Seleccionar Cantón</span></a></li>
         <li class="last"><a href="#"><span>Ayuda</span></a></li>
       </ul>

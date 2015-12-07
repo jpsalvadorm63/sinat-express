@@ -351,7 +351,7 @@
 <div id="menu">
   <ul class="menu">
     <li><a href="${createLink(uri: '/')}"><span>Principal</span></a></li>
-    <li><g:link class="create" action="geoserver" id="${fichaCampoInstance?.id}"><span>Mapa</span></g:link></li>
+    <!-- <li><g:link class="create" action="geoserver" id="${fichaCampoInstance?.id}"><span>Mapa</span></g:link></li> -->
     <li><g:link class="create" action="create"><span>Crear Ficha</span></g:link></li>
     <li><g:link class="list" action="index"><span>Fichas de Investigación de Campo</span></g:link></li>
   </ul>
