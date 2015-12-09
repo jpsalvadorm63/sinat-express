@@ -28,7 +28,8 @@ environments {
     test {
       dataSource {
         dbCreate = "update"
-        url="jdbc:postgresql://172.21.1.25:5432/ficdb"
+        //url="jdbc:postgresql://172.21.1.25:5432/ficdb"
+          url="jdbc:postgresql://localhost:5432/ficdb_prod"
         username = "postgres"
         password = "postgres"
       }
@@ -37,9 +38,9 @@ environments {
     production {
       dataSource {
         dbCreate = "update"
-        url="jdbc:postgresql://127.0.0.1:5432/ficdb"
+        url="jdbc:postgresql://localhost:5432/ficdb_prod"
         username = "postgres"
-        password = "sqlgis2101"
+        password = "sqlgis1606"
         properties {
           // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
           jmxEnabled = true

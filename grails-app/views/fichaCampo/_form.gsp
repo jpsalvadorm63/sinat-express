@@ -37,7 +37,7 @@
 
         <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'statusLevantamiento', 'error')} required"
              style="margin-top:4px;">
-            <div class="label" style="width:100%;">Estatus en levantamiento ${actionName}</div>
+            <div class="label" style="width:100%;">Estatus en levantamiento</div>
             <g:if test="${actionName=='SHOWING'}">
                 <g:textField disabled="${showing}"
                              name="statusLevantamiento"

@@ -26,7 +26,6 @@ class BootStrap {
       TipoTecnologiaPredominante.fillData()
       TipoSistemaDeRiego.fillData()
       TipoMecanizacion.fillData()
-      DPALP.fillData()
       /*
       mailService.sendMail {
         to "salvadorjp63@yahoo.com.au"

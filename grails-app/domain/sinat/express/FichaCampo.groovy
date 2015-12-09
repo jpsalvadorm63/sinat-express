@@ -117,7 +117,7 @@ class FichaCampo {
         fechaActualizacion(default: new Date())
         statusLevantamiento(size:0..48, nullable:true,inList: ['EN REVISION', 'PARA ENTREGA'])
         statusControl(size:0..48, nullable:true,inList: ['POR REVISAR','ACEPTADA','RECHAZADA'])
-        origen(size:0..48, nullable:true,inList: ['INGEMATICA','UE'])
+        origen(size:0..48, nullable:true,inList: ['INGEOMATICA','UE'])
     }
 
     static mapping = {

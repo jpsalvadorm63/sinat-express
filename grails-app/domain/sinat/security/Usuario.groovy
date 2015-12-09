@@ -49,7 +49,8 @@ class Usuario {
 			'admin' :   [password:'sigTierras',rol:'ROLE_ADMIN'],
 			'publico' : [password:'publico',rol:'ROLE_OBSERVER'],
 			'público' : [password:'público',rol:'ROLE_OBSERVER'],
-			'fic' :     [password:'fic2015',rol:'ROLE_FIC']
+			'fic' :     [password:'fic2015',rol:'ROLE_FIC'],
+            'ingeomatica' : [password:'ingeomatica',rol:'ROLE_FIC']
 		]
 
     // set initial users

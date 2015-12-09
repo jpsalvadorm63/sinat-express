@@ -135,7 +135,7 @@ class FichaCampoController {
       respond fichaCampoInstance.errors, view: 'create'
       return
     }
-    fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEMATICA'
+    fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEOMATICA'
     fichaCampoInstance.save flush: true
     canton.updateIndice()
     request.withFormat {
@@ -244,7 +244,7 @@ class FichaCampoController {
     fichaCampoInstance.properties = params
     fichaCampoInstance.fechaActualizacion = new Date()
     if(fichaCampoInstance.origen == null) {
-        fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEMATICA'
+        fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEOMATICA'
     }
     fichaCampoInstance.save(flush:true)
     fichaCampoInstance.refresh()
