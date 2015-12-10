@@ -588,55 +588,6 @@ class FichaCampoController {
     render new Date().format("ddMMMyyyy hh:mm a").toUpperCase()
   }
 
-  // - - - - Geoserver  - - - - -
-
-  def geoserver() {
-    def fichaCampoInstance = (params?.id != null)?FichaCampo.get(params.id):null
-    def minx = AppSession.getSessionVar(session.id,'cantonminx')
-    def miny = AppSession.getSessionVar(session.id,'cantonminy')
-    def maxx = AppSession.getSessionVar(session.id,'cantonmaxx')
-    def maxy = AppSession.getSessionVar(session.id,'cantonmaxy')
-    def gad = AppSession.getSessionVar(session.id,'canton')
-    render view:"geoserver", model:[wms:wms,fichaCampoInstance:fichaCampoInstance,minx:minx,miny:miny,maxx:maxx,maxy:maxy,gad:gad]
-  }
-
-  def selectPredio() {
-    def longitud = params.longitud
-    def latitud = params.latitud
-    def strqry
-    def data
-    sql = new Sql(dataSource)
-    def myTable = ""
-
-    strqry = "select cc, st_x(st_centroid(geom)), st_y(st_centroid(geom)) from lp.prediogr where ST_Contains(geom,ST_GeomFromText('POINT(' || ${longitud} || ' ' || ${latitud} || ' )',32717))"
-    data = sql.firstRow(strqry)
-    if(data != null) {
-      def cod = data[0]
-      def fichaCampoInstance = FichaCampo.findByCodigoCatastral(cod)
-      def id = fichaCampoInstance?"${fichaCampoInstance.id}":''
-      render(contentType: 'text/json') {['codigoCatastral':data[0],'id':id, info:myTable]}
-    } else {
-      render(contentType: 'text/json') {['codigoCatastral':'','id':'', info:myTable]}
-    }
-  }
-
-  def searchPredio() {
-    sql = new Sql(dataSource)
-    def myTable = ""
-    def strqry = "select cc, st_x(st_centroid(geom)), st_y(st_centroid(geom)) from lp.prediogr where cc = '" + params.cc + "'"
-    def data = sql.firstRow(strqry)
-    if(data != null) {
-      def cod = data[0]
-      def x = data[1]
-      def y = data[2]
-      def fichaCampoInstance = FichaCampo.findByCodigoCatastral(cod)
-      def id = fichaCampoInstance?"${fichaCampoInstance.id}":''
-      render(contentType: 'text/json') {['codigoCatastral':data[0],'id':id, x:x, y:y, info:myTable]}
-    } else {
-      render(contentType: 'text/json') {['codigoCatastral':'','id':'', x:x, y:y, info:myTable]}
-    }
-  }
-
   @Transactional
   def testService() {
     render GeomsService.loadDataToLp('chunchiforweb', 'geom','codigocata')

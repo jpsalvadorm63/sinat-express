@@ -44,7 +44,7 @@
       <g:select style="width:160px;"
                 id="provincia"
                 name="provincia.id"
-                from="${sinat.express.DPA.provincias()}"
+                from="${sinat.express.DPALP.provincias()}"
                 optionKey="id"
                 required=""
                 value="${fichaCampoInstance?.provincia?.id}"
@@ -57,7 +57,7 @@
           <g:select style='width:160px;'
                     id='canton'
                     name='canton.id'
-                    from='${sinat.express.DPA.cantones(fichaCampoInstance?.provincia)}'
+                    from='${sinat.express.DPALP.cantones(fichaCampoInstance?.provincia)}'
                     optionKey='id'
                     required=''
                     value='${fichaCampoInstance?.canton?.id}'
@@ -70,7 +70,7 @@
           <g:select style="width:160px;"
                   id="parroquia"
                   name="parroquia.id"
-                  from="${sinat.express.DPA.parroquias(fichaCampoInstance?.canton)}"
+                  from="${sinat.express.DPALP.parroquias(fichaCampoInstance?.canton)}"
                   optionKey="id"
                   required=""
                   value="${fichaCampoInstance?.parroquia?.id}"

@@ -5241,3 +5241,5 @@ n:2797:script1449603668880935982064$_run_closure3_closure5_closure8
 n:2834:script1449603668880935982064$_run_closure3_closure6
 n:3215:script1449603668880935982064$_run_closure3_closure6_closure9
 n:4067:script1449603668880935982064$_run_closure3_closure6_closure9_closure10
+n:289:org/codehaus/groovy/classgen/asm/OptimizingStatementWriter$1
+n:1576:org/codehaus/groovy/control/CompilationUnit$addSource$1

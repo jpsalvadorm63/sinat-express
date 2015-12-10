@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="sinat-express dev" uuid="2d1dc436-2aba-4292-9882-9d3af04b45f4">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/ficdb</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/ficdb_prod</jdbc-url>
       <libraries>
         <library>
           <url>file://$MAVEN_REPOSITORY$/org/postgresql/postgresql/9.3-1101-jdbc41/postgresql-9.3-1101-jdbc41.jar</url>

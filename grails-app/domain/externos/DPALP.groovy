@@ -2,7 +2,8 @@ package externos
 
 class DPALP {
 
-  def DPALP dPA1
+  DPALP dPA1
+
   static belongsTo = [DPALP]
   String codigo
   String nombre
@@ -296,7 +297,7 @@ class DPALP {
   }
 
   def updateIndice() {
-    indice++
+    indice = (indice==null)?1:(indice+1)
     save(flush:true)
   }
 

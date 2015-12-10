@@ -48,14 +48,20 @@ class DPAController {
     }
 
     def setEnvelope(canton) {
+        AppSession.setSessionVar(session.id,'cantonminx',0)
+        AppSession.setSessionVar(session.id,'cantonminy',0)
+        AppSession.setSessionVar(session.id,'cantonmaxx',0)
+        AppSession.setSessionVar(session.id,'cantonmaxy',0)
+        /*
         def sqlstr = "select min(minx), min(miny), max(maxx), max(maxy) from lp.Prediogr where gad = '" + canton.codigo + "'"
-        def data = lp.Prediogr.executeQuery(sqlstr)
+        def data = ????.Prediogr.executeQuery(sqlstr)
         data.each {
             AppSession.setSessionVar(session.id,'cantonminx',it[0])
             AppSession.setSessionVar(session.id,'cantonminy',it[1])
             AppSession.setSessionVar(session.id,'cantonmaxx',it[2])
             AppSession.setSessionVar(session.id,'cantonmaxy',it[3])
         }
+        */
     }
 
   @Transactional

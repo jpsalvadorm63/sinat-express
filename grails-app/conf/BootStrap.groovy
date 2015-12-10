@@ -1,5 +1,4 @@
 import externos.DPALP
-import sinat.express.DPA
 import sinat.express.TipoUso
 import sinat.express.ServicioBasico
 import sinat.express.Accesibilidad
@@ -7,16 +6,18 @@ import sinat.express.TipoCobertura
 import sinat.express.TipoTecnologiaPredominante
 import sinat.express.TipoSistemaDeRiego
 import sinat.express.TipoMecanizacion
-import externos.DPALP
+import sinat.security.Rol
+import sinat.security.Usuario
+import sinat.security.Requestmap
 
 class BootStrap {
 
     //def mailServic
 
     def init = { servletContext ->
-      sinat.security.Rol.fillData()
-      sinat.security.Usuario.fillData()
-      sinat.security.Requestmap.fillData()
+      Rol.fillData()
+      Usuario.fillData()
+      Requestmap.fillData()
 
       DPALP.fillData()
       TipoUso.fillData()
