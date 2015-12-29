@@ -81,7 +81,6 @@ grails {
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
-
 // Set to false to use the new Grails 1.2 JSONBuilder in the render method
 grails.json.legacy.builder = false
 // enabled native2ascii conversion of i18n properties files
@@ -90,19 +89,15 @@ grails.enable.native2ascii = true
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
-
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
-
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
-
 // configure passing transaction's read-only attribute to Hibernate session, queries and criterias
 // set "singleSession = false" OSIV mode in hibernate configuration after enabling
 grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
-
 // JP: date binding
 grails.databinding.dateFormats = ['yyyy-MM-dd HH:mm:ss', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
 
@@ -140,7 +135,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
     '/**/js/**':         ['permitAll'],
     '/**/css/**':        ['permitAll'],
     '/**/images/**':     ['permitAll'],
-    '/**/favicon.ico':   ['permitAll'],
+    '/**/favicon.png':   ['permitAll'],
     '/login/**':         ['permitAll'],
     '/logout/**':        ['permitAll'],
     '/DPA/**':           ['isFullyAuthenticated()'],
@@ -156,7 +151,6 @@ grails.plugin.springsecurity.interceptUrlMap = [
 
 // log4j configuration
 log4j = {
-  // Example of changing the log pattern for the default console appender:
   //
   //appenders {
   //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')

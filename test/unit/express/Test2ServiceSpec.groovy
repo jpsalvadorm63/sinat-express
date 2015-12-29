@@ -1,4 +1,4 @@
-package express
+package security
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification

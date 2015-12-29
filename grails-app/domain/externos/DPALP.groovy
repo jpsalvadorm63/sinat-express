@@ -302,7 +302,8 @@ class DPALP {
   }
 
   String indice() {
-    preIndice + ('00000000' + indice)[-4..-1]
+      //preIndice + ('00000000' + indice)[-4..-1]
+      codigo + '-' + ('00000000' + ((indice == null)?0:indice) ) [-4..-1]
   }
 
   static def provincias() {

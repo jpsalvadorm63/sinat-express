@@ -10,324 +10,334 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class FichaCampoController {
 
-  static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-  def dataSource
-  Sql sql = null
-  //static wms = 'http://172.21.1.25:9090/geoserver/wms'
-  static wms = 'http://45.55.142.238:9090/geoserver/wms'
-  //static wms = 'http://localhost:9090/geoserver/wms'
-  static photoDirBase = '/var/fic'
-  static allowedExtensions = ["gif","png","jpg","jpeg","PNG","JPG","JPEG"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def dataSource
+    Sql sql = null
+    //static wms = 'http://172.21.1.25:9090/geoserver/wms'
+    //static wms = 'http://45.55.142.238:9090/geoserver/wms'
+    //static wms = 'http://localhost:9090/geoserver/wms'
+    static photoDirBase = '/var/fic'
+    static allowedExtensions = [ "gif", "png", "jpg", "jpeg", "PNG", "JPG", "JPEG" ]
 
-  def GeomsService
+    def GeomsService
 
-  def ping() { render "<span>pung !</span>" }
+    def ping() { render "<span>pung !</span>" }
 
-  def index(Integer max) {
-    params.max = Math.min(max ?: 16, 100)
-    def n
-    def lista
-    if (AppSession.getSessionVar(session.id, 'canton') != null) {
-      lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')), params)
-      n = FichaCampo.countByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')))
-    } else {
-      n = FichaCampo.count
-      lista = FichaCampo.list(params)
-    }
-    respond lista, model: [fichaCampoInstanceCount: n]
-  }
-
-  def show(FichaCampo fichaCampoInstance) {
-    def photoFilesList = []
-    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
-      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
-    }
-    def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
-    def habitacionalInstanceList = Habitacional.findAllByFichaCampo(fichaCampoInstance)
-    respond fichaCampoInstance,
-        model:[ showing:'true',
-                opname:'PRESENTACIÓN',
-                actionName:'SHOWING',
-                coberturaInstanceList:coberturaInstanceList,
-                habitacionalInstanceList:habitacionalInstanceList,
-                claveCatastral: fichaCampoInstance.codigoCatastral,
-                photos:photoFilesList ]
-  }
-
-  def allPhotos(photoDirBase,cc) {
-    def photoFilesList = []
-    def photoDir = new File(photoDirBase)
-    if(photoDir.exists() && photoDir.isDirectory()) {
-      photoDir = new File(photoDirBase + "/" + cc)
-      if(!photoDir.exists())
-        photoDir.mkdir();
-      // buuild list of graphic files
-      photoDir.listFiles().each() {
-        if(!it.isDirectory())
-          photoFilesList << it.getName()
-      }
-    }
-    return photoFilesList
-  }
-
-  @Transactional
-  def create() {
-    def fichaNueva = anyFichacampo()
-    if( params.id != null ) {
-      sql = new Sql(dataSource)
-      def strqry = "select st_area(geom) area, st_x(st_centroid(geom)) x, st_y(st_centroid(geom)) y from chunchiforweb where codigocata = '" + params.id +"'"
-      def data = sql.firstRow(strqry)
-      fichaNueva.codigoCatastral = params.id
-      Double suptotal = data[0]/10000; suptotal = suptotal * 100; suptotal = suptotal.trunc(); suptotal = suptotal / 100
-      fichaNueva.superficieTotal = suptotal
-      Double x = data[1] * 10.0; x = x.trunc()/10.0
-      fichaNueva.coordenadaX = "${x.toString()}"
-      Double y = data[2] * 10.0; y = y.trunc()/10.0
-      fichaNueva.coordenadaY = "${y.toString()}"
-      fichaNueva.provincia = DPALP.findByCodigo(params.id[0..1])
-      fichaNueva.canton = DPALP.findByCodigo(params.id[0..3])
-      fichaNueva.parroquia = DPALP.findByCodigo(params.id[0..5])
-      fichaNueva.zonaHomogenea = '?'
-      fichaNueva.construccion = ''
-      fichaNueva.legalizacion = ''
-    } else
-    if(AppSession.getSessionVar(session.id,'provincia') != null && AppSession.getSessionVar(session.id,'canton') != null) {
-      fichaNueva.provincia = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia'))
-      fichaNueva.canton = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton'))
-    }
-    respond fichaNueva, model:[showing:'false',opname:'CREACIÓN']
-  }
-
-  def anyFichacampo() {
-    def fichaNueva = new FichaCampo()
-    fichaNueva.fecha = new Date()
-    fichaNueva.numeroFicha = "(GENERAR)"
-    fichaNueva.provincia = DPALP.findByCodigo('11')
-    fichaNueva.canton = DPALP.findByCodigo('1104')
-    fichaNueva.parroquia = DPALP.findByCodigo('110455')
-    fichaNueva.construccion = ''
-    fichaNueva.legalizacion = ''
-    fichaNueva.confiabilidad = ''
-
-    return fichaNueva
-  }
-
-  String randomNumericCode(int times) {
-    def codigo = ""
-    (1..14).each {
-      codigo += "${Math.round(Math.random()*10000)}"
-    }
-    return codigo
-  }
-
-  @Transactional
-  def save(FichaCampo fichaCampoInstance) {
-    if (fichaCampoInstance == null) {
-      notFound()
-      return
-    }
-    fichaCampoInstance.clearErrors()
-    def canton = fichaCampoInstance.canton
-    fichaCampoInstance.fechaActualizacion = new Date()
-    fichaCampoInstance.numeroFicha = canton.indice()
-    fichaCampoInstance.validate()
-    if (fichaCampoInstance.hasErrors()) {
-      respond fichaCampoInstance.errors, view: 'create'
-      return
-    }
-    fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEOMATICA'
-    fichaCampoInstance.save flush: true
-    canton.updateIndice()
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.created.message', args: [message(code: 'fichaCampoInstance.label', default: 'FichaCampo'), fichaCampoInstance.id])
-        redirect fichaCampoInstance
-      }
-      '*' { respond fichaCampoInstance, [status: CREATED] }
-    }
-  }
-
-  def edit(FichaCampo fichaCampoInstance) {
-    respond fichaCampoInstance
-  }
-
-  @Transactional
-  def update(FichaCampo fichaCampoInstance) {
-    if (fichaCampoInstance == null) {
-      notFound()
-      return
+    def index(Integer max) {
+        params.max = Math.min(max ?: 16, 100)
+        def n
+        def lista
+        if (AppSession.getSessionVar(session.id, 'canton') != null) {
+            lista = FichaCampo.findAllByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')), params)
+            n = FichaCampo.countByCanton(DPALP.findByCodigo(AppSession.getSessionVar(session.id, 'canton')))
+        } else {
+            n = FichaCampo.count
+            lista = FichaCampo.list(params)
+        }
+        model : [fichaCampoInstanceList: lista, fichaCampoInstanceCount: n]
     }
 
-    if (fichaCampoInstance.hasErrors()) {
-      respond fichaCampoInstance.errors, view: 'edit'
-      return
+    def show(FichaCampo fichaCampoInstance) {
+        def photoFilesList = []
+        if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+            photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+        }
+        def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
+        def habitacionalInstanceList = Habitacional.findAllByFichaCampo(fichaCampoInstance)
+        respond fichaCampoInstance,
+                model:[ showing:'true',
+                        opname:'PRESENTACIÓN',
+                        actionName:'SHOWING',
+                        coberturaInstanceList:coberturaInstanceList,
+                        habitacionalInstanceList:habitacionalInstanceList,
+                        claveCatastral: fichaCampoInstance.codigoCatastral,
+                        photos:photoFilesList ]
     }
 
-    fichaCampoInstance.save flush: true
-
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'FichaCampo.label', default: 'FichaCampo'), fichaCampoInstance.id])
-        redirect fichaCampoInstance
-      }
-      '*' { respond fichaCampoInstance, [status: OK] }
-    }
-  }
-
-  @Transactional
-  def delete(FichaCampo fichaCampoInstance) {
-
-    if (fichaCampoInstance == null) {
-      notFound()
-      return
+    def allPhotos(photoDirBase,cc) {
+        def photoFilesList = []
+        def photoDir = new File(photoDirBase)
+        if(photoDir.exists() && photoDir.isDirectory()) {
+            photoDir = new File(photoDirBase + "/" + cc)
+            if(!photoDir.exists())
+                photoDir.mkdir();
+            // buuild list of graphic files
+            photoDir.listFiles().each() {
+            if(!it.isDirectory())
+              photoFilesList << it.getName()
+            }
+        }
+        return photoFilesList
     }
 
-    fichaCampoInstance.delete flush: true
-
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.deleted.message', args: [message(code: 'FichaCampo.label', default: 'FichaCampo'), fichaCampoInstance.id])
-        redirect action: "index", method: "GET"
-      }
-      '*' { render status: NO_CONTENT }
+    @Transactional
+    def create() {
+        def fichaNueva = anyFichacampo()
+        if( params.id != null ) {
+            fichaNueva.codigoCatastral = params.id
+            Double suptotal = data[0]/10000; suptotal = suptotal * 100; suptotal = suptotal.trunc(); suptotal = suptotal / 100
+            fichaNueva.superficieTotal = suptotal
+            Double x = data[1] * 10.0; x = x.trunc()/10.0
+            fichaNueva.coordenadaX = "${x.toString()}"
+            Double y = data[2] * 10.0; y = y.trunc()/10.0
+            fichaNueva.coordenadaY = "${y.toString()}"
+            fichaNueva.provincia = DPALP.findByCodigo(params.id[0..1])
+            fichaNueva.canton = DPALP.findByCodigo(params.id[0..3])
+            fichaNueva.parroquia = DPALP.findByCodigo(params.id[0..5])
+            fichaNueva.zonaHomogenea = '?'
+            fichaNueva.construccion = ''
+            fichaNueva.legalizacion = ''
+        } else
+            if(AppSession.getSessionVar(session.id,'provincia') != null && AppSession.getSessionVar(session.id,'canton') != null) {
+                fichaNueva.provincia = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'provincia'))
+                fichaNueva.canton = DPALP.findByCodigo(AppSession.getSessionVar(session.id,'canton'))
+                fichaNueva.numeroFicha = fichaNueva.canton?.codigo + "-"
+            }
+        respond fichaNueva, model:[showing:'false',opname:'CREACIÓN']
     }
-  }
 
-  protected void notFound() {
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.not.found.message', args: [message(code: 'fichaCampoInstance.label', default: 'FichaCampo'), params.id])
-        redirect action: "index", method: "GET"
-      }
-      '*' { render status: NOT_FOUND }
+    def anyFichacampo() {
+        def fichaNueva = new FichaCampo()
+        fichaNueva.fecha = new Date()
+        fichaNueva.provincia = DPALP.findByCodigo('11')
+        fichaNueva.canton = DPALP.findByCodigo('1104')
+        fichaNueva.parroquia = DPALP.findByCodigo('110455')
+        fichaNueva.construccion = ''
+        fichaNueva.legalizacion = ''
+        fichaNueva.confiabilidad = ''
+
+        return fichaNueva
     }
-  }
 
-  def cantones() {
-    def provincia = DPALP.get(params.id)
+    String randomNumericCode(int times) {
+        def codigo = ""
+        (1..14).each {
+            codigo += "${Math.round(Math.random()*10000)}"
+        }
+        return codigo
+    }
 
-    render g.select(style:'width:160px;',
-                    id:'canton',
-                    name:'canton.id',
-                    from:DPALP.cantones(provincia),
-                    optionKey:'id',
-                    required:'',
-                    value:'',
-                    class:'many-to-one',
-                    onchange: remoteFunction(controller:'fichaCampo', action:'parroquias',params:'\'id=\'+escape(this.value)',onSuccess:'ajaxParroquias(data);') )
-  }
+    def fichaAsJson() {
+        def results = "$params"
+        render(contentType: 'text/json') {[
+            'results': results,
+            'status': results ? "OK" : "Nothing present"
+        ]}
+    }
 
-  def parroquias() {
-    def canton = DPALP.get(params.id)
-
-    render g.select(style:'width:160px;',
-        id:'parroquia',
-        name:'parroquia.id',
-        from:DPALP.parroquias(canton),
-        optionKey:'id',
-        required:'', value:'',class:'many-to-one')
-  }
-
-  def editInformacionGeneral() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "editInformacionGeneral", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
-  }
-
-  def cancelInformacionGeneral() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "form", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
-
-  @Transactional
-  def updateInformacionGeneral() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    fichaCampoInstance.properties = params
-    fichaCampoInstance.fechaActualizacion = new Date()
-    if(fichaCampoInstance.origen == null) {
+    @Transactional
+    def save(FichaCampo fichaCampoInstance) {
+        if (fichaCampoInstance == null) {
+            notFound()
+            return
+        }
+        fichaCampoInstance.clearErrors()
+        def canton = fichaCampoInstance.canton
+        fichaCampoInstance.fechaActualizacion = new Date()
+        /*
+        def ci = canton.indice()
+        fichaCampoInstance.numeroFicha = ci
+        */
+        fichaCampoInstance.validate()
+        if (fichaCampoInstance.hasErrors()) {
+            respond fichaCampoInstance.errors, view: 'create'
+            return
+        }
         fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEOMATICA'
+        fichaCampoInstance.save flush: true
+        canton.updateIndice()
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'fichaCampoInstance.label', default: 'FichaCampo'), fichaCampoInstance.id])
+                redirect fichaCampoInstance
+            }
+            '*' { respond fichaCampoInstance, [status: CREATED] }
+        }
     }
-    fichaCampoInstance.save(flush:true)
-    fichaCampoInstance.refresh()
-    render template: "form", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
 
-  def editCaractreriasticasPredio() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "editCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
-  }
-
-  def cancelCaractreriasticasPredio() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "formCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
-
-  @Transactional
-  def updateCaractreriasticasPredio() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    fichaCampoInstance.properties = params
-    fichaCampoInstance.save(flush:true)
-    render template: "formCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
-
-  def editRegistroFotografico() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    def photoFilesList = []
-    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
-      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    def edit(FichaCampo fichaCampoInstance) {
+        respond fichaCampoInstance
     }
-    render template: "editRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
-                                                       actionName:'EDITING',
-                                                       showing:'false',
-                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
-                                                       photos:photoFilesList]
-  }
 
-  def cancelRegistroFotografico() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    def photoFilesList = []
-    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
-      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    @Transactional
+    def update(FichaCampo fichaCampoInstance) {
+        if (fichaCampoInstance == null) {
+            notFound()
+            return
+        }
+
+        if (fichaCampoInstance.hasErrors()) {
+            respond fichaCampoInstance.errors, view: 'edit'
+            return
+        }
+
+        fichaCampoInstance.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'FichaCampo.label', default: 'FichaCampo'), fichaCampoInstance.id])
+                redirect fichaCampoInstance
+            }
+            '*' { respond fichaCampoInstance, [status: OK] }
+        }
     }
-    render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
-                                                       actionName:'SHOWING',
-                                                       showing:'true',
-                                                       claveCatastral: fichaCampoInstance.codigoCatastral,
-                                                       photos:photoFilesList]
-  }
 
-  @Transactional
-  def updateRegistroFotografico() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    def photoFilesList = []
-    if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
-      photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+    @Transactional
+    def delete(FichaCampo fichaCampoInstance) {
+
+        if (fichaCampoInstance == null) {
+            notFound()
+            return
+        }
+
+        fichaCampoInstance.delete flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'FichaCampo.label', default: 'FichaCampo'), fichaCampoInstance.id])
+                redirect action: "index", method: "GET"
+            }
+            '*' { render status: NO_CONTENT }
+        }
     }
-    fichaCampoInstance.properties = params
-    fichaCampoInstance.save(flush:true)
-    render template: "formRegistroFotografico", model:[ fichaCampoInstance:fichaCampoInstance,
-                                                        actionName:'SHOWING',
-                                                        showing:'true',
-                                                        claveCatastral: fichaCampoInstance.codigoCatastral,
-                                                        photos:photoFilesList ]
-  }
 
-  def editObservaciones() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "editObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
-  }
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'fichaCampoInstance.label', default: 'FichaCampo'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*' { render status: NOT_FOUND }
+        }
+    }
 
-  def cancelObservaciones() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    render template: "formObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
+    def cantones() {
+        def provincia = DPALP.get(params.id)
 
-  @Transactional
-  def updateObservaciones() {
-    def fichaCampoInstance = FichaCampo.get(params.id)
-    fichaCampoInstance.properties = params
-    fichaCampoInstance.save(flush:true)
-    render template: "formObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
-  }
+        render g.select(style:'width:160px;',
+                        id:'canton',
+                        name:'canton.id',
+                        from:DPALP.cantones(provincia),
+                        optionKey:'id',
+                        required:'',
+                        value:'',
+                        class:'many-to-one',
+                        onchange: remoteFunction(controller:'fichaCampo', action:'parroquias',params:'\'id=\'+escape(this.value)',onSuccess:'ajaxParroquias(data);') )
+    }
+
+    def parroquias() {
+        def canton = DPALP.get(params.id)
+
+        render g.select(style:'width:160px;',
+            id:'parroquia',
+            name:'parroquia.id',
+            from:DPALP.parroquias(canton),
+            optionKey:'id',
+            required:'', value:'',class:'many-to-one')
+    }
+
+    def editInformacionGeneral() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "editInformacionGeneral", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
+    }
+
+    def cancelInformacionGeneral() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "form", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
+
+    @Transactional
+    def updateInformacionGeneral() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        fichaCampoInstance.properties = params
+        fichaCampoInstance.fechaActualizacion = new Date()
+        if(fichaCampoInstance.origen == null) {
+            fichaCampoInstance.origen = KV.isLocUE()?'UE':'INGEOMATICA'
+        }
+        fichaCampoInstance.save(flush:true)
+        fichaCampoInstance.refresh()
+        render template: "form", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
+
+    def editCaractreriasticasPredio() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "editCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
+    }
+
+    def cancelCaractreriasticasPredio() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "formCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
+
+    @Transactional
+    def updateCaractreriasticasPredio() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        fichaCampoInstance.properties = params
+        fichaCampoInstance.save(flush:true)
+        render template: "formCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
+
+    def editRegistroFotografico() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        def photoFilesList = []
+        if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+            photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+        }
+        render template: "editRegistroFotografico",
+               model : [ fichaCampoInstance:fichaCampoInstance,
+                         actionName:'EDITING',
+                         showing:'false',
+                         claveCatastral: fichaCampoInstance.codigoCatastral,
+                         photos:photoFilesList]
+    }
+
+    def cancelRegistroFotografico() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        def photoFilesList = []
+        if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+            photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+        }
+        render template: "formRegistroFotografico", model:[fichaCampoInstance:fichaCampoInstance,
+                                                           actionName:'SHOWING',
+                                                           showing:'true',
+                                                           claveCatastral: fichaCampoInstance.codigoCatastral,
+                                                           photos:photoFilesList]
+    }
+
+    @Transactional
+    def updateRegistroFotografico() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        def photoFilesList = []
+        if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+            photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
+        }
+        fichaCampoInstance.properties = params
+        fichaCampoInstance.save(flush:true)
+        render template: "formRegistroFotografico",
+               model:[ fichaCampoInstance:fichaCampoInstance,
+                       actionName:'SHOWING',
+                       showing:'true',
+                       claveCatastral: fichaCampoInstance.codigoCatastral,
+                       photos:photoFilesList ]
+    }
+
+    def editObservaciones() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "editObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'EDITING', showing:'false']
+    }
+
+    def cancelObservaciones() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        render template: "formObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
+
+    @Transactional
+    def updateObservaciones() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        fichaCampoInstance.properties = params
+        fichaCampoInstance.save(flush:true)
+        render template: "formObservaciones", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+    }
 
   def createCobertura() {
     def coberturaInstance = new Cobertura()
@@ -627,5 +637,10 @@ class FichaCampoController {
       render(contentType: 'text/json') {['msg':"Error: Archivo ${params['photo']} NO PUDO se borrado . . ."]}
     }
   }
+
+    def showFicAsJson() {
+        println "{nada:'que nada'}"
+        ficAsJson : "{nada:'que nada'}"
+    }
 
 }

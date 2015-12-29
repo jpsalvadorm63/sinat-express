@@ -34,4 +34,10 @@ class KV {
         return (loc != null && loc.value == 'UE'.encodeAsSHA1())
     }
 
+    static void setLocUE() {
+        if(!sinat.express.KV.findByKey('loc')) {
+            new sinat.express.KV(key:'loc', value:'UE'.encodeAsSHA1()).save(flush:true)
+        }
+    }
+
 }

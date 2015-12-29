@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="layout" content="main"/>
-  <title>SINAT-EXPRESS</title>
-  <link type="text/css" href="menu/menu.css" rel="stylesheet" />
-  <script type="text/javascript" src="menu/jquery.js"></script>
-  <script type="text/javascript" src="menu/menu.js"></script>
+    <meta name="layout" content="main"/>
+    <title>SINAT-EXPRESS</title>
+    <link type="text/css" href="menu/menu.css" rel="stylesheet" />
+    <script type="text/javascript" src="menu/jquery.js"></script>
+    <script type="text/javascript" src="menu/menu.js"></script>
 </head>
 <body>
   <div id="menu">
@@ -36,14 +36,15 @@
             </li>
           </ul></div>
         </li>
-        <!-- <li><a href="${createLink(uri: '/fichaCampo/geoserver')}"><span>Mapa</span></a></li> -->
         <li id="provCanton"><a href="${createLink(uri: '/DPA/cambiarCanton')}"><span>Seleccionar Cantón</span></a></li>
         <li class="last"><a href="#"><span>Ayuda</span></a></li>
       </ul>
     </g:if>
     <g:if test="${AppSession.getSessionVar(session.id,'canton') == null}">
       <ul class="menu">
-        <li class="last"><a href="${createLink(uri: '/DPA/cambiarCanton')}"><span>Seleccionar Provincia/Cantón</span></a></li>
+        <li class="last">
+            <a href="${createLink(uri: '/DPA/cambiarCanton')}"><span>Seleccionar Provincia/Cantón</span></a>
+        </li>
       </ul>
     </g:if>
   </div>

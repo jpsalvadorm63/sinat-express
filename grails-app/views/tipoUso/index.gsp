@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'tipoUso.label', default: 'TipoUso')}" />
-		<title>SINAT - Tipos de uso</title>
+		<title>FIC - Tipos de uso</title>
     <style>
     .scaffold-list {
       border : 1px #000000 solid;

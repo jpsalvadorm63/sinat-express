@@ -3,7 +3,7 @@
 <head>
   <meta name="layout" content="main">
   <g:set var="entityName" value="${message(code: 'tipoUso.label', default: 'TipoUso')}" />
-  <title>SINAT - Cambiar Cantón</title>
+  <title>FIC - Cambiar Cantón</title>
   <style>
   .scaffold-list {
     border : 1px #000000 solid;

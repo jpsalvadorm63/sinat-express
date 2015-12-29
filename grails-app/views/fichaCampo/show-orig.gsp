@@ -107,9 +107,7 @@
 				<g:if test="${fichaCampoInstance?.altitud}">
 				<li class="fieldcontain">
 					<span id="altitud-label" class="property-label"><g:message code="fichaCampo.altitud.label" default="Altitud" /></span>
-					
-						<span class="property-value" aria-labelledby="altitud-label"><g:fieldValue bean="${fichaCampoInstance}" field="altitud"/></span>
-					
+                    <span class="property-value" aria-labelledby="altitud-label"><g:fieldValue bean="${fichaCampoInstance}" field="altitud"/></span>
 				</li>
 				</g:if>
 			

@@ -19,7 +19,7 @@ class Requestmap {
 	}
 
   static def fillData() {
-    ['/', '/index', '/index.gsp', '/**/favicon.ico','/**/js/**', '/**/css/**', '/**/images/**',
+    ['/', '/index', '/index.gsp', '/**/favicon.png','/**/js/**', '/**/css/**', '/**/images/**',
      '/login', '/login.*', '/login/*','/logout', '/logout.*', '/logout/*'].each { url ->
       def rm = sinat.security.Requestmap.findByUrl(url)
       if(rm)

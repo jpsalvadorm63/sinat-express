@@ -52,13 +52,6 @@ class FichaCampo {
     String cultivosSector3
     String cultivosSector4
 
-    /*
-    Float valoracionVenta
-    Float valoracionOferta
-    Float valoracionArriendo
-    String registroFotografico
-    String observacion
-    */
     String observaciones
     String registroFotografico
 
@@ -156,11 +149,7 @@ class FichaCampo {
         cultivosSector2       column:"cultivossector2"
         cultivosSector3       column:"cultivossector3"
         cultivosSector4       column:"cultivossector4"
-        /*
-        valoracionVenta		  column:"valoracionventa"
-        valoracionOferta	  column:"valoracionoferta"
-        valoracionArriendo    column:"valoracionarriendo"
-        */
+
         minx                  column:"minx"
         miny                  column:"miny"
         maxx                  column:"maxx"

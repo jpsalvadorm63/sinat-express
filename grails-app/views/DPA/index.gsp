@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'DPA.label', default: 'DPA')}" />
-		<title>SINAT - Distribución Política Administrativa</title>
+		<title>FIC - Distribución Política Administrativa</title>
     <style>
       .scaffold-list {
         background: ghostwhite;
