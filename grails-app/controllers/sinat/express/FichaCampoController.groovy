@@ -1,9 +1,8 @@
 package sinat.express
 
-import groovy.sql.Sql
+//import groovy.sql.Sql
 import externos.DPALP
 import util.AppSession
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -11,8 +10,8 @@ import grails.transaction.Transactional
 class FichaCampoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-    def dataSource
-    Sql sql = null
+    //def dataSource
+    //Sql sql = null
     //static wms = 'http://172.21.1.25:9090/geoserver/wms'
     //static wms = 'http://45.55.142.238:9090/geoserver/wms'
     //static wms = 'http://localhost:9090/geoserver/wms'
@@ -51,7 +50,8 @@ class FichaCampoController {
                         coberturaInstanceList:coberturaInstanceList,
                         habitacionalInstanceList:habitacionalInstanceList,
                         claveCatastral: fichaCampoInstance.codigoCatastral,
-                        photos:photoFilesList ]
+                        photos:photoFilesList,
+                        photo: (photoFilesList.size()>0)?photoFilesList[0]:null ]
     }
 
     def allPhotos(photoDirBase,cc) {
@@ -61,10 +61,48 @@ class FichaCampoController {
             photoDir = new File(photoDirBase + "/" + cc)
             if(!photoDir.exists())
                 photoDir.mkdir();
-            // buuild list of graphic files
             photoDir.listFiles().each() {
-            if(!it.isDirectory())
-              photoFilesList << it.getName()
+                if(!it.isDirectory())
+                    photoFilesList << it.getName()
+            }
+        }
+        return photoFilesList
+    }
+
+    def normalizePhotos(photoDirBase, FichaCampo fc) {
+        def photoFilesList = []
+        def prefix = fc?.numeroFicha + "-"
+        def photoDir = new File(photoDirBase)
+        if(photoDir.exists() && photoDir.isDirectory()) {
+            photoDir = new File(photoDirBase + "/" + fc.codigoCatastral)
+            photoDir.listFiles().each() {
+                if(!it.isDirectory()) {
+                    def parentDir = it.parent
+                    def fname = it.getName()
+                    def extension = ""
+                    if((fname + 'zzzzzzzzzzz')[0..prefix.length()-1] != prefix) {
+                        def tqnz = fname.tokenize(".")
+                        if(tqnz.size() > 1)
+                            extension = tqnz[tqnz.size() - 1]
+                        def i = 1
+                        while(i <= 99) {
+                            fname = prefix + String.format("%02d",i) + ((extension == "")?"":("." + extension))
+                            def strFileName = parentDir + "/" + fname
+                            if(! new File(strFileName).exists()) {
+                                try {
+                                    it.renameTo(new File(strFileName))
+                                    photoFilesList << fname
+                                } catch(e) {
+                                    println e.getMessage()
+                                }
+                                break
+                            }
+                            i++
+                        }
+                    } else {
+                        photoFilesList << it.getName()
+                    }
+                }
             }
         }
         return photoFilesList
@@ -134,10 +172,6 @@ class FichaCampoController {
         fichaCampoInstance.clearErrors()
         def canton = fichaCampoInstance.canton
         fichaCampoInstance.fechaActualizacion = new Date()
-        /*
-        def ci = canton.indice()
-        fichaCampoInstance.numeroFicha = ci
-        */
         fichaCampoInstance.validate()
         if (fichaCampoInstance.hasErrors()) {
             respond fichaCampoInstance.errors, view: 'create'
@@ -288,7 +322,8 @@ class FichaCampoController {
                          actionName:'EDITING',
                          showing:'false',
                          claveCatastral: fichaCampoInstance.codigoCatastral,
-                         photos:photoFilesList]
+                         photos:photoFilesList,
+                         photo: (photoFilesList.size()>0)?photoFilesList[0]:null ]
     }
 
     def cancelRegistroFotografico() {
@@ -301,7 +336,8 @@ class FichaCampoController {
                                                            actionName:'SHOWING',
                                                            showing:'true',
                                                            claveCatastral: fichaCampoInstance.codigoCatastral,
-                                                           photos:photoFilesList]
+                                                           photos:photoFilesList,
+                                                           photo: (photoFilesList.size()>0)?photoFilesList[0]:null]
     }
 
     @Transactional
@@ -318,7 +354,23 @@ class FichaCampoController {
                        actionName:'SHOWING',
                        showing:'true',
                        claveCatastral: fichaCampoInstance.codigoCatastral,
-                       photos:photoFilesList ]
+                       photos:photoFilesList,
+                       photo: (photoFilesList.size()>0)?photoFilesList[0]:null ]
+    }
+
+    def normalizarRegistroFotografico() {
+        def fichaCampoInstance = FichaCampo.get(params.id)
+        def photoFilesList = []
+        if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
+            photoFilesList = normalizePhotos(photoDirBase,fichaCampoInstance)
+        }
+        render template: "formRegistroFotografico",
+                 model : [ fichaCampoInstance:fichaCampoInstance,
+                           actionName:'SHOWING',
+                           showing:'true',
+                           claveCatastral: fichaCampoInstance.codigoCatastral,
+                           photos:photoFilesList,
+                           photo: (photoFilesList.size()>0)?photoFilesList[0]:null  ]
     }
 
     def editObservaciones() {
@@ -381,50 +433,49 @@ class FichaCampoController {
     }
   }
 
-  def editCobertura() {
-    def coberturaInstance = Cobertura.get(params.id)
-    def fichaCampoInstance = coberturaInstance.fichaCampo
-    def coberturas0 = TipoCobertura.findAllByTipoUso(coberturaInstance.tipoUso)
-    def nmbr = (coberturaInstance.tipoCobertura != null)?coberturaInstance.tipoCobertura.nombre[0..2]:'XXX'
-    def deshabilitarOtros = (nmbr != 'OTR')
-    render template:"editCobertura",
-           model:[fichaCampoInstance:fichaCampoInstance,
-                  coberturaInstance:coberturaInstance,
-                  coberturas0:coberturas0,
-                  showing:'false',
-                  deshabilitarOtros:deshabilitarOtros,
-                  actionName:'EDITING']
-  }
-
-  @Transactional
-  def updateCobertura() {
-    Cobertura coberturaInstance = Cobertura.get(params.id)
-    coberturaInstance.properties = params
-    if(coberturaInstance.tipoUso == null) {
-      render "error0"
-    } else
-    if(coberturaInstance.venta == null && coberturaInstance.oferta == null && coberturaInstance.arriendo == null) {
-      render "error1"
-    } else
-    if(coberturaInstance.tipoUso.hasCoberturas && coberturaInstance.tipoCobertura == null) {
-      render "error2"
-    } else
-    if( TipoTecnologiaPredominante.findAllByTipoUso(coberturaInstance.tipoUso).size() > 0 && coberturaInstance.tecnologiaPredominante == null ) {
-      render "error3"
-    } else  {
-      coberturaInstance.save(flush:true)
-      def fichaCampoInstance = coberturaInstance.fichaCampo
-      def coberturas0 = TipoCobertura.findAllByTipoUso(coberturaInstance.tipoUso)
-      def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
-      render template:'indexCoberturas',
-          model:[fichaCampoInstance:fichaCampoInstance,
-                 coberturaInstanceList:coberturaInstanceList,
-                 actionName:'SHOWING',
-                 showing:'true',
-                 coberturas0:coberturas0]
+    def editCobertura() {
+        def coberturaInstance = Cobertura.get(params.id)
+        def fichaCampoInstance = coberturaInstance.fichaCampo
+        def coberturas0 = TipoCobertura.findAllByTipoUso(coberturaInstance.tipoUso)
+        def nmbr = (coberturaInstance.tipoCobertura != null)?coberturaInstance.tipoCobertura.nombre[0..2]:'XXX'
+        def deshabilitarOtros = (nmbr != 'OTR')
+        render template:"editCobertura",
+               model:[fichaCampoInstance:fichaCampoInstance,
+                      coberturaInstance:coberturaInstance,
+                      coberturas0:coberturas0,
+                      showing:'false',
+                      deshabilitarOtros:deshabilitarOtros,
+                      actionName:'EDITING']
     }
 
-  }
+    @Transactional
+    def updateCobertura() {
+        Cobertura coberturaInstance = Cobertura.get(params.id)
+        coberturaInstance.properties = params
+        if(coberturaInstance.tipoUso == null) {
+            render "error0"
+        } else
+        if(coberturaInstance.venta == null && coberturaInstance.oferta == null && coberturaInstance.arriendo == null) {
+            render "error1"
+        } else
+        if(coberturaInstance.tipoUso.hasCoberturas && coberturaInstance.tipoCobertura == null) {
+            render "error2"
+        } else
+        if( TipoTecnologiaPredominante.findAllByTipoUso(coberturaInstance.tipoUso).size() > 0 && coberturaInstance.tecnologiaPredominante == null ) {
+            render "error3"
+        } else {
+            coberturaInstance.save(flush:true)
+            def fichaCampoInstance = coberturaInstance.fichaCampo
+            def coberturas0 = TipoCobertura.findAllByTipoUso(coberturaInstance.tipoUso)
+            def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
+            render template : 'indexCoberturas',
+                   model : [ fichaCampoInstance:fichaCampoInstance,
+                             coberturaInstanceList:coberturaInstanceList,
+                             actionName:'SHOWING',
+                             showing:'true',
+                             coberturas0:coberturas0 ]
+        }
+    }
 
   def cancelCobertura() {
     def fichaCampoInstance = FichaCampo.get(params.id)
@@ -490,7 +541,6 @@ class FichaCampoController {
     'CONSERVACIÓN':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'ACUACULTURA':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'*','tecnologiaPredominante':'*','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'*'],
     'SIN USO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
-    /*'HABITACIONAL':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],*/
     'COMERCIAL':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'TURISMO':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
     'INDUSTRIA':['superficie':'*','rendimiento':'disabled','rotacion':'disabled','cosechasPorAnio':'disabled','cargaAnimal':'disabled','tecnologiaPredominante':'disabled','sistemaDeRiego':'disabled','mecanizacion':'disabled','venta':'*','oferta':'*','arriendo':'*','precioProducto':'disabled'],
@@ -623,24 +673,47 @@ class FichaCampoController {
     response.outputStream.flush()
   }
 
-  def deletePhoto() {
-    def path = photoDirBase + "/${params['cc']}/${params['photo']}"
-    def deletedPath = photoDirBase + "/${params['cc']}/deleted"
-    def deletedDir = new File(deletedPath)
-    if(!deletedDir.exists() || !deletedDir.isDirectory())
-      deletedDir.mkdir()
-    def file2move = new File(path)
-    if(file2move.exists() && deletedDir.exists() && deletedDir.isDirectory()) {
-      file2move.renameTo(deletedPath + '/' + params['photo'])
-      render(contentType: 'text/json') {['msg':"Archivo ${params['photo']} ha sido borrado . . ."]}
-    } else {
-      render(contentType: 'text/json') {['msg':"Error: Archivo ${params['photo']} NO PUDO se borrado . . ."]}
+    def deletePhoto() {
+        def path = photoDirBase + "/${params['cc']}/${params['photo']}"
+        def deletedPath = photoDirBase + "/${params['cc']}/deleted"
+        def deletedDir = new File(deletedPath)
+        if(!deletedDir.exists() || !deletedDir.isDirectory())
+            deletedDir.mkdir()
+        def file2move = new File(path)
+        if(file2move.exists() && deletedDir.exists() && deletedDir.isDirectory()) {
+            file2move.renameTo(deletedPath + '/' + params['photo'])
+            render(contentType: 'text/json') {['msg':"Archivo ${params['photo']} ha sido borrado . . ."]}
+        } else {
+            render(contentType: 'text/json') {['msg':"Error: Archivo ${params['photo']} NO PUDO se borrado . . ."]}
+        }
     }
-  }
 
     def showFicAsJson() {
-        println "{nada:'que nada'}"
-        ficAsJson : "{nada:'que nada'}"
+        println "{nada:'¡?'}"
+        ficAsJson : "{nada:'!?'}"
+    }
+
+    @Transactional
+    def aprobarFic() {
+        FichaCampo fichaCampoInstance = FichaCampo.get(params['id'])
+        fichaCampoInstance.statusControl = 'ACEPTADA'
+        fichaCampoInstance.save(flush:true)
+        render template : 'form', model : [ fichaCampoInstance : fichaCampoInstance,
+                 showing            : 'true',
+                 opname             : 'PRESENTACIÓN',
+                 actionName         : 'SHOWING' ]
+    }
+
+    @Transactional
+    def rechazarFic() {
+        FichaCampo fichaCampoInstance = FichaCampo.get(params['id'])
+        fichaCampoInstance.statusControl = 'RECHAZADA'
+        fichaCampoInstance.save(flush:true)
+        render template : 'form',
+               model : [ fichaCampoInstance : fichaCampoInstance,
+                         showing            : 'true',
+                         opname             : 'PRESENTACIÓN',
+                         actionName         : 'SHOWING' ]
     }
 
 }

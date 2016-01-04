@@ -36,9 +36,9 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url="jdbc:postgresql://localhost:5432/ficdb_ue"
+            url="jdbc:postgresql://localhost:5432/ficdb_prod"
             username = "postgres"
-            password = "sqlgis1606"
+            password = "postgres"
             properties {
                 jmxEnabled = true
                 initialSize = 5

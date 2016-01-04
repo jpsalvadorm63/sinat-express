@@ -5661,3 +5661,10 @@ n:1987:org/codehaus/groovy/grails/project/compiler/GrailsProjectCompiler$compile
 n:1395:java_util_Map$entrySet$8
 n:1899:grails/util/PluginBuildSettings$getSupportedPluginInfos$15
 n:1900:grails/util/PluginBuildSettings$getPluginSourceDirectories$16
+n:3229:BuildConfig$_run_closure1_closure5
+n:6336:_Events
+n:3048:_Events$_run_closure1_closure4
+n:3500:_Events$_run_closure2
+n:3767:_Events$_run_closure2_closure5
+n:2989:_Events$_run_closure2_closure5_closure6
+n:2768:_Events$_run_closure3

@@ -190,6 +190,11 @@
                 return !(charCode > 31 && (charCode < 48 || charCode > 57));
         }
 
+        function isJustNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            return !(charCode > 31 && (charCode < 48 || charCode > 57));
+        }
+
         function isIntegerKey(evt){
             var charCode = (evt.which) ? evt.which : event.keyCode
             return !(charCode > 31 && (charCode < 48 || charCode > 57));
@@ -345,9 +350,7 @@
     </style>
 
     <asset:javascript src="uploadr.manifest.js"/>
-    <asset:javascript src="uploadr.demo.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
-    <asset:stylesheet href="uploadr.demo.manifest.css"/>
 
 </head>
 <body>

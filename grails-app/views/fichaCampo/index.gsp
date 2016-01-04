@@ -9,7 +9,6 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 
     <style>
-
         .scaffold-list {
             border : 1px #888888 solid;
             background-color: whitesmoke;
@@ -33,13 +32,10 @@
             text-align: center;
             font-weight: bolder;
         }
-
     </style>
-
     <link type="text/css" href="${resource(dir: 'menu', file: 'menu.css')}" rel="stylesheet" />
     <script type="text/javascript" src="${resource(dir: 'menu', file: 'jquery.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'menu', file: 'menu.js')}"></script>
-
 </head>
 <body>
 

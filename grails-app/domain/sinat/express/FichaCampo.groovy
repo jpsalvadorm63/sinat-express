@@ -81,7 +81,7 @@ class FichaCampo {
         sector(size:1..64,nullable:true,unique:false)
         coordenadaX(maxSize:16,nullable:true)
         coordenadaY(maxSize:16,nullable:true)
-        altitud (nullable:true)
+        altitud (nullable:true, max: 6800.toFloat())
         nombrePropietario(maxSize:64,nullable:false,unique:false)
         nombreArrendatario(maxSize:64,nullable:true,unique:false)
         nombreAdministrador(maxSize:64,nullable:true,unique:false)

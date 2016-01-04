@@ -117,8 +117,8 @@
                      maxlength="4"
                      min="0"
                      max="6800"
-                     value="${fichaCampoInstance?.altitud}"
-                     onkeypress="return isNumberKey(event)" />
+                     value="${fichaCampoInstance?.altitud?.toInteger()}"
+                     onkeypress="return isJustNumberKey(event)" />
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: fichaCampoInstance, field: 'zonaHomogenea', 'error')} required">
@@ -185,9 +185,7 @@
                           value="${fichaCampoInstance?.parroquia?.id}"
                           class="many-to-one"/>
             </div>
-
         </div>
-
     </div>
 
     <div class="bloque2" style="width:33%;margin:16px 8px 16px 8px;">
@@ -280,7 +278,17 @@
 
     <g:if test="${actionName?.toUpperCase() == 'SHOWING'}">
         <div class="options">
+            <g:if test="${sinat.express.KV.isLocUE()}">
+                <g:submitToRemote update="informacionGeneral"
+                                  url="[action: 'aprobarFic', id:fichaCampoInstance.id]"
+                                  value="aprobar" />
+                <g:submitToRemote update="informacionGeneral"
+                                  url="[action: 'rechazarFic', id:fichaCampoInstance.id]"
+                                  value="rechazar" />
+            </g:if>
+            <!--
             <g:submitButton name="json" value="json" />
+            -->
             <g:submitToRemote url="[action: 'editInformacionGeneral', id:fichaCampoInstance.id]"
                               update="informacionGeneral"
                               value="Editar" />
