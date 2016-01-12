@@ -44,14 +44,14 @@ class FichaCampoController {
         def coberturaInstanceList = Cobertura.findAllByFichaCampo(fichaCampoInstance)
         def habitacionalInstanceList = Habitacional.findAllByFichaCampo(fichaCampoInstance)
         respond fichaCampoInstance,
-                model:[ showing:'true',
-                        opname:'PRESENTACIÓN',
-                        actionName:'SHOWING',
-                        coberturaInstanceList:coberturaInstanceList,
-                        habitacionalInstanceList:habitacionalInstanceList,
-                        claveCatastral: fichaCampoInstance.codigoCatastral,
-                        photos:photoFilesList,
-                        photo: (photoFilesList.size()>0)?photoFilesList[0]:null ]
+                model : [ showing:'true',
+                          opname:'PRESENTACIÓN',
+                          actionName:'SHOWING',
+                          coberturaInstanceList:coberturaInstanceList,
+                          habitacionalInstanceList:habitacionalInstanceList,
+                          claveCatastral: fichaCampoInstance.codigoCatastral,
+                          photos:photoFilesList,
+                          photo: (photoFilesList.size()>0)?photoFilesList[0]:null ]
     }
 
     def allPhotos(photoDirBase,cc) {
@@ -248,15 +248,15 @@ class FichaCampoController {
     def cantones() {
         def provincia = DPALP.get(params.id)
 
-        render g.select(style:'width:160px;',
-                        id:'canton',
-                        name:'canton.id',
-                        from:DPALP.cantones(provincia),
-                        optionKey:'id',
-                        required:'',
-                        value:'',
-                        class:'many-to-one',
-                        onchange: remoteFunction(controller:'fichaCampo', action:'parroquias',params:'\'id=\'+escape(this.value)',onSuccess:'ajaxParroquias(data);') )
+        render g.select( style:'width:160px;',
+                         id:'canton',
+                         name:'canton.id',
+                         from:DPALP.cantones(provincia),
+                         optionKey:'id',
+                         required:'',
+                         value:'',
+                         class:'many-to-one',
+                         onchange: remoteFunction(controller:'fichaCampo', action:'parroquias',params:'\'id=\'+escape(this.value)',onSuccess:'ajaxParroquias(data);') )
     }
 
     def parroquias() {
@@ -308,7 +308,8 @@ class FichaCampoController {
         def fichaCampoInstance = FichaCampo.get(params.id)
         fichaCampoInstance.properties = params
         fichaCampoInstance.save(flush:true)
-        render template: "formCaracteristicasPredio", model:[fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
+        render  template : "formCaracteristicasPredio",
+                model : [fichaCampoInstance:fichaCampoInstance, actionName:'SHOWING', showing:'true']
     }
 
     def editRegistroFotografico() {
@@ -317,7 +318,7 @@ class FichaCampoController {
         if(fichaCampoInstance && fichaCampoInstance.codigoCatastral && fichaCampoInstance.codigoCatastral != '') {
             photoFilesList = allPhotos(photoDirBase,fichaCampoInstance.codigoCatastral)
         }
-        render template: "editRegistroFotografico",
+        render template : "editRegistroFotografico",
                model : [ fichaCampoInstance:fichaCampoInstance,
                          actionName:'EDITING',
                          showing:'false',
@@ -688,9 +689,14 @@ class FichaCampoController {
         }
     }
 
+    FicService ficService
+
     def showFicAsJson() {
-        println "{nada:'¡?'}"
-        ficAsJson : "{nada:'!?'}"
+        def myFic = sinat.express.FichaCampo.get(params['id'])
+        def f = ficService.fic2json(myFic)
+        String s = groovy.json.JsonOutput.prettyPrint(f.toString())
+
+        model : [ id : myFic?.id, ficAsJson : s, contentType: "text/json", encoding: "UTF-8"]
     }
 
     @Transactional
@@ -698,10 +704,11 @@ class FichaCampoController {
         FichaCampo fichaCampoInstance = FichaCampo.get(params['id'])
         fichaCampoInstance.statusControl = 'ACEPTADA'
         fichaCampoInstance.save(flush:true)
-        render template : 'form', model : [ fichaCampoInstance : fichaCampoInstance,
-                 showing            : 'true',
-                 opname             : 'PRESENTACIÓN',
-                 actionName         : 'SHOWING' ]
+        render template : 'form',
+               model : [ fichaCampoInstance : fichaCampoInstance,
+                         showing            : 'true',
+                         opname             : 'PRESENTACIÓN',
+                         actionName         : 'SHOWING' ]
     }
 
     @Transactional
@@ -714,6 +721,31 @@ class FichaCampoController {
                          showing            : 'true',
                          opname             : 'PRESENTACIÓN',
                          actionName         : 'SHOWING' ]
+    }
+
+    @Transactional
+    def porRevisarFic() {
+        FichaCampo fichaCampoInstance = FichaCampo.get(params['id'])
+        fichaCampoInstance.statusControl = 'POR REVISAR'
+        fichaCampoInstance.save(flush:true)
+        render template : 'form',
+                model : [ fichaCampoInstance : fichaCampoInstance,
+                          showing            : 'true',
+                          opname             : 'PRESENTACIÓN',
+                          actionName         : 'SHOWING' ]
+    }
+
+    def exportFics() {
+        FichaCampo.list().each { FichaCampo fic ->
+            ficService.fic2file(fic,photoDirBase,'BK')
+        }
+        redirect action: "index"
+    }
+
+    @Transactional
+    def importFics() {
+        ficService.files2fic(photoDirBase,'BK-')
+        redirect action: "index"
     }
 
 }

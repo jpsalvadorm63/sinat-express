@@ -202,7 +202,7 @@ class FichaCampo {
     }*/
   }
 
-  String updatePolygon(String gadm, String dbTable, String campoCodigoCata, String campoGeon) {
+    String updatePolygon(String gadm, String dbTable, String campoCodigoCata, String campoGeon) {
 
     // -- EJEMPLO DE UTILIZACION EN SCRIPT:
     //  def gad = '0605' /*- Antonio Ante- */

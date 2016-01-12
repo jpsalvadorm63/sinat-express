@@ -47,7 +47,12 @@
         <ul class="menu">
             <li><a href="${createLink(uri: '/')}"><span>Principal</span></a></li>
             <li><g:link class="create" action="create"><span>Nueva Ficha</span></g:link></li>
-            <li><a href="#"><span>Ayuda</span></a></li>
+            <g:if test="${!sinat.express.KV.isLocUE()}">
+                <li><g:link class="create" action="exportFics"><span>Exportar</span></g:link></li>
+            </g:if>
+            <g:if test="${sinat.express.KV.isLocUE()}">
+                <li><g:link class="create" action="importFics"><span>Importar</span></g:link></li>
+            </g:if>
         </ul>
     </div>
 

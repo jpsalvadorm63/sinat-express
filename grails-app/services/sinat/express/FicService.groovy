@@ -82,11 +82,50 @@ class FicService {
                 statusControl        myFic.statusControl
                 origen               myFic.origen
             }
+            cobertura (
+                cobs.collect { Cobertura cob ->
+                    [ tipoUso : TipoUso.get(cob.tipoUso?.id)?.codigo,
+                      tipoCobertura : TipoCobertura.get(cob.tipoCobertura?.id)?.codigo,
+                      superficie : cob.superficie,
+                      rendimiento : cob.rendimiento,
+                      cargaAnimal : cob.cargaAnimal,
+                      rotacion : cob.rotacion,
+                      cosechasPorAnio : cob.cosechasPorAnio,
+                      tecnologiaPredominante : TipoTecnologiaPredominante.get(cob.tecnologiaPredominante?.id)?.codigo,
+                      sistemaDeRiego : cob.sistemaDeRiego,
+                      permanenciaDeRiego : cob.permanenciaDeRiego,
+                      mecanizacion : cob.mecanizacion,
+                      venta : cob.venta,
+                      oferta : cob.oferta,
+                      arriendo : cob.arriendo,
+                      precioProducto : cob.precioProducto,
+                      otrosCultivo : cob.otrosCultivo,
+                      fechaCreacion : cob.fechaCreacion.format("'D'yyyyMMdd'H'hhmmss"),
+                      fechaActualizacion : cob.fechaActualizacion.format("'D'yyyyMMdd'H'hhmmss") ]
+                }
+            )
+            habitacional (
+                habs.collect { Habitacional hab ->
+                    [ superficie : hab.superficie,
+                      sbEnergiaElectrica : hab.sbEnergiaElectrica,
+                      sbAguaPotable : hab.sbAguaPotable,
+                      sbAlcantarillado : hab.sbAlcantarillado,
+                      sbComunicaciones : hab.sbComunicaciones,
+                      legalizacion : hab.legalizacion,
+                      venta : hab.venta,
+                      oferta : hab.oferta,
+                      arriendo : hab.arriendo,
+                      fechaCreacion : hab.fechaCreacion.format("'D'yyyyMMdd'H'hhmmss"),
+                      fechaActualizacion : hab.fechaActualizacion.format("'D'yyyyMMdd'H'hhmmss")
+                    ]
+                }
+            )
         }
 
         return builder
 
         /* ------------------------------------------------ TEST in groovy consoles:
+        // eduardo batson: 0992562241 / trabajo (02)2394900 048
         def fs = ctx.ficService
         def fic = sinat.express.FichaCampo.findByCodigoCatastral('0106500480267')
         def coberturas = sinat.express.Cobertura.findAllByFichaCampo(fic)
@@ -106,8 +145,8 @@ class FicService {
     def json2fic(String s) {
         def jsonReader = new groovy.json.JsonSlurper()
         def fj = jsonReader.parseText(s)
-        def codigoCatastral = fj.fic.encabezado.codigoCatastral
 
+        /*
         FichaCampo fc = FichaCampo.findByCodigoCatastral(codigoCatastral)
         if(fc == null) {
             fc = new FichaCampo()
@@ -115,7 +154,10 @@ class FicService {
         } else {
             pushFicInHystory(fc)
         }
+        */
 
+        FichaCampo fc = new FichaCampo()
+        fc.codigoCatastral = fj.fic.encabezado.codigoCatastral
         fc.responsable = fj.fic.encabezado.responsable
         fc.fecha       = string2date(fj.fic.encabezado.fecha).toTimestamp()
         fc.numeroFicha = fj.fic.encabezado.numeroFicha
@@ -162,10 +204,14 @@ class FicService {
         fc.statusControl       = fj.fic.camposDeControl.statusControl
         fc.origen              = fj.fic.camposDeControl.origen
 
+        fc.observaciones = fj.fic.observaciones.observaciones
+
+        /*
         fj.fic.coberturas.each { cob ->
             println "cob.tipoCobertura=${cob.tipoCobertura}"
         }
-        fc.observaciones = fj.fic.observaciones.observaciones
+        */
+
         return fc
     }
 
@@ -193,7 +239,61 @@ class FicService {
             }
 
     def pushFicInHystory(FichaCampo fic) {
+        def hdir = '/var/fic/history'
+        File fhdir = new File(hdir)
+        if( !fhdir.exists() || ( fhdir.exists() && fhdir.isDirectory() ) )
+            fhdir.mkdir()
+        fic2file(fic,hdir,'H')
+    }
 
+    def fic2file(FichaCampo fic, String ddir, String prefix) {
+        if(fic != null) {
+            String ficFileName = ddir + '/' + prefix + '-' + fic.codigoCatastral + '.json'
+            new File(ficFileName).withWriter { out ->
+                out.println fic2json(fic)
+            }
+        }
+    }
+
+    def files2fic(String ddir, String prefix) {
+        if(ddir != null) {
+            def fdir = new File(ddir)
+            if(fdir.exists() && fdir.isDirectory()) {
+                fdir.listFiles().each { File f ->
+                    def absPath = f.name
+                    if( absPath.startsWith(prefix) && absPath.endsWith('.json') ) {
+                        absPath = f.absolutePath
+                        FichaCampo fic = json2fic(new File(absPath).text)
+                        if(evalFicForLoading(fic)) {
+                            if(fic.id == null)
+                                fic.save(flush:true)
+                            else {
+                                FichaCampo myFc = FichaCampo.get(fic.id)
+                                myFc.properties = fic.properties
+                                myFc.save(flush:true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    String evalFicForLoading(FichaCampo fic) {
+        boolean loadFic = ( ( fic != null ) &&
+                            ( fic.statusLevantamiento == 'PARA ENTREGA' ) &&
+                            ( fic.codigoCatastral != null) )
+        if(loadFic) {
+            FichaCampo rFic = FichaCampo.findByCodigoCatastral(fic.codigoCatastral)
+            loadFic = ( rFic == null ) ||
+                      ( ( rFic.statusControl == null || rFic.statusControl == 'RECHAZADA' ) )
+            if( loadFic && rFic && ( rFic.statusControl == 'RECHAZADA' || rFic.statusControl == null ) ) {
+                fic.id = rFic.id
+
+            }
+
+        }
+        return loadFic
     }
 
 }

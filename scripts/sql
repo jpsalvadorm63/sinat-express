@@ -1,0 +1,1 @@
+update fichacampo set numeroficha = concat(substring(numeroficha,1,5),'3',substring(numeroficha,7,3)) where statuslevantamiento = 'PARA ENTREGA'

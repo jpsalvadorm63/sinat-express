@@ -281,14 +281,14 @@
             <g:if test="${sinat.express.KV.isLocUE()}">
                 <g:submitToRemote update="informacionGeneral"
                                   url="[action: 'aprobarFic', id:fichaCampoInstance.id]"
-                                  value="aprobar" />
+                                  value="aceptar" />
                 <g:submitToRemote update="informacionGeneral"
                                   url="[action: 'rechazarFic', id:fichaCampoInstance.id]"
                                   value="rechazar" />
+                <g:submitToRemote update="informacionGeneral"
+                                  url="[action: 'porRevisarFic', id:fichaCampoInstance.id]"
+                                  value="Por revisar" />
             </g:if>
-            <!--
-            <g:submitButton name="json" value="json" />
-            -->
             <g:submitToRemote url="[action: 'editInformacionGeneral', id:fichaCampoInstance.id]"
                               update="informacionGeneral"
                               value="Editar" />
