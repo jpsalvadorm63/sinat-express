@@ -57,11 +57,20 @@
   <div style="min-height: 32px;padding: 12px 0 12px 4px;float:left;">
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'superficie', 'error')}">
       <div class="label">Superficie (ha)</div>
-      <g:field disabled="${showing}" name="superficie" value="${fieldValue(bean: coberturaInstance, field: 'superficie')}"  onkeypress="return isNumberKey(event)"/>
+      <g:field type="floatNumber"
+               disabled="${showing}"
+               name="superficie"
+               value="${fieldValue(bean: coberturaInstance, field: 'superficie')}"
+               onkeypress="return isNumberKey(event)"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'cargaAnimal', 'error')} ">
       <div class="label">Carga animal</div>
-      <g:field disabled="${showing}" name="cargaAnimal" value="${coberturaInstance.cargaAnimal}" style="width:64px;"  onkeypress="return isNumberKey(event)"/>
+      <g:field type="floatNumber"
+               disabled="${showing}"
+               name="cargaAnimal"
+               value="${fieldValue(bean: coberturaInstance, field: 'cargaAnimal')}"
+               style="width:64px;"
+               onkeypress="return isNumberKey(event)"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'tecnologiaPredominante', 'error')} ">
       <div class="label">Tecnología Predominante</div>
@@ -85,7 +94,12 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'oferta', 'error')} ">
       <div class="label">Valor Oferta (USD/ha)</div>
-      <g:field disabled="${showing}" name="oferta" value="${fieldValue(bean: coberturaInstance, field: 'oferta')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
+      <g:field type="floatNumber"
+              disabled="${showing}"
+              name="oferta"
+              value="${fieldValue(bean: coberturaInstance, field: 'oferta')}"
+              onkeypress="return isNumberKey(event)"
+              style="width:114px;"/>
     </div>
     <div style="clear:both;height:4px;"></div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'rotacion', 'error')} ">
@@ -111,7 +125,12 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'venta', 'error')} ">
       <div class="label">Valor Venta (USD/ha)</div>
-      <g:field disabled="${showing}" name="venta" value="${fieldValue(bean: coberturaInstance, field: 'venta')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
+      <g:field type="floatNumber"
+               disabled="${showing}"
+               name="venta"
+               value="${fieldValue(bean: coberturaInstance, field: 'venta')}"
+               onkeypress="return isNumberKey(event)"
+               style="width:114px;"/>
     </div>
     <div style="clear:both;height:4px;"></div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'cosechasPorAnio', 'error')} ">
@@ -120,7 +139,12 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'precioProducto', 'error')} ">
       <div class="label">Precio producto</div>
-      <g:field disabled="${showing}" name="precioProducto" value="${fieldValue(bean: coberturaInstance, field: 'precioProducto')}" onkeypress="return isNumberKey(event)" style="width:64px;"/>
+      <g:field type="floatNumber"
+               disabled="${showing}"
+               name="precioProducto"
+               value="${fieldValue(bean: coberturaInstance, field: 'precioProducto')}"
+               onkeypress="return isNumberKey(event)"
+               style="width:64px;"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'permanenciaDeRiego', 'error')} ">
       <div class="label">Permanencia de riego</div>
@@ -141,7 +165,12 @@
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'arriendo', 'error')} ">
       <div class="label">Valor Arriendo (USD/ha)</div>
-      <g:field disabled="${showing}" name="arriendo" value="${fieldValue(bean: coberturaInstance, field: 'arriendo')}" onkeypress="return isNumberKey(event)" style="width:114px;"/>
+      <g:field type="floatNumber"
+               disabled="${showing}"
+               name="arriendo"
+               value="${fieldValue(bean: coberturaInstance, field: 'arriendo')}"
+               onkeypress="return isNumberKey(event)"
+               style="width:114px;"/>
     </div>
     <div class="fieldcontain fieldcontain2 ${hasErrors(bean: coberturaInstance, field: 'mecanizacion', 'error')} ">
       <div class="label">Mecanización</div>

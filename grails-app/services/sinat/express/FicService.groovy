@@ -1,6 +1,7 @@
 package sinat.express
 
 import grails.transaction.Transactional
+import java.text.MessageFormat
 
 @Transactional
 class FicService {
@@ -146,16 +147,6 @@ class FicService {
         def jsonReader = new groovy.json.JsonSlurper()
         def fj = jsonReader.parseText(s)
 
-        /*
-        FichaCampo fc = FichaCampo.findByCodigoCatastral(codigoCatastral)
-        if(fc == null) {
-            fc = new FichaCampo()
-            fc.codigoCatastral = codigoCatastral
-        } else {
-            pushFicInHystory(fc)
-        }
-        */
-
         FichaCampo fc = new FichaCampo()
         fc.codigoCatastral = fj.fic.encabezado.codigoCatastral
         fc.responsable = fj.fic.encabezado.responsable
@@ -206,13 +197,64 @@ class FicService {
 
         fc.observaciones = fj.fic.observaciones.observaciones
 
-        /*
-        fj.fic.coberturas.each { cob ->
-            println "cob.tipoCobertura=${cob.tipoCobertura}"
-        }
-        */
-
         return fc
+    }
+
+    def json2coberturas(String s) {
+        def jsonReader = new groovy.json.JsonSlurper()
+        def fj = jsonReader.parseText(s)
+        def coberturas = []
+
+        fj.fic.cobertura.each { cob ->
+            def myCob = new Cobertura()
+            myCob.tipoUso = TipoUso.findByCodigo(cob.tipoUso)
+            myCob.tipoCobertura = TipoCobertura.findByCodigo(cob.tipoCobertura)
+            myCob.superficie = cob.superficie
+            myCob.rendimiento = cob.rendimiento
+            myCob.cargaAnimal = cob.cargaAnimal
+            myCob.rotacion = cob.rotacion
+            myCob.cosechasPorAnio = cob.cosechasPorAnio
+            myCob.tecnologiaPredominante = TipoTecnologiaPredominante.findByCodigo(cob.tecnologiaPredominante)
+            myCob.sistemaDeRiego = cob.sistemaDeRiego
+            myCob.permanenciaDeRiego = cob.permanenciaDeRiego
+            myCob.mecanizacion = cob.mecanizacion
+            myCob.venta = cob.venta
+            myCob.oferta = cob.oferta
+            myCob.arriendo = cob.arriendo
+            myCob.precioProducto = cob.precioProducto
+            myCob.otrosCultivo = cob.otrosCultivo
+            myCob.fechaCreacion = string2dateTime(cob.fechaCreacion)
+            myCob.fechaActualizacion = string2dateTime(cob.fechaActualizacion)
+
+            coberturas.add(myCob)
+        }
+
+        return coberturas
+    }
+
+    def json2habitacional(String s) {
+        def jsonReader = new groovy.json.JsonSlurper()
+        def fj = jsonReader.parseText(s)
+        def habitacionales = []
+
+        fj.fic.habitacional.each { hab ->
+            Habitacional myHab = new Habitacional()
+            myHab.superficie = hab.superficie
+            myHab.sbEnergiaElectrica = hab.sbEnergiaElectrica
+            myHab.sbAguaPotable = hab.sbAguaPotable
+            myHab.sbAlcantarillado = hab.sbAlcantarillado
+            myHab.sbComunicaciones = hab.sbComunicaciones
+            myHab.legalizacion = hab.legalizacion
+            myHab.venta = hab.venta
+            myHab.oferta = hab.oferta
+            myHab.arriendo = hab.arriendo
+            myHab.fechaCreacion = string2dateTime(hab.fechaCreacion)
+            myHab.fechaActualizacion = string2dateTime(hab.fechaActualizacion)
+
+            habitacionales << myHab
+        }
+
+        return habitacionales
     }
 
             Date string2date(String dd) {
@@ -249,9 +291,14 @@ class FicService {
     def fic2file(FichaCampo fic, String ddir, String prefix) {
         if(fic != null) {
             String ficFileName = ddir + '/' + prefix + '-' + fic.codigoCatastral + '.json'
-            new File(ficFileName).withWriter { out ->
-                out.println fic2json(fic)
+            try {
+                new File(ficFileName).withWriter { out ->
+                    out.println fic2json(fic)
+                }
+            } catch (e) {
+                println ficFileName + ' NOT GENERATED . . .'
             }
+
         }
     }
 
@@ -263,19 +310,70 @@ class FicService {
                     def absPath = f.name
                     if( absPath.startsWith(prefix) && absPath.endsWith('.json') ) {
                         absPath = f.absolutePath
-                        FichaCampo fic = json2fic(new File(absPath).text)
+                        def jsonText = new File(absPath).text
+                        FichaCampo fic = json2fic(jsonText)
                         if(evalFicForLoading(fic)) {
-                            if(fic.id == null)
+                            if(fic.id == null) {
                                 fic.save(flush:true)
-                            else {
+                                if(fic.hasErrors()) {
+                                    fic.errors.each { err ->
+                                        registerImportEvent( 'ERROR',
+                                                "CREACION DE FIC",
+                                                "${fic.numeroFicha} | ${fic.codigoCatastral}",
+                                                err.getFieldError().field,
+                                                err.getFieldError().rejectedValue.toString(),
+                                                err.getFieldError().defaultMessage,
+                                                err.getFieldError().getArguments())
+                                    }
+                                } else {
+                                }
+                                loadCoberturas(fic,jsonText)
+                                loadHabitacional(fic,jsonText)
+                            } else {
                                 FichaCampo myFc = FichaCampo.get(fic.id)
                                 myFc.properties = fic.properties
                                 myFc.save(flush:true)
+                                if(myFc.hasErrors()) {
+                                    fic.errors.each { err ->
+                                        registerImportEvent( 'ERROR',
+                                                "ACTUALIZACION DE FIC",
+                                                "${myFc.numeroFicha} | ${myFc.codigoCatastral}",
+                                                err.getFieldError().field,
+                                                err.getFieldError().rejectedValue.toString(),
+                                                err.getFieldError().defaultMessage,
+                                                err.getFieldError().getArguments())
+                                    }
+                                } else {
+                                }
+                                Cobertura.findAllByFichaCampo(myFc).each { it.delete(flush:true) }
+                                Habitacional.findAllByFichaCampo(myFc).each { it.delete(flush:true) }
+                                loadCoberturas(myFc,jsonText)
+                                loadHabitacional(myFc,jsonText)
                             }
                         }
                     }
                 }
             }
+        }
+    }
+
+    def registerImportEvent(type, op, refs, field, regValue, msg, args) {
+        println "${type}, ${op}, ${refs}, ${field}, ${regValue}, ${MessageFormat.format(msg, args)}"
+    }
+
+    def loadCoberturas(FichaCampo fic,String s) {
+        def coberturas = json2coberturas(s)
+        coberturas.each { Cobertura cob ->
+            cob.fichaCampo = FichaCampo.findByCodigoCatastral(fic.codigoCatastral)
+            cob.save(flush:true)
+        }
+    }
+
+    def loadHabitacional(FichaCampo fic,String s) {
+        def habitaciones = json2habitacional(s)
+        habitaciones.each { Habitacional hab ->
+            hab.fichaCampo = FichaCampo.findByCodigoCatastral(fic.codigoCatastral)
+            hab.save(flush:true)
         }
     }
 

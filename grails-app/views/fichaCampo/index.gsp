@@ -50,9 +50,6 @@
             <g:if test="${!sinat.express.KV.isLocUE()}">
                 <li><g:link class="create" action="exportFics"><span>Exportar</span></g:link></li>
             </g:if>
-            <g:if test="${sinat.express.KV.isLocUE()}">
-                <li><g:link class="create" action="importFics"><span>Importar</span></g:link></li>
-            </g:if>
         </ul>
     </div>
 
