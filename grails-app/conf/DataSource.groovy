@@ -18,7 +18,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update"
-            url="jdbc:postgresql://localhost:5432/ficdb"
+            url="jdbc:postgresql://localhost:5432/FIC_B"
             username = "postgres"
             password = "sqlgis1606"
         }
@@ -36,7 +36,8 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url="jdbc:postgresql://localhost:5432/ficdb_prod"
+            //url="jdbc:postgresql://localhost:5432/ficdb"
+            url="jdbc:postgresql://172.21.1.25:5432/ficdb"
             username = "postgres"
             password = "postgres"
             properties {
