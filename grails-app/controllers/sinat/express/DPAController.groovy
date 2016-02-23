@@ -15,8 +15,8 @@ class DPAController {
         params.sort = (params.sort)?:'nombre'
         params.order = (params.order)?:'ASC'
         render view:'index',
-               model:[ DPAInstanceList: DPALP.findAllByNivel('PROVINCIA',params),
-                       DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size() ]
+               model : [ DPAInstanceList: DPALP.findAllByNivel('PROVINCIA',params),
+                         DPAInstanceCount: DPALP.findAllByNivel('PROVINCIA').size() ]
     }
 
     @Transactional
@@ -28,15 +28,14 @@ class DPAController {
         AppSession.setSessionVar(session.id,'provincia',provincia?.codigo)
         AppSession.setSessionVar(session.id,'canton',canton?.codigo)
         setEnvelope(canton)
-        render g.select(
-              style:'width:260px;',
-              id:'canton',
-              name:'canton.id',
-              from:DPALP.cantones(provincia),
-              optionKey:'id',
-              value:canton?.id,
-              class:'many-to-one',
-              onchange: 'cambiaCanton(this.value)' )
+        render g.select( style:'width:260px;',
+                         id:'canton',
+                         name:'canton.id',
+                         from:DPALP.cantones(provincia),
+                         optionKey:'id',
+                         value:canton?.id,
+                         class:'many-to-one',
+                         onchange: 'cambiaCanton(this.value)' )
     }
 
     @Transactional
