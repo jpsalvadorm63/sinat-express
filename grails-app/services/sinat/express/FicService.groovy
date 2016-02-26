@@ -377,7 +377,7 @@ class FicService {
         }
     }
 
-    String evalFicForLoading(FichaCampo fic) {
+    boolean evalFicForLoading(FichaCampo fic) {
         boolean loadFic = ( ( fic != null ) &&
                             ( fic.statusLevantamiento == 'PARA ENTREGA' ) &&
                             ( fic.codigoCatastral != null) )
@@ -387,9 +387,7 @@ class FicService {
                       ( ( rFic.statusControl == null || rFic.statusControl == 'RECHAZADA' ) )
             if( loadFic && rFic && ( rFic.statusControl == 'RECHAZADA' || rFic.statusControl == null ) ) {
                 fic.id = rFic.id
-
             }
-
         }
         return loadFic
     }
